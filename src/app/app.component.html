@@ -6,7 +6,7 @@
       <h2>{{ visit.name }} details!</h2>
       <div><label>id: </label>{{ visit.id }}</div>
       <div><label>name: </label>{{ visit.name }}</div>
-      <div><label>adress: </label>{{ visit.adress }}</div>
+      <div><label>address: </label>{{ visit.address }}</div>
       <!-- Test du data binding -->
       <input [value]='visit.name' (input)='visit.name=$event.target.value'>
     </li>
