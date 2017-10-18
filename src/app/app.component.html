@@ -1,14 +1,1 @@
-<div style="text-align:center">
-  <h1>Liste des visites</h1>
-  <ul>
-    <!-- Affiche les donnees recuperees dans l'API Rest -->
-    <li *ngFor="let visit of visits">
-      <h2>{{ visit.name }} details!</h2>
-      <div><label>id: </label>{{ visit.id }}</div>
-      <div><label>name: </label>{{ visit.name }}</div>
-      <div><label>address: </label>{{ visit.address }}</div>
-      <!-- Test du data binding -->
-      <input [value]='visit.name' (input)='visit.name=$event.target.value'>
-    </li>
-  </ul>
-</div>
+<visits></visits>

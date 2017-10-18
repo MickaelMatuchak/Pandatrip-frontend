@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import { VisitModel } from './visit.model';
+import { VisitComponent } from './visit.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 
 export class AppComponent implements OnInit {
   visits: VisitModel[];
@@ -25,6 +28,6 @@ export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit() {
-    this.callService();
+    // this.callService();
   }
 }

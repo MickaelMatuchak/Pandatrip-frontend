@@ -4,10 +4,12 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
+import { VisitComponent } from './visit.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VisitComponent
   ],
   imports: [
     BrowserModule, HttpModule
