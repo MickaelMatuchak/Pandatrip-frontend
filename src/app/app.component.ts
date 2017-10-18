@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
-import { VisitModel } from './visit.model';
-import { VisitComponent } from './visit.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,23 +8,22 @@ import { VisitComponent } from './visit.component';
 
 
 
-export class AppComponent implements OnInit {
-  visits: VisitModel[];
+export class AppComponent {
 
-  private errorMsg: string;
-  private errorFlag: boolean;
+  // private errorMsg: string;
+  // private errorFlag: boolean;
 
-  callService() {
-    this.appService.getVisits()
-      .subscribe(
-        (data: VisitModel[]) => { this.visits = data; },
-        (error) =>  { this.errorMsg = error; this.errorFlag = true; }
-      );
-  }
+  // callService() {
+  //   this.appService.getVisits()
+  //     .subscribe(
+  //       (data: VisitModel[]) => { this.visits = data; },
+  //       (error) =>  { this.errorMsg = error; this.errorFlag = true; }
+  //     );
+  // }
 
-  constructor(private appService: AppService) {}
+  // constructor(private appService: AppService) {}
 
-  ngOnInit() {
-    // this.callService();
-  }
+  // ngOnInit() {
+  //   this.callService();
+  // }
 }

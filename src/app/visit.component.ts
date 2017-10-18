@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
+import { Component } from '@angular/core';
 import { VisitModel } from './visit.model';
 
 const VISITS: VisitModel[] = [
