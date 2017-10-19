@@ -7,14 +7,15 @@ import { AppService } from './app.service';
 import { VisitComponent } from './visit.component';
 import { ThemeComponent } from './theme.component';
 import { GuideComponent } from './guide.component';
-
+import { ResearchComponent } from './research.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VisitComponent,
     ThemeComponent,
-    GuideComponent
+    GuideComponent,
+    ResearchComponent
   ],
   imports: [
     BrowserModule, HttpModule
