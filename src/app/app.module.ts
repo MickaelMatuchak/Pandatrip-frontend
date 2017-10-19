@@ -4,14 +4,17 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { VisitComponent } from './visit.component'
-import { ThemeComponent } from './theme.component'
+import { VisitComponent } from './visit.component';
+import { ThemeComponent } from './theme.component';
+import { GuideComponent } from './guide.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     VisitComponent,
-    ThemeComponent
+    ThemeComponent,
+    GuideComponent
   ],
   imports: [
     BrowserModule, HttpModule

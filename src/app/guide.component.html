@@ -1,0 +1,15 @@
+<div style="text-align:center">
+  <h1>Liste des Guides</h1>
+  <ul>
+    <!-- Affiche les donnees recuperees dans l'API Rest -->
+    <li *ngFor="let guide of guides">
+      <h2>{{ guide.name }} details!</h2>
+      <div><label>id: </label>{{ guide.id }}</div>
+      <div><label>name: </label>{{ guide.name }}</div>
+      <div><label>image: </label>{{ guide.image }}</div>
+      <div><label>note: </label>{{ guide.note }} / 5</div>
+      <!-- Test du data binding -->
+      <input [value]='guide.name' (input)='guide.name=$event.target.value'>
+    </li>
+  </ul>
+</div>
