@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemeModel } from './theme.model';
 
 const THEMES: ThemeModel[] = [
@@ -17,9 +17,24 @@ const THEMES: ThemeModel[] = [
 @Component({
   selector: 'themes',
   templateUrl: './theme.component.html',
-  styleUrls: ['./theme.component.css']
+  styleUrls: ['./theme.component.css', '../../node_modules/bulma/css/bulma.css']
 })
 
-export class ThemeComponent {
-  themes = THEMES;
+export class ThemeComponent implements OnInit{
+  lineThemes = [];
+
+  separateLine = function(nbElementPerLine) {
+    for (var i = 0; i < THEMES.length; i++) {
+      if (i % nbElementPerLine == 0) {
+        var array = new Array();
+        this.lineThemes.push(array);        
+      }
+
+      array.push(THEMES[i]);
+    }
+  }
+
+  ngOnInit() {
+    this.separateLine(5);
+  }
 }

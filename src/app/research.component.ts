@@ -4,7 +4,7 @@ import { GuideModel } from './guide.model';
 @Component({
   selector: 'research',
   templateUrl: './research.component.html',
-  styleUrls: ['./research.component.css']
+  styleUrls: ['./research.component.css', '../../node_modules/bulma/css/bulma.css']
 })
 
 export class ResearchComponent {

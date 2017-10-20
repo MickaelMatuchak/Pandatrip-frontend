@@ -1,9 +1,5 @@
 <div style="text-align:center">
   <h1>Barre de recherche</h1>
-  <ul>
-    <li>
       <h2>{{ researchValue }} details!</h2>
-      <input [value]='researchValue' (input)='researchValue=$event.target.value'>
-    </li>
-  </ul>
+      <input class="input is-large is-info" [value]='researchValue' (input)='researchValue=$event.target.value'>
 </div>

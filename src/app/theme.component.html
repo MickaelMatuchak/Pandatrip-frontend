@@ -1,13 +1,11 @@
-<div style="text-align:center">
+<div>
   <h1>Liste des Thèmes</h1>
-  <ul>
-    <!-- Affiche les donnees recuperees dans l'API Rest -->
-    <li *ngFor="let theme of themes">
-      <h2>{{ theme.name }} details!</h2>
-      <div><label>id: </label>{{ theme.id }}</div>
-      <div><label>name: </label>{{ theme.name }}</div>
-      <!-- Test du data binding -->
-      <input [value]='theme.name' (input)='theme.name=$event.target.value'>
-    </li>
-  </ul>
+    <div class="columns" *ngFor="let line of lineThemes;">
+        <div class="column" *ngFor="let theme of line;">
+          <h2>{{ theme.name }} details!</h2>
+          <div><label>id: </label>{{ theme.id }}</div>
+          <div><label>name: </label>{{ theme.name }}</div> 
+          <input class="input is-info" type="text" [value]='theme.name' (input)='theme.name=$event.target.value'>
+        </div>
+    </div>
 </div>
