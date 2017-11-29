@@ -1,12 +1,12 @@
 <div style="text-align:center">
-  <h1>Liste des visites</h1>
-  <div class="columns">      
-    <div class="column" *ngFor="let visit of visits">
-      <h2>{{ visit.name }} details!</h2>
+  <div class="content title_visit">
+    <h1>Les utilisateurs près de Lille ont aussi aimé...</h1>
+  </div>
+  <div class="columns" *ngFor="let line of lineVisits;">
+    <div class="column square_visit" *ngFor="let visit of line;">
+      <h2>{{ visit.name }}</h2>
       <div><label>id: </label>{{ visit.id }}</div>
-      <div><label>name: </label>{{ visit.name }}</div>
       <div><label>address: </label>{{ visit.address }}</div>
-      <input class="input is-success" type="text" [value]='visit.name' (input)='visit.name=$event.target.value'>
     </div>
   </div>
 </div>

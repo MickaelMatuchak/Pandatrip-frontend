@@ -1,11 +1,12 @@
-<div>
-  <h1>Liste des Thèmes</h1>
-    <div class="columns" *ngFor="let line of lineThemes;">
-        <div class="column" *ngFor="let theme of line;">
-          <h2>{{ theme.name }} details!</h2>
-          <div><label>id: </label>{{ theme.id }}</div>
-          <div><label>name: </label>{{ theme.name }}</div> 
-          <input class="input is-info" type="text" [value]='theme.name' (input)='theme.name=$event.target.value'>
-        </div>
-    </div>
+<div style="text-align:center;">
+  <div class="content title_theme">
+    <h1>Découvrez les thèmes qui vous intéressent...</h1>
+  </div>
+  <div class="columns" *ngFor="let line of lineThemes;">
+      <div class="column square_theme" *ngFor="let theme of line;">
+        <h2>{{ theme.name }}</h2>
+        <div><label>id: </label>{{ theme.id }}</div>
+        <div><label>name: </label>{{ theme.name }}</div>
+      </div>
+  </div>
 </div>

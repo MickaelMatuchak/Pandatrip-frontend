@@ -1,0 +1,11 @@
+.square_guide
+{
+  background: #ffe853;
+  height: 150px;
+  border:solid 4px white;
+}
+
+.title_guide h1
+{
+  margin: 10px;
+}

@@ -1,0 +1,29 @@
+.reset
+{
+  padding:0 !important;
+}
+
+.menu
+{
+  display: inline-block;
+  width:100%;
+  text-align:right;
+}
+
+.menu ul li{
+  display: inline;
+}
+
+#logo_panda
+{
+  width:600px;
+  margin: 0 auto;
+  display: block;
+}
+
+.title_wrapper h1
+{
+  margin: 10px;
+}
+
+

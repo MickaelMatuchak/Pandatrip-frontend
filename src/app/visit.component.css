@@ -1,0 +1,11 @@
+.square_visit
+{
+  background: #ffa255;
+  height: 150px;
+  border:solid 4px white;
+}
+
+.title_visit h1
+{
+  margin: 10px;
+}

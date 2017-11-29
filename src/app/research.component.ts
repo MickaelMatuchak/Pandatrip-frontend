@@ -8,5 +8,5 @@ import { GuideModel } from './guide.model';
 })
 
 export class ResearchComponent {
-  researchValue = 'Arc de Triomphe, château, lac...';
+  researchValue = 'Arc de Triomphe, Châteaux, Lac...';
 }

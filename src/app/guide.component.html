@@ -1,13 +1,14 @@
 <div style="text-align:center">
-  <h1>Liste des Guides</h1>
-    <div class="columns">      
-      <div class="column" *ngFor="let guide of guides">
-        <h2>{{ guide.name }} details!</h2>
+  <div class="content title_guide">
+    <h1>Vivez une expérience unique avec nos guides Charlotte, Lionnel, Charles...</h1>
+  </div>
+    <div class="columns">
+      <div class="column square_guide" *ngFor="let guide of guides">
+        <h2>{{ guide.name }}</h2>
         <div><label>id: </label>{{ guide.id }}</div>
         <div><label>name: </label>{{ guide.name }}</div>
         <div><label>image: </label>{{ guide.image }}</div>
         <div><label>note: </label>{{ guide.note }} / 5</div>
-      <input class="input is-warning" type="text" [value]='guide.name' (input)='guide.name=$event.target.value'>
     </div>
   </div>
 </div>

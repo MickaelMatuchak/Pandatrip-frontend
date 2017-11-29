@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VisitModel } from './visit.model';
 
 const VISITS: VisitModel[] = [
@@ -20,6 +20,21 @@ const VISITS: VisitModel[] = [
   styleUrls: ['./visit.component.css', '../../node_modules/bulma/css/bulma.css']
 })
 
-export class VisitComponent {
-  visits = VISITS;
+export class VisitComponent implements OnInit {
+  lineVisits = [];
+
+  separateLine = function (nbElementPerLine) {
+    for (var i = 0; i < VISITS.length; i++) {
+      if (i % nbElementPerLine == 0) {
+        var array = new Array();
+        this.lineVisits.push(array);
+      }
+
+      array.push(VISITS[i]);
+    }
+  }
+
+  ngOnInit() {
+    this.separateLine(5);
+  }
 }
