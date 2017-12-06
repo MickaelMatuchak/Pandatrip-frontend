@@ -16,8 +16,8 @@ const VISITS: VisitModel[] = [
 
 @Component({
   selector: 'visits',
-  templateUrl: './visit.component.html',
-  styleUrls: ['./visit.component.css', '../../node_modules/bulma/css/bulma.css']
+  templateUrl: 'visit.component.html',
+  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css']
 })
 
 export class VisitComponent implements OnInit {

@@ -11,8 +11,8 @@ const GUIDES: GuideModel[] = [
 
 @Component({
   selector: 'guides',
-  templateUrl: './guide.component.html',
-  styleUrls: ['./guide.component.css', '../../node_modules/bulma/css/bulma.css']
+  templateUrl: 'guide.component.html',
+  styleUrls: ['guide.component.css', '../../../node_modules/bulma/css/bulma.css']
 })
 
 export class GuideComponent {

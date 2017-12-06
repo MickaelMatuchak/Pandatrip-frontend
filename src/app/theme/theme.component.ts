@@ -16,8 +16,8 @@ const THEMES: ThemeModel[] = [
 
 @Component({
   selector: 'themes',
-  templateUrl: './theme.component.html',
-  styleUrls: ['./theme.component.css', '../../node_modules/bulma/css/bulma.css']
+  templateUrl: 'theme.component.html',
+  styleUrls: ['theme.component.css', '../../../node_modules/bulma/css/bulma.css']
 })
 
 export class ThemeComponent implements OnInit{
@@ -27,7 +27,7 @@ export class ThemeComponent implements OnInit{
     for (var i = 0; i < THEMES.length; i++) {
       if (i % nbElementPerLine == 0) {
         var array = new Array();
-        this.lineThemes.push(array);        
+        this.lineThemes.push(array);
       }
 
       array.push(THEMES[i]);

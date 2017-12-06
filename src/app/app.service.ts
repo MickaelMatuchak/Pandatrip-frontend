@@ -4,7 +4,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { Injectable } from '@angular/core';
-import { VisitModel } from './visit.model';
+import { VisitModel } from './visit/visit.model';
 import { Http, Response } from '@angular/http';
 
 @Injectable()

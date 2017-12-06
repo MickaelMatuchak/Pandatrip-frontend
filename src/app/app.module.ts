@@ -4,10 +4,10 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { VisitComponent } from './visit.component';
-import { ThemeComponent } from './theme.component';
-import { GuideComponent } from './guide.component';
-import { ResearchComponent } from './research.component';
+import { VisitComponent } from './visit/visit.component';
+import { ThemeComponent } from './theme/theme.component';
+import { GuideComponent } from './guide/guide.component';
+import { ResearchComponent } from './research/research.component';
 
 @NgModule({
   declarations: [
