@@ -1,8 +1,12 @@
+
+
 .menu
 {
   display: inline-block;
   width:100%;
   text-align:right;
+  height: 4rem;
+  margin-bottom: 4rem;
 }
 
 .menu ul{
@@ -11,77 +15,84 @@
 
 .menu ul li{
   display: inline-block;
+  vertical-align: middle;
   margin-right:2rem;
   font-size: 1.3rem;
+  max-height: 3rem;
 }
 
 .menu ul li a{
   color: black;
 }
 
-.menu ul li:nth-child(1):hover, .menu ul li:nth-child(2):hover{
+.menu ul li:nth-child(3):hover, .menu ul li:nth-child(5):hover{
   opacity: 0.5;
 }
 
-.menu ul li:nth-child(3):hover{
+.menu ul li:nth-child(5):hover{
   opacity: 0.9;
 }
 
 .menu ul li:nth-child(1){
-  text-decoration: underline;
+  margin-right: 1rem;
+}
+
+.menu ul li:nth-child(1), .menu ul li:nth-child(2){
+  float: left;
+  line-height: 4rem;
 }
 
 .menu ul li:nth-child(3){
+  text-decoration: underline;
+}
+
+.menu ul li:nth-child(5){
   background-color: #E16666;
   padding: 0.7rem;
   border-radius: 12px;
   box-shadow: 1px 0px 2px #E16666;
-  width: 7rem;
+  width: 8rem;
   color: white;
   text-align: center;
   /*background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255,255,255,.5) 15px, rgba(255,255,255,.5) 30px);*/
   background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.5) 20px, rgba(255,255,255,.5) 21px);
+  margin-right:0;
 }
 
-.menu ul li:nth-child(3) a{
+.menu ul li:nth-child(5) a{
   color:white;
   opacity: 1;
 }
 
-.menu ul li:nth-child(3):hover{
+.menu ul li:nth-child(5):hover{
   background-color: #78ab66;
   box-shadow: 1px 0px 2px #78ab66;
   background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.5) 20px, rgba(255,255,255,.5) 21px);
 }
 
-#logo_panda
+.logo_panda
 {
-  width:600px;
-  margin: 0 auto;
+  width: 3em;
   display: block;
+  margin-left: 0.2rem;
+}
+
+.logo_panda_texte
+{
+  height: 2rem;
 }
 
 .title_wrapper h1
 {
   margin: 10px;
 }
-/*
+
 footer{
   margin-top: 1rem;
+  border-top: 1px solid #DBDBDB;
 }
 
-footer ul{
-  list-style: none;
-  background: rebeccapurple;
-  height: 5rem;
-  width: 100%;
+footer p{
+  line-height: 3rem;
 }
 
-footer ul li {
-
-  display: inline-block;
-  line-height: 5rem;
-  margin-left: 3rem;
-}
-
-*/

@@ -1,0 +1,9 @@
+.input.rechercher_barre{
+  height:3.5rem;
+  box-shadow: 0.8rem 1.0rem 2.5rem #E6E6E6;
+}
+
+.button.is-info.rechercher_valider {
+  height: 3.5rem;
+  box-shadow: 0 1.0rem 2.5rem #E6E6E6;
+}
