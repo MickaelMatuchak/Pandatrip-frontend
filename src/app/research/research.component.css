@@ -29,8 +29,7 @@ input.rechercher_barre::placeholder{
   border-right: solid 0.1rem #d3d3d3;
 }
 
-.rechercher_valider:hover
-{
+.rechercher_valider:hover {
   opacity: 0.9;
   background-color: #f0f0f0;
   box-shadow:0px 1px 0px #f0f0f0;
