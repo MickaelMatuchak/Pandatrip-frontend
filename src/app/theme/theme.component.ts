@@ -3,10 +3,8 @@ import { ThemeModel } from './theme.model';
 
 const THEMES: ThemeModel[] = [
   { id: 1, name: 'Histoire'},
-  { id: 2, name: 'Culture'},
   { id: 3, name: 'Château'},
   { id: 4, name: 'Guerre'},
-  { id: 5, name: 'Ruines'},
   { id: 6, name: 'Culte'},
   { id: 7, name: 'Musée'},
   { id: 8, name: 'Lac'},
@@ -35,6 +33,6 @@ export class ThemeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.separateLine(5);
+    this.separateLine(4);
   }
 }
