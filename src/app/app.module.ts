@@ -10,10 +10,12 @@ import { ThemeComponent } from './theme/theme.component';
 import { GuideComponent } from './guide/guide.component';
 import { ResearchComponent } from './research/research.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const routes: Routes = [
     ThemeComponent,
     GuideComponent,
     ResearchComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(routes)
