@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeModel } from './theme.model';
+import { ThemeService } from './theme.service';
 
 const THEMES: ThemeModel[] = [
   { id: 1, name: 'Histoire'},
@@ -20,6 +21,8 @@ const THEMES: ThemeModel[] = [
 
 export class ThemeComponent implements OnInit{
   lineThemes = [];
+
+  constructor(private themeService: ThemeService) {}
 
   separateLine = function(nbElementPerLine) {
     for (var i = 0; i < THEMES.length; i++) {

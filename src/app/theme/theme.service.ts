@@ -4,18 +4,17 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { Injectable } from '@angular/core';
-import { VisitModel } from './visit/visit.model';
+import { ThemeModel } from './theme.model';
 import { Http, Response } from '@angular/http';
+import { AppService } from '../app.service';
 
 @Injectable()
-export class AppService {
+export class ThemeService {
   constructor(private http: Http) {}
-  
-  public static entryPointUrl: string = 'https://pandatrip.herokuapp.com/api';
 
-  private endpointUrl = 'https://pandatrip.herokuapp.com/api/visits';
+  private endpointUrl = AppService.entryPointUrl + '/themes';
 
-  getVisits(): Observable<VisitModel[]> {
+  getThemes(): Observable<ThemeModel[]> {
     return this.http.get(this.endpointUrl)
       .map((response: Response) => {
         const result = response.json();
