@@ -12,12 +12,15 @@ import { ResearchComponent } from './research/research.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { VisitDetailsComponent } from './visit-details/visit-details.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'visit-details', component: VisitDetailsComponent },
 ];
 
 @NgModule({
@@ -29,7 +32,9 @@ const routes: Routes = [
     ResearchComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    VisitDetailsComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(routes)

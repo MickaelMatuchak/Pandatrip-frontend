@@ -1,0 +1,45 @@
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification">
+          <figure class="image is-4by3">
+            <img src="../assets/img/visit/{{ visitDetails.name }}.jpg">
+          </figure>
+        </article>
+        <article class="tile is-child notification">
+          <div class="content">
+            <button class="bouton_visit">
+              Demander un guide
+            </button>
+            <button class="bouton_visit">
+              Ajouter à mes visites
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification">
+          <p class="title">{{ visitDetails.name }}</p>
+          <p class="content">{{ visitDetails.city }}</p>
+          <p class="content">{{ visitDetails.address }}</p>
+          <p class="content">{{ visitDetails.postalCode }}</p>
+          <p class="content">{{ visitDetails.description }}</p>
+        </article>
+      </div>
+    </div>
+
+  </div>
+  <div class="tile is-parent">
+
+    <article class="tile is-child notification">
+      <div class="content">
+        <p class="title">Mes visites</p>
+        <p class="subtitle">Pas encore de visite ? Ajouter une visite</p>
+      </div>
+    </article>
+
+  </div>
+</div>
