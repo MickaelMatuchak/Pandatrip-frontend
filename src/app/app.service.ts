@@ -13,16 +13,4 @@ export class AppService {
   
   public static entryPointUrl: string = 'https://pandatrip.herokuapp.com/api';
 
-  private endpointUrl = 'https://pandatrip.herokuapp.com/api/visits';
-
-  getVisits(): Observable<VisitModel[]> {
-    return this.http.get(this.endpointUrl)
-      .map((response: Response) => {
-        const result = response.json();
-        return result;
-      })
-      .catch((error: Response | any) => {
-        return Observable.throw(error.statusText);
-      });
-  }
 }

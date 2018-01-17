@@ -3,7 +3,9 @@ export class ThemeModel {
     this.id = id;
     this.name = name;
   }
+  
   id: number;
   name: string;
-  image: object;
+  image: string;
+  visits: Object[];
 }

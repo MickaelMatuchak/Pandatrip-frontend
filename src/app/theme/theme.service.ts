@@ -14,17 +14,6 @@ export class ThemeService {
 
   private endpointUrl = AppService.entryPointUrl + '/themes';
 
-  getThemes(): Observable<ThemeModel[]> {
-    return this.http.get(this.endpointUrl)
-      .map((response: Response) => {
-        const result = response.json();
-        return result;
-      })
-      .catch((error: Response | any) => {
-        return Observable.throw(error.statusText);
-      });
-  }
-
   getThemesPromise(): Promise<ThemeModel[]> {
     let headers = new Headers();
     headers.append("Content-Type", 'application/json');
@@ -39,7 +28,7 @@ export class ThemeService {
     headers.append("Content-Type", 'application/json');
 
     //let url = `${this.endpointUrl}/${id}`;
-    let url = `${this.endpointUrl}/1`;
+    let url = this.endpointUrl + '/1';
 
     return this.http.get(url)
            .toPromise()
