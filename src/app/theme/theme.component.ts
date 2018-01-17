@@ -3,20 +3,21 @@ import { ThemeModel } from './theme.model';
 import { ThemeService } from './theme.service';
 
 const THEMES: ThemeModel[] = [
-  { id: 1, name: 'Histoire'},
-  { id: 3, name: 'Château'},
-  { id: 4, name: 'Guerre'},
-  { id: 6, name: 'Culte'},
-  { id: 7, name: 'Musée'},
-  { id: 8, name: 'Lac'},
-  { id: 9, name: 'Forêt'},
-  { id: 10, name: 'Parc'}
+  { id: 1, name: 'Parc animalier', image: {url: 'parc-animalier.jpg'}},
+  { id: 2, name: 'Histoire', image: {url: 'histoire.jpg'}},
+  { id: 3, name: 'Château', image: {url: 'chateau.jpg'}},
+  { id: 4, name: 'Guerre', image: {url: 'guerre.jpg'}},
+  { id: 5, name: 'Culte', image: {url: 'culte.jpg'}},
+  { id: 6, name: 'Musée', image: {url: 'musee.jpg'}},
+  { id: 7, name: 'Lac', image: {url: 'lac.jpg'}},
+  { id: 8, name: 'Forêt', image: {url: 'foret.jpg'}}
 ];
 
 @Component({
   selector: 'themes',
   templateUrl: 'theme.component.html',
-  styleUrls: ['theme.component.css', '../../../node_modules/bulma/css/bulma.css']
+  styleUrls: ['theme.component.css', '../../../node_modules/bulma/css/bulma.css'],
+  providers: [ThemeService]
 })
 
 export class ThemeComponent implements OnInit{

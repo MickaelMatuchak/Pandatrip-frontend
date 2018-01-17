@@ -5,4 +5,5 @@ export class ThemeModel {
   }
   id: number;
   name: string;
+  image: object;
 }
