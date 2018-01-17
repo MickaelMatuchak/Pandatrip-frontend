@@ -5,7 +5,7 @@ import 'rxjs/add/observable/throw';
 
 import { Injectable } from '@angular/core';
 import { ThemeModel } from './theme.model';
-import { Http, Response } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { AppService } from '../app.service';
 
 @Injectable()
@@ -24,4 +24,26 @@ export class ThemeService {
         return Observable.throw(error.statusText);
       });
   }
+
+  getThemesPromise(): Promise<ThemeModel[]> {
+    let headers = new Headers();
+    headers.append("Content-Type", 'application/json');
+
+    return this.http.get(this.endpointUrl)
+          .toPromise()
+          .then(response => response.json());
+  }
+
+  getTheme(id: number) {
+    let headers = new Headers();
+    headers.append("Content-Type", 'application/json');
+
+    //let url = `${this.endpointUrl}/${id}`;
+    let url = `${this.endpointUrl}/1`;
+
+    return this.http.get(url)
+           .toPromise()
+           .then(response => response.json());
+  }
+
 }

@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeModel } from './theme.model';
 import { ThemeService } from './theme.service';
+import { log } from 'util';
 
 const THEMES: ThemeModel[] = [
-  { id: 1, name: 'Histoire'},
-  { id: 3, name: 'Château'},
-  { id: 4, name: 'Guerre'},
-  { id: 6, name: 'Culte'},
-  { id: 7, name: 'Musée'},
-  { id: 8, name: 'Lac'},
-  { id: 9, name: 'Forêt'},
-  { id: 10, name: 'Parc'}
+    { id: 1, name: 'Parc'},
+    { id: 2, name: 'Histoire'},
+    { id: 3, name: 'Château'},
+    { id: 4, name: 'Guerre'},
+    { id: 5, name: 'Forêt'},
+    { id: 6, name: 'Culte'},
+    { id: 7, name: 'Musée'},
+    { id: 8, name: 'Lac'}
 ];
 
 @Component({
   selector: 'themes',
   templateUrl: 'theme.component.html',
-  styleUrls: ['theme.component.css', '../../../node_modules/bulma/css/bulma.css']
+  styleUrls: ['theme.component.css', '../../../node_modules/bulma/css/bulma.css'],
+  providers: [ ThemeService ]
 })
 
 export class ThemeComponent implements OnInit{
@@ -33,6 +35,12 @@ export class ThemeComponent implements OnInit{
 
       array.push(THEMES[i]);
     }
+    log("TEST Observable : ");
+    log(this.themeService.getThemes());
+    log("TEST Promise : ");
+    log(this.themeService.getThemes());
+    log("TEST Promise id-1 : ");
+    log(this.themeService.getTheme());
   }
 
   ngOnInit() {
