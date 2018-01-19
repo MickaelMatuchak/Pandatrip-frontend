@@ -10,6 +10,6 @@
   margin-top: 5rem;
 }
 
-.card-content .content h2{
+.card-content .content h2, .card-content .content h4{
   margin: 0;
 }

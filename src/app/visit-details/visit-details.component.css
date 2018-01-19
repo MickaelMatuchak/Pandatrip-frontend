@@ -10,3 +10,8 @@
   font-size: 1rem;
   display: inline-block;
 }
+
+article.panier{
+  position: fixed;
+  min-height: 24.3rem;
+}

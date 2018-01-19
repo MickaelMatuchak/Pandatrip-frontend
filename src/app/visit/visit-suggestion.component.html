@@ -1,0 +1,30 @@
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-danger">
+        <p class="title">Ces lieux pourraient aussi vous intéresser</p>
+      </article>
+    </div>
+
+    <div class="tile">
+      <div class="tile is-parent is-vertical is-3.5" *ngFor="let line of lineVisits;">
+        <article class="tile is-child notification is-info" *ngFor="let visit of line;">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="../assets/img/visit/{{ visit.name }}.jpg" alt="{{ visit.name }}">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <h4>{{ visit.name }}</h4>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { VisitComponent } from './visit/visit.component';
+import { VisitComponent, VisitSuggestionComponent } from './visit/visit.component';
 import { ThemeComponent } from './theme/theme.component';
 import { GuideComponent } from './guide/guide.component';
 import { ResearchComponent } from './research/research.component';
@@ -20,13 +20,14 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'visit-details', component: VisitDetailsComponent },
+  { path: 'visit', component: VisitDetailsComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     VisitComponent,
+    VisitSuggestionComponent,
     ThemeComponent,
     GuideComponent,
     ResearchComponent,

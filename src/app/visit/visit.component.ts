@@ -36,3 +36,28 @@ export class VisitComponent implements OnInit {
     this.separateLine(4);
   }
 }
+
+@Component({
+  selector: 'visits-suggestion',
+  templateUrl: 'visit-suggestion.component.html',
+  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css']
+})
+
+export class VisitSuggestionComponent implements OnInit {
+  lineVisits = [];
+
+  separateLine = function (nbElementPerLine) {
+    for (var i = 0; i < 3; i++) {
+      if (i % nbElementPerLine == 0) {
+        var array = new Array();
+        this.lineVisits.push(array);
+      }
+
+      array.push(VISITS[i]);
+    }
+  }
+
+  ngOnInit() {
+    this.separateLine(1);
+  }
+}
