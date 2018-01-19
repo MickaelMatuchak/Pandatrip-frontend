@@ -6,6 +6,5 @@ export class ThemeModel {
   
   id: number;
   name: string;
-  image: string;
-  visits: Object[];
+  image: Object;
 }

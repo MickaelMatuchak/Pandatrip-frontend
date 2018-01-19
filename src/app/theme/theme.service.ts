@@ -27,8 +27,7 @@ export class ThemeService {
     let headers = new Headers();
     headers.append("Content-Type", 'application/json');
 
-    //let url = `${this.endpointUrl}/${id}`;
-    let url = this.endpointUrl + '/1';
+    let url = `${this.endpointUrl}/${id}`;
 
     return this.http.get(url)
            .toPromise()

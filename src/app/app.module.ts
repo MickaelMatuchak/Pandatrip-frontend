@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { ThemeDetailComponent } from './theme-detail/theme-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'auth', component: AuthenticationComponent },
+  { path: 'theme', component: ThemeDetailComponent },
 ];
 
 @NgModule({
@@ -32,12 +34,13 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    ThemeDetailComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(routes)
   ],
-  providers: [AppService],
-  bootstrap: [AppComponent]
+  providers: [ AppService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

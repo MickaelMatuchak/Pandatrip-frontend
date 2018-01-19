@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { ThemeModel } from './theme.model';
 import { ThemeService } from './theme.service';
 import { log } from 'util';
@@ -13,8 +15,13 @@ import { log } from 'util';
 
 export class ThemeComponent implements OnInit{
   lineThemes = [];
+  selectedThemeModel: ThemeModel;
+  strToRetireToHaveId: string;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(
+    private router: Router,
+    private themeService: ThemeService
+  ) {}
 
   separateLine = function(nbElementPerLine, themes) {
     for (var i = 0; i < themes.length; i++) {
@@ -33,9 +40,24 @@ export class ThemeComponent implements OnInit{
       }
     );
   }
-  
+
+  onSelect(theme: ThemeModel, event: any) { 
+    event.stopPropagation();
+    this.selectedThemeModel = theme;
+    this.gotoDetail();
+  }
+
+  gotoDetail() {
+    let id = this.selectedThemeModel["@id"].substr(this.strToRetireToHaveId.length);
+    this.router.navigate(
+      ['/theme', { 
+                  idTheme: id,
+                  nameTheme: this.selectedThemeModel.name }]
+    );
+  }
 
   ngOnInit() {
+    this.strToRetireToHaveId = "/api/themes/";
     this.readThemesPromise();
   }
 }
