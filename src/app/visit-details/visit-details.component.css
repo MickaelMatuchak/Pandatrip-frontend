@@ -9,9 +9,16 @@
   font-family: "Source Sans Pro";
   font-size: 1rem;
   display: inline-block;
+  cursor: pointer;
 }
 
 article.panier{
   position: fixed;
   min-height: 24.3rem;
+}
+
+.marker{
+  width: 28px;
+  vertical-align: middle;
+  margin-right: 0.4rem;
 }

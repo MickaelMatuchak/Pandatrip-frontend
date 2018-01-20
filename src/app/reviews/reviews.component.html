@@ -2,33 +2,29 @@
   <div class="tile is-vertical is-8">
 
     <div class="tile is-parent">
-      <article class="tile is-child notification is-danger">
+      <article class="tile is-child notification bandeau-vert">
         <p class="title">Les avis clients</p>
       </article>
     </div>
 
-    <div class="tile">
+    <div class="tile" *ngFor="let review of reviews;">
 
       <div class="tile is-parent is-vertical is-2">
-        <article class="tile is-child notification is-info">
+        <article class="tile is-child notification">
           <figure class="image is-64x64">
             <img src="../assets/img/boy.png" alt="avatar" />
           </figure>
-          <p class="content">Jean, 27 ans</p>
+          <p class="content has-text-centered">{{ review.author }}, 27 ans</p>
         </article>
-
-<!--        <article class="tile is-child notification is-primary">
-          <p class="title">Vertical...</p>
-          <p class="subtitle">Top tile</p>
-        </article>-->
       </div>
 
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-primary">
-          <p class="subtitle">Vraiment pas mal...</p>
-          <p class="content">A la télé, on se rend pas compte à quel point le monument est imposant. Dire que l'arc de triomphe se tient là, débout, depuis des siècles et qu'il n'a presque pas pris une ride donne vraiment le vertige. A voir absolument au moins une fois dans sa vie !</p>
+        <article class="tile is-child notification">
+          <p class="subtitle">{{ review.title }} (note : {{review.note}}/5)<span *ngFor="let item of items; let i = index"></span></p>
+          <p class="content">{{ review.text }}</p>
         </article>
       </div>
+
     </div>
   </div>
 

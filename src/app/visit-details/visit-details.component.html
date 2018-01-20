@@ -3,12 +3,12 @@
     <div class="tile">
 
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification">
+        <article class="tile is-child">
           <figure class="image is-4by3">
             <img src="../assets/img/visit/{{ visitDetails.name }}.jpg">
           </figure>
         </article>
-        <article class="tile is-child notification">
+        <article class="tile is-child is-centered">
           <div class="content">
             <button class="bouton_visit">
               Demander un guide
@@ -23,9 +23,11 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
           <p class="title">{{ visitDetails.name }}</p>
-          <p class="content">{{ visitDetails.city }}</p>
-          <p class="content">{{ visitDetails.address }}</p>
-          <p class="content">{{ visitDetails.postalCode }}</p>
+          <p class="content">
+            <img src="../assets/img/marker.png" alt="position" class="marker"/>
+            {{ visitDetails.city }}
+            {{ visitDetails.address }}, ({{ visitDetails.postalCode }})
+          </p>
           <p class="content">{{ visitDetails.description }}</p>
         </article>
       </div>

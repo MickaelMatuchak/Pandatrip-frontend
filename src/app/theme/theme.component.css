@@ -14,3 +14,7 @@
 .card-content .content h2{
   margin: 0;
 }
+
+.card-image {
+  cursor: pointer;
+}
