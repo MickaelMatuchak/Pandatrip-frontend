@@ -10,9 +10,9 @@
     <div class="tile" *ngFor="let review of reviews;">
 
       <div class="tile is-parent is-vertical is-2">
-        <article class="tile is-child notification">
-          <figure class="image is-64x64">
-            <img src="../assets/img/boy.png" alt="avatar" />
+        <article class="tile is-child">
+          <figure class="image is-64x64 avatar">
+            <img src="../assets/img/{{ review.avatar }}" alt="avatar" />
           </figure>
           <p class="content has-text-centered">{{ review.author }}, 27 ans</p>
         </article>

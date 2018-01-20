@@ -7,7 +7,7 @@ const VISITSDETAILS: VisitDetailsModel =
 @Component({
   selector: 'visit-details',
   templateUrl: './visit-details.component.html',
-  styleUrls: ['./visit-details.component.css', '../../../node_modules/bulma/css/bulma.css']
+  styleUrls: ['./visit-details.component.css', '../../../node_modules/bulma/css/bulma.css', "../../../node_modules/font-awesome/css/font-awesome.css"]
 })
 export class VisitDetailsComponent implements OnInit {
 
