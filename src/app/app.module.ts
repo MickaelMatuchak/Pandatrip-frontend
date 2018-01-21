@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { VisitDetailsComponent } from './visit-details/visit-details.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'visit', component: VisitDetailsComponent },
+  { path: 'profil', component: ProfilComponent },
 ];
 
 @NgModule({
@@ -35,7 +37,8 @@ const routes: Routes = [
     RegisterComponent,
     HomeComponent,
     VisitDetailsComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(routes)
