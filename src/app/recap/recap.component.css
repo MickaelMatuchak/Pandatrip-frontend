@@ -1,0 +1,18 @@
+article.bandeau-vert {
+  background-color: #78ab66;
+  color: white;
+}
+
+.recap_valider{
+  background-color: #78ab66;
+  padding: 0.7rem;
+  border-radius: 3px;
+  box-shadow: 1px 0px 2px #78ab66;
+  min-width: 12rem;
+  color: white;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
+  display: inline-block;
+  cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ReviewsModel} from "./reviews.model";
+import { ReviewsModel } from "./reviews.model";
 
 const REVIEWS: ReviewsModel[] = [
   { id: 1, author: 'Jean', avatar:'boy.png', note: 5, title: "Vraiment pas mal...", text: "A la télé, on se rend pas compte à quel point le monument est imposant. Dire que l'arc de triomphe se tient là, débout, depuis des siècles et qu'il n'a presque pas pris une ride donne vraiment le vertige. A voir absolument au moins une fois dans sa vie !", date: '20/01/2018'},
