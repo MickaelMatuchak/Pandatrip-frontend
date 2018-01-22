@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { VisitComponent, VisitSuggestionComponent } from './visit/visit.component';
+import { VisitComponent, VisitSuggestionComponent, VisitForOneThemeComponent } from './visit/visit.component';
 import { ThemeComponent } from './theme/theme.component';
 import { GuideComponent } from './guide/guide.component';
 import { ResearchComponent } from './research/research.component';
@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'visit', component: VisitDetailsComponent },
+  { path: 'theme', component: VisitForOneThemeComponent},
   { path: 'profil', component: ProfilComponent },
 ];
 
@@ -38,7 +39,8 @@ const routes: Routes = [
     HomeComponent,
     VisitDetailsComponent,
     ReviewsComponent,
-    ProfilComponent
+    ProfilComponent,
+    VisitForOneThemeComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(routes)

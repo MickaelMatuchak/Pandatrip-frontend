@@ -61,3 +61,28 @@ export class VisitSuggestionComponent implements OnInit {
     this.separateLine(1);
   }
 }
+
+@Component({
+  selector: 'visits-for-one-theme',
+  templateUrl: 'visit-for-one-theme.component.html',
+  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css']
+})
+
+export class VisitForOneThemeComponent implements OnInit {
+  lineVisits = [];
+
+  separateLine = function (nbElementPerLine) {
+    for (var i = 0; i < VISITS.length; i++) {
+      if (i % nbElementPerLine == 0) {
+        var array = new Array();
+        this.lineVisits.push(array);
+      }
+
+      array.push(VISITS[i]);
+    }
+  }
+
+  ngOnInit() {
+    this.separateLine(5);
+  }
+}

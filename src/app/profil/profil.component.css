@@ -32,3 +32,13 @@
   margin:0 auto;
   margin-top: 0.5rem;
 }
+
+.fa-window-close{
+  background: white;
+  color: #F64343;
+}
+
+.fa-check-square {
+  background-color: white;
+  color: #78ab66;
+}

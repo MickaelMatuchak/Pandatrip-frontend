@@ -42,3 +42,8 @@ article.panier{
   right: 2.5rem;
   cursor: pointer;
 }
+
+.fa-window-close{
+  background: white;
+  color: #F64343;
+}
