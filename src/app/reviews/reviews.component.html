@@ -14,13 +14,13 @@
           <figure class="image is-64x64 avatar">
             <img src="../assets/img/{{ review.avatar }}" alt="avatar" />
           </figure>
-          <p class="content has-text-centered">{{ review.author }}, 27 ans</p>
+          <p class="content has-text-centered">{{ review.user }}, {{ review.date }} </p>
         </article>
       </div>
 
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
-          <p class="subtitle">{{ review.title }} (note : {{review.note}}/5)<span *ngFor="let item of items; let i = index"></span></p>
+          <p class="subtitle">{{ review.title }} (note : {{ review.note }}/5)<span *ngFor="let item of items; let i = index"></span></p>
           <p class="content">{{ review.text }}</p>
         </article>
       </div>

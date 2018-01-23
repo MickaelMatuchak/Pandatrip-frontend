@@ -5,7 +5,7 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child">
           <figure class="image is-4by3">
-            <img src="../assets/img/visit/{{ visitDetails.name }}.jpg">
+            <img src="../assets/img/{{ visitSelected.images[0].url }}">
           </figure>
         </article>
         <article class="tile is-child is-centered">
@@ -22,13 +22,15 @@
 
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
-          <p class="title">{{ visitDetails.name }}</p>
+          <p class="title">{{ visitSelected.name }}</p>
           <p class="content">
             <img src="../assets/img/marker.png" alt="position" class="marker"/>
-            {{ visitDetails.city }}
-            {{ visitDetails.address }}, ({{ visitDetails.postalCode }})
+            {{ visitSelected.address }},
+            {{ visitSelected.city }} ({{ visitSelected.postalCode }})
+            {{ visitSelected.country }},
+            {{ visitSelected.region }}
           </p>
-          <p class="content">{{ visitDetails.description }}</p>
+          <p class="content">{{ visitSelected.description }}</p>
         </article>
       </div>
     </div>
@@ -61,5 +63,5 @@
   </div>
 </div>
 
-<reviews></reviews>
+<reviews [reviews]=visitSelected.reviews></reviews>
 <visits-suggestion></visits-suggestion>

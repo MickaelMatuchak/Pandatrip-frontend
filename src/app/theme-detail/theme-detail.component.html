@@ -1,5 +1,28 @@
-<p>
-  theme-detail works!
-</p>
-    {{ themeName }}
-  
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-12">
+
+    <div class="tile is-parent">
+      <article class="tile is-child notification bandeau-vert">
+        <p class="title">Encore plus de visites du thème {{ themeSelected.name }}</p>
+      </article>
+    </div>
+
+    <div class="tile" *ngFor="let line of lineVisits;">
+      <div class="tile is-parent" *ngFor="let visit of line;" (click)="onSelect(visit, $event)">
+        <div class="card tile is-child">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="../assets/img/{{ visit.images[0].url }}" alt="{{ visit.name }}">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <h4>{{ visit.name }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

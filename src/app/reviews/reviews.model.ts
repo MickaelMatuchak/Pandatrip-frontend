@@ -1,18 +1,17 @@
 export class ReviewsModel {
-  constructor(id: number, author: string, avatar: string, note : number, title : string, text : string, date : string) {
+  constructor(id: number, note : number, title : string, text : string, date : string, user: string) {
     this.id = id;
-    this.author = author;
-    this.avatar = avatar;
     this.note = note;
     this.title = title;
     this.text = text;
     this.date = date;
+    this.user = user;
   }
+
   id : number;
-  author : string;
-  avatar : string;
   note : number;
   title : string;
   text : string;
   date : string;
+  user: string;
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { VisitModel } from './visit.model';
+import { VisitModel, VisitModel2 } from './visit.model';
+import { VisitService } from './visit.service';
 
-const VISITS: VisitModel[] = [
+const VISITS: VisitModel2[] = [
   { id: 1, name: 'Arc de Triomphe', address: '1 rue mock' },
   { id: 2, name: 'Tour Eiffel', address: '2 rue mock' },
   { id: 3, name: 'Jardin de Majorelle', address: '3 rue mock' },
@@ -15,7 +16,8 @@ const VISITS: VisitModel[] = [
 @Component({
   selector: 'visits',
   templateUrl: 'visit.component.html',
-  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css']
+  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css'],
+  providers: [ VisitService ]
 })
 
 export class VisitComponent implements OnInit {
@@ -59,30 +61,5 @@ export class VisitSuggestionComponent implements OnInit {
 
   ngOnInit() {
     this.separateLine(1);
-  }
-}
-
-@Component({
-  selector: 'visits-for-one-theme',
-  templateUrl: 'visit-for-one-theme.component.html',
-  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css']
-})
-
-export class VisitForOneThemeComponent implements OnInit {
-  lineVisits = [];
-
-  separateLine = function (nbElementPerLine) {
-    for (var i = 0; i < VISITS.length; i++) {
-      if (i % nbElementPerLine == 0) {
-        var array = new Array();
-        this.lineVisits.push(array);
-      }
-
-      array.push(VISITS[i]);
-    }
-  }
-
-  ngOnInit() {
-    this.separateLine(5);
   }
 }

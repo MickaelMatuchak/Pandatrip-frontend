@@ -1,0 +1,24 @@
+.square_visit
+{
+  background: #ffa255;
+  height: 10rem;
+  border:solid 4px white;
+}
+
+.title_visit
+{
+  margin-top: 5rem;
+}
+
+.card-content .content h2, .card-content .content h4{
+  margin: 0;
+}
+
+article.bandeau-vert {
+  background-color: #78ab66;
+  color: white;
+}
+
+.card-image {
+  cursor: pointer;
+}

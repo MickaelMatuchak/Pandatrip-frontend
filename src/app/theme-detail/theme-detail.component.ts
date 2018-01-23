@@ -1,21 +1,21 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }   from '@angular/router';
-import { isNull, log } from 'util';
+import { isNull } from 'util';
 import { ThemeService } from '../theme/theme.service';
 import { ThemeModel } from '../theme/theme.model';
+import { VisitModel } from '../visit/visit.model';
 
 @Component({
   selector: 'app-theme-detail',
   templateUrl: './theme-detail.component.html',
-  styleUrls: ['./theme-detail.component.css'],
+  styleUrls: ['./theme-detail.component.css', '../../../node_modules/bulma/css/bulma.css'],
   providers: [ ThemeService ]
 })
 export class ThemeDetailComponent implements OnInit, OnDestroy {
   
-  lineThemes = [];
-  themeId: number;
-  themeName: string;
+  lineVisits = [];
   themeSelected: ThemeModel;
+  selectedVisitModel: VisitModel;
 
   private sub: any;
 
@@ -25,44 +25,44 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
     private themeService: ThemeService) {
     }
 
-  separateLine = function(nbElementPerLine, themes) {
-    for (var i = 0; i < themes.length; i++) {
+  separateLine = function(nbElementPerLine, visits) {
+    for (var i = 0; i < visits.length; i++) {
       if (i % nbElementPerLine == 0) {
         var array = new Array();
-        this.lineThemes.push(array);
+        this.lineVisits.push(array);
       }
-      array.push(themes[i]);
+      array.push(visits[i]);
     }
-  }
-
-  readThemesPromise() {
-    // this.themeService.getThemesPromise().then(
-    //   (data: ThemeModel[]) => {
-    //     this.separateLine(4, data["hydra:member"]);
-    //   }
-    // );
-  }
-  
+  }  
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.themeName = params['nameTheme'];
-      let idTheme :number = params['idTheme'];
-      console.info('idTheme: ' + idTheme);
-      if (!isNaN(idTheme)) {
-        let id = +idTheme;
-        console.info("this.themeSelected avant " + this.themeSelected);
-        this.themeService.getTheme(id)
-                    .then(theme => {
-                      this.themeSelected = new ThemeModel(theme["@id"], theme["name"]);        
-                      console.info("this.themeSelected apres " + this.themeSelected);
-                    });
+      let nameTheme :any = params['name']
+      if (!isNull(nameTheme)) {
+        this.themeService.getTheme(nameTheme)
+        .then(theme => {
+          let themeTmp = theme["hydra:member"][0];
+          this.themeSelected = new ThemeModel(themeTmp["id"], themeTmp["name"], themeTmp["image"], themeTmp["visits"]);
+          this.separateLine(5, this.themeSelected.visits);
+        });
       } else { 
-        
+
       }
     });
   }
   
+  onSelect(visit: VisitModel, event: any) { 
+    event.stopPropagation();
+    this.selectedVisitModel = visit;
+    this.gotoDetail();
+  }
+
+  gotoDetail() {
+    this.router.navigate(
+      ['/visit', this.selectedVisitModel.name ]
+    );
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

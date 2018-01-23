@@ -16,7 +16,6 @@ import { log } from 'util';
 export class ThemeComponent implements OnInit{
   lineThemes = [];
   selectedThemeModel: ThemeModel;
-  strToRetireToHaveId: string;
 
   constructor(
     private router: Router,
@@ -29,13 +28,13 @@ export class ThemeComponent implements OnInit{
         var array = new Array();
         this.lineThemes.push(array);
       }
-      array.push(themes[i]);
+      array.push( new ThemeModel(themes[i].id, themes[i].name, themes[i].image, themes[i].visits));
     }
   }
 
   readThemesPromise() {
-    this.themeService.getThemesPromise().then(
-      (data: ThemeModel[]) => {
+    this.themeService.getNumbersThemes(8).then(
+      (data: Object[]) => {
         this.separateLine(4, data["hydra:member"]);
       }
     );
@@ -48,16 +47,12 @@ export class ThemeComponent implements OnInit{
   }
 
   gotoDetail() {
-    let id = this.selectedThemeModel["@id"].substr(this.strToRetireToHaveId.length);
     this.router.navigate(
-      ['/theme', { 
-                  idTheme: id,
-                  nameTheme: this.selectedThemeModel.name }]
+      ['/theme', this.selectedThemeModel.name ]
     );
   }
 
   ngOnInit() {
-    this.strToRetireToHaveId = "/api/themes/";
     this.readThemesPromise();
   }
 }

@@ -14,20 +14,22 @@ export class ThemeService {
 
   private endpointUrl = AppService.entryPointUrl + '/themes';
 
-  getThemesPromise(): Promise<ThemeModel[]> {
-    let headers = new Headers();
-    headers.append("Content-Type", 'application/json');
-
+  getThemes(): Promise<ThemeModel[]> {
     return this.http.get(this.endpointUrl)
           .toPromise()
           .then(response => response.json());
   }
 
-  getTheme(id: number) {
-    let headers = new Headers();
-    headers.append("Content-Type", 'application/json');
+  getNumbersThemes(nbThemes: number): Promise<ThemeModel[]> {
+    let url = `${this.endpointUrl}?itemsPerPage=` + nbThemes;
 
-    let url = `${this.endpointUrl}/${id}`;
+    return this.http.get(url)
+          .toPromise()
+          .then(response => response.json());
+  }
+
+  getTheme(name: string) {
+    let url = `${this.endpointUrl}?name=${name}&pagination=false`;
 
     return this.http.get(url)
            .toPromise()
