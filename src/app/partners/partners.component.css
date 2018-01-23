@@ -1,0 +1,44 @@
+.partners_valider{
+  background-color: #78ab66;
+  padding: 0.7rem;
+  border-radius: 3px;
+  box-shadow: 1px 0px 2px #78ab66;
+  width: 8rem;
+  color: white;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 1.3rem;
+  display: block;
+  margin:0 auto;
+  margin-top: 0.5rem;
+}
+
+.partners{
+  text-align: center;
+}
+
+.partners p{
+  margin-top: 0.3rem;
+}
+
+.login_input{
+  padding-left: 35px;
+  height: 2.45rem;
+  width: 30%;
+  max-width: 30%;
+  font-family: "Source Sans Pro";
+  font-size: 1.3rem;
+}
+
+.input_icone {
+  margin-left: 10px;
+  margin-top: 12px;
+  position: absolute;
+  z-index: 2;
+  color: #808080;
+}
+
+article.bandeau-vert {
+  background-color: #78ab66;
+  color: white;
+}
