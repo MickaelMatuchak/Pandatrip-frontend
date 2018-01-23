@@ -1,0 +1,49 @@
+.bouton_visit{
+  background-color: #78ab66;
+  padding: 0.7rem;
+  border-radius: 3px;
+  box-shadow: 1px 0px 2px #78ab66;
+  width: 9rem;
+  color: white;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+article.panier{
+  position: fixed;
+  min-height: 24.3rem;
+}
+
+.marker{
+  width: 28px;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+
+.panier{
+  max-width: 22rem;
+  width: 22rem;
+}
+
+.panier_bouton .bouton_visit {
+  position: absolute;
+  bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+.panier_supprimer {
+  position: absolute;
+  right: 2.5rem;
+  cursor: pointer;
+}
+
+.fa-window-close{
+  background: white;
+  color: #F64343;
+}

@@ -10,6 +10,15 @@
   margin-top: 5rem;
 }
 
-.card-content .content h2{
+.card-content .content h2, .card-content .content h4{
   margin: 0;
+}
+
+article.bandeau-vert {
+  background-color: #78ab66;
+  color: white;
+}
+
+.card-image {
+  cursor: pointer;
 }

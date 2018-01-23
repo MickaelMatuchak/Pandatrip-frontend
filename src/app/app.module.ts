@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { VisitComponent } from './visit/visit.component';
+import { VisitComponent, VisitSuggestionComponent, VisitForOneThemeComponent } from './visit/visit.component';
 import { ThemeComponent } from './theme/theme.component';
 import { GuideComponent } from './guide/guide.component';
 import { ResearchComponent } from './research/research.component';
@@ -14,6 +14,10 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { ThemeDetailComponent } from './theme-detail/theme-detail.component';
+import { VisitDetailsComponent } from './visit-details/visit-details.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ProfilComponent } from './profil/profil.component';
+import { RecapComponent } from './recap/recap.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,12 +26,17 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'auth', component: AuthenticationComponent },
   { path: 'theme', component: ThemeDetailComponent },
+  { path: 'visit', component: VisitDetailsComponent },
+  { path: 'theme', component: VisitForOneThemeComponent},
+  { path: 'profil', component: ProfilComponent },
+  { path: 'recap', component: RecapComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     VisitComponent,
+    VisitSuggestionComponent,
     ThemeComponent,
     GuideComponent,
     ResearchComponent,
@@ -35,7 +44,12 @@ const routes: Routes = [
     RegisterComponent,
     HomeComponent,
     AuthenticationComponent,
-    ThemeDetailComponent
+    ThemeDetailComponent,
+    VisitDetailsComponent,
+    ReviewsComponent,
+    ProfilComponent,
+    VisitForOneThemeComponent,
+    RecapComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(routes)

@@ -1,0 +1,59 @@
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-12">
+    <div class="tile is-parent">
+      <article class="tile is-child notification bandeau-vert">
+        <p class="title">Récapitulatif de votre parcours</p>
+      </article>
+    </div>
+    <div class="tile">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification">
+          <p class="title">Nom</p>
+          <div class="content">
+            <table>
+              <thead>
+              <tr>
+                <th>Lieu</th>
+                <th>Nom du lieu</th>
+                <th>Date</th>
+                <th>Guide</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let recap of recap;">
+                <td>
+                  <figure class="image is-128x128">
+                    <img src="../assets/img/visit/{{ recap.image }}" alt="">
+                  </figure>
+                </td>
+                <td>{{ recap.nom }}</td>
+                <td>{{ recap.date }}</td>
+
+                <td *ngIf="recap.guide">
+                  <figure class="image is-64x64">
+                    <img src="../assets/img/{{ recap.guide_image }}" alt="">
+                  </figure>
+                  <p class="content">{{ recap.guide }}</p>
+                </td>
+                <td *ngIf="recap.guide==null">
+                  <p class="content">Aucun guide. <a href="#">Choisir un guide ?</a> </p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <article class="tile is-child">
+            <div class="content has-text-centered">
+              <button class="recap_valider">
+                Sauvegarder comme un brouillon
+              </button>
+              <button class="recap_valider">
+                Valider mon parcours
+              </button>
+            </div>
+          </article>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>

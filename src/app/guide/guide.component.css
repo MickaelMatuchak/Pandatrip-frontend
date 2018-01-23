@@ -9,3 +9,7 @@
 {
   margin-top: 5rem;
 }
+
+.card-image {
+  cursor: pointer;
+}
