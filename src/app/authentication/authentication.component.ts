@@ -27,6 +27,7 @@ export class AuthenticationComponent {
     }
 
     onSubmit() {
+        console.error(this.loginForm.value);
         this.authenticationService
             .authenticate(this.loginForm.value)
             .subscribe(

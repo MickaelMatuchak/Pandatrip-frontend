@@ -11,10 +11,12 @@ export class AuthenticationService {
   constructor(private http: Http) {}
 
   authenticate(user: any) {
-      let url     = 'https://pandatrip.herokuapp.com/login_check';
-      let body     = new URLSearchParams();
+      let url = 'https://pandatrip.herokuapp.com/login_check';
+      let body = new URLSearchParams();
       body.append('username', user.username);
       body.append('password', user.password);
+      console.info(user.username);
+      console.info(user.password);
       let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
       let options = new RequestOptions({headers: headers});
 
