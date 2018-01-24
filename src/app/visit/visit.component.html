@@ -3,11 +3,11 @@
   <h1>Les utilisateurs près de Lille ont aussi aimé...</h1>
 </div>
 <div class="columns has-text-centered" *ngFor="let line of lineVisits;">
-  <div class="column" *ngFor="let visit of line;">
+  <div class="column" *ngFor="let visit of line;" (click)="onSelect(visit, $event)">
     <div class="card">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img src="../assets/img/visit/{{ visit.name }}.jpg" alt="{{ visit.name }}">
+          <img src="../assets/img/{{ visit.images[0].url }}" alt="{{ visit.images[0].description }}">
         </figure>
       </div>
       <div class="card-content">

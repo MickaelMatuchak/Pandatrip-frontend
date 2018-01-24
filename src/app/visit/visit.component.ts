@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { VisitModel, VisitModel2 } from './visit.model';
 import { VisitService } from './visit.service';
 
@@ -22,20 +24,45 @@ const VISITS: VisitModel2[] = [
 
 export class VisitComponent implements OnInit {
   lineVisits = [];
+  selectedVisitModel: VisitModel;
 
-  separateLine = function (nbElementPerLine) {
-    for (var i = 0; i < VISITS.length; i++) {
+  constructor(
+    private router: Router,
+    private visitService: VisitService
+  ) {}
+
+  separateLine = function (nbElementPerLine, visits) {
+    for (var i = 0; i < visits.length; i++) {
       if (i % nbElementPerLine == 0) {
         var array = new Array();
         this.lineVisits.push(array);
       }
-
-      array.push(VISITS[i]);
+      array.push( new VisitModel(visits[i].id, visits[i].name, visits[i].images, visits[i]["reviews"], visits[i].latitude, visits[i].longitude, visits[i].adresse, visits[i].country, visits[i].region, visits[i].city, visits[i].postalCode, visits[i].description, visits[i].note, visits[i].nbNotes, visits[i].site) );
     }
   }
 
+  readVisitsPromise() {
+    this.visitService.getNumbersVisits(8).then(
+      (data: Object[]) => {
+        this.separateLine(4, data["hydra:member"]);
+      }
+    );
+  }
+
+  onSelect(visit: VisitModel, event: any) { 
+    event.stopPropagation();
+    this.selectedVisitModel = visit;
+    this.gotoDetail();
+  }
+
+  gotoDetail() {
+    this.router.navigate(
+      ['/visit', this.selectedVisitModel.name ]
+    );
+  }
+
   ngOnInit() {
-    this.separateLine(4);
+    this.readVisitsPromise();
   }
 }
 

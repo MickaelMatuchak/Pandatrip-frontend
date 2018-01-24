@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { ThemeModel } from './theme.model';
 import { ThemeService } from './theme.service';
-import { log } from 'util';
 
 
 @Component({

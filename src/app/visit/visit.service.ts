@@ -23,6 +23,14 @@ export class VisitService {
           .then(response => response.json());
   }
 
+  getNumbersVisits(nbVisits: number): Promise<VisitModel[]> {
+    let url = `${this.endpointUrl}?postalCode[between]=59000..59999&itemsPerPage=` + nbVisits;
+
+    return this.http.get(url)
+          .toPromise()
+          .then(response => response.json());
+  }
+
   getVisit(name: string) {
     let url = `${this.endpointUrl}?name=${name}`;
 
