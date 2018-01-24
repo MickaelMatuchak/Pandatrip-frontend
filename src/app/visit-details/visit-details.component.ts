@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {VisitDetailsModel} from "./visit-details.model";
+import { ICarouselConfig, AnimationConfig } from 'angular4-carousel';
 
 declare var $: any;
 declare var jquery:any;
@@ -14,6 +15,24 @@ const VISITSDETAILS: VisitDetailsModel =
 })
 export class VisitDetailsComponent implements OnInit {
   visitDetails = VISITSDETAILS;
+
+  public imageSources: string[] = [
+    './assets/img/visit/Tour Eiffel.jpg',
+    '../assets/img/visit/Tour Eiffel.jpg',
+    './assets/img/visit/Tour Eiffel.jpg',
+    './assets/img/visit/Arc de Triomphe.jpg'
+
+  ];
+
+  public config: ICarouselConfig = {
+    verifyBeforeLoad: true,
+    log: false,
+    animation: true,
+    animationType: AnimationConfig.SLIDE,
+    autoplay: true,
+    autoplayDelay: 4000,
+    stopAutoplayMinWidth: 768
+  };
 
   /* afficher pop-up*/
   toggleModalClasses(event) {

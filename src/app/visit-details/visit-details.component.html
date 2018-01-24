@@ -4,9 +4,12 @@
 
       <div class="tile is-parent is-vertical">
         <article class="tile is-child">
-          <figure class="image is-4by3">
-            <img src="../assets/img/visit/{{ visitDetails.name }}.jpg">
-          </figure>
+          <!--<figure class="image is-4by3">-->
+            <!--<img src="../assets/img/visit/{{ visitDetails.name }}.jpg">-->
+          <!--</figure>-->
+          <div class="carousel-container">
+            <carousel [sources]="imageSources" [config]="config"></carousel>
+          </div>
         </article>
         <article class="tile is-child is-centered">
           <div class="content">

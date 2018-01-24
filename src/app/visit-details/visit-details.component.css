@@ -73,3 +73,11 @@ button.bouton_vert{
 button.bouton_vert:hover{
   color: white;
 }
+
+.carousel-wrapper{
+  height: 22.3rem;
+}
+
+.carousel-container{
+  height: 22.3rem;
+}
