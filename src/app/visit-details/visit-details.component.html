@@ -63,5 +63,6 @@
   </div>
 </div>
 
-<reviews [reviews]=visitSelected.reviews></reviews>
+<div *ngIf="!noReviews"> <reviews [Reviews]=visitSelected.reviews></reviews> </div>
+
 <visits-suggestion></visits-suggestion>

@@ -12,9 +12,9 @@
       <div class="tile is-parent is-vertical is-2">
         <article class="tile is-child">
           <figure class="image is-64x64 avatar">
-            <img src="../assets/img/{{ review.avatar }}" alt="avatar" />
+            <img src="../assets/img/{{ review.user.image.url }}" alt="avatar" />
           </figure>
-          <p class="content has-text-centered">{{ review.user }}, {{ review.date }} </p>
+          <p class="content has-text-centered">{{ review.user.username }}, {{ review.date }} </p>
         </article>
       </div>
 

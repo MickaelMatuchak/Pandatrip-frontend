@@ -1,5 +1,5 @@
 export class ReviewsModel {
-  constructor(id: number, note : number, title : string, text : string, date : string, user: string) {
+  constructor(id: number, note : number, title : string, text : string, date : string, user: Object) {
     this.id = id;
     this.note = note;
     this.title = title;
@@ -13,5 +13,5 @@ export class ReviewsModel {
   title : string;
   text : string;
   date : string;
-  user: string;
+  user: Object;
 }
