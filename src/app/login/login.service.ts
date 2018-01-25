@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { LoginModel } from './login.model';
-import { HttpHeaders } from '@angular/common/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -15,40 +14,40 @@ export class LoginService {
   }
 
   // Add new TemplateStatistic
-  private post(username: string, password: string): any {
+  private post(username: string, password: string): Promise<any> {
     let headers = new Headers();
-    headers.append("Content-Type", 'application/json');
+    headers.append("Content-Type", 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
 
     console.info("username");
     console.info(username);
     console.info("password");
     console.info(password);
     
-    const budy = {'_username':"Loic",'_password':"admin"};
-    let budy2 = new Map();
-    budy2.set("_username","Loic");
-    budy2.set("_password","admin");
 
-    let body = new URLSearchParams();
-    body.append('username', 'Loic');
-    body.append('password', 'admin');
+    const bodyJSON = {'_username':"Loic",'_password':"admin"};
+
+    
+    let bodyFormData = '------WebKitFormBoundary7MA4YWxkTrZu0gW';
+    bodyFormData += '\nContent-Disposition: form-data; name="_username"';
+
+    bodyFormData += '\n\n' + username;
+    bodyFormData += '\n------WebKitFormBoundary7MA4YWxkTrZu0gW';
+    bodyFormData += '\nContent-Disposition: form-data; name="_password"';
+
+    bodyFormData += '\n\n' + password;
+    bodyFormData += '\n------WebKitFormBoundary7MA4YWxkTrZu0gW--';
 
     let logM = new LoginModel(username, password);
 
     let url = 'https://pandatrip.herokuapp.com/login_check';
 
-    console.info(url);
-    console.error(budy);
-    console.error(budy2);
-    console.error(body.toString());
+    console.error(bodyJSON);
+    console.info(bodyFormData);
     return this.http
-            .post(url, body.toString())
-            .subscribe(data => {
-              console.info(data);
-            }, error => {
-              console.info('Something went wrong! \n '+JSON.stringify(error));
-            });
-            // .catch(this.handleError);
+            .post(url, bodyFormData, {headers: headers})
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
   }
 
   private handleError(error: any) {

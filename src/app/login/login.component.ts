@@ -19,9 +19,7 @@ export class LoginComponent implements OnInit {
     this.password = "";
   }
 
-  onSubmit(username: string, password: string) {
-    console.info(""+this.username); 
-    console.info(""+this.password); 
-    this.loginService.save(username, password);
+  onSubmit() {
+    this.loginService.save(this.username, this.password);
   }
 }
