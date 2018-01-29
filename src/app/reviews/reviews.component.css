@@ -7,3 +7,33 @@ article.bandeau-vert {
   display: block;
   margin: 0 auto;
 }
+
+button.bouton_vert{
+  background-color: #78ab66;
+  color: white;
+  text-align: center;
+}
+
+button.bouton_vert:hover{
+  color: white;
+}
+
+.bouton_commenter{
+  background-color: #78ab66;
+  padding: 0.7rem;
+  border-radius: 3px;
+  box-shadow: 1px 0px 2px #78ab66;
+  width: 12rem;
+  color: white;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 1.3rem;
+  display: block;
+  margin:0 auto;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+star-rating-comp{
+  cursor: pointer;
+}

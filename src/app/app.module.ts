@@ -20,6 +20,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { ProfilComponent } from './profil/profil.component';
 import { RecapComponent } from './recap/recap.component';
 import { PartnersComponent } from './partners/partners.component';
+import { StarRatingModule } from 'angular-star-rating';
+import { CarouselModule } from 'angular4-carousel';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -54,7 +56,7 @@ const routes: Routes = [
     PartnersComponent
   ],
   imports: [
-    BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes)
+    BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes), StarRatingModule.forRoot(), CarouselModule
   ],
   providers: [ AppService ],
   bootstrap: [ AppComponent ]
