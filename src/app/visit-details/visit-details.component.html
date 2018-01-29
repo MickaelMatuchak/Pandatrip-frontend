@@ -69,5 +69,45 @@
   </div>
 </div>
 
+<div class="modal" id="my-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Choisir un guide</p>
+      <a class="delete close-modal" aria-label="close" data-modal-id="#my-modal"></a>
+    </header>
+    <section class="modal-card-body">
+      <table class="choisir_guide">
+        <tbody>
+        <tr>
+          <td>
+            <figure class="image is-64x64 avatar">
+              <img src="../assets/img/boy.png" alt="avatar" />
+            </figure>
+          </td>
+          <td>Jean</td>
+          <td>28 ans</td>
+          <td>4,5/5</td>
+        </tr>
+        <tr>
+          <td>
+            <figure class="image is-64x64 avatar">
+              <img src="../assets/img/boy.png" alt="avatar" />
+            </figure>
+          </td>
+          <td>George</td>
+          <td>24 ans</td>
+          <td>4.7/5</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="close-modal button" data-modal-id="#my-modal">Annuler</button>
+      <button class="close-modal button bouton_vert" data-modal-id="#my-modal">Choisir ce guide</button>
+    </footer>
+  </div>
+</div>
+
 <div *ngIf="!noReviews"> <reviews [Reviews]=visitSelected.reviews></reviews> </div>
 <visits-suggestion></visits-suggestion>
