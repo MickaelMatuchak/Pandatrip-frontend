@@ -86,3 +86,11 @@ button.bouton_vert:hover{
 .carousel-nav-list{
   padding: 0;
 }
+
+carousel-slide {
+  padding: 0;
+}
+
+:host >>> .carousel-nav-list{
+  padding: 0;
+}

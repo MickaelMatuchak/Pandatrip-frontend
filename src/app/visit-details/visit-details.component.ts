@@ -82,6 +82,7 @@ export class VisitDetailsComponent implements OnInit {
     $('tr').on('click', function () {
       $('tr').removeClass('selected');
       $(this).addClass('selected');
+
     });
   }
 
