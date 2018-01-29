@@ -80,4 +80,9 @@ button.bouton_vert:hover{
 
 .carousel-container{
   height: 22.3rem;
+  padding: 0;
+}
+
+.carousel-nav-list{
+  padding: 0;
 }

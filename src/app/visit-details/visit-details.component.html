@@ -31,7 +31,7 @@
           <p class="title">{{ visitSelected.name }}</p>
           <p class="content">
             <img src="../assets/img/marker.png" alt="position" class="marker"/>
-            {{ visitSelected.address }},
+            {{ visitSelected.address }}<span *ngIf="visitSelected.address.length != 0">,</span>
             {{ visitSelected.city }} ({{ visitSelected.postalCode }})
             {{ visitSelected.country }},
             {{ visitSelected.region }}
