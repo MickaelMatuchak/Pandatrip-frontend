@@ -8,7 +8,12 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
-          <p class="title">Nom</p>
+          <p class="title">
+            <span *ngIf="!show">{{title}}</span>
+            <input *ngIf="show" (input)="title = $event.target.value" [value]='title' class="input_edit" (blur)="toggle()">
+            <i class="fa fa-pencil-square" (click)="toggle()"></i>
+          </p>
+
           <div class="content">
             <table>
               <thead>
@@ -19,7 +24,7 @@
                 <th>Guide</th>
               </tr>
               </thead>
-              <tbody>
+              <tbody id="ligne_visite">
               <tr *ngFor="let recap of recap;">
                 <td>
                   <figure class="image is-128x128">
