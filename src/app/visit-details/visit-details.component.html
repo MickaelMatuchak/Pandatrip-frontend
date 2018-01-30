@@ -19,7 +19,7 @@
             <button class="bouton_visit open-modal" data-modal-id="#my-modal">
               Demander un guide
             </button>
-            <button class="bouton_visit">
+            <button class="bouton_visit" (click)="ajouterPanier()">
               Ajouter à mes visites
             </button>
           </div>
@@ -45,19 +45,19 @@
   <div class="tile is-parent">
 
     <article class="tile is-child notification panier">
-      <div class="content">
+      <div class="content" id="mon_panier">
         <p class="title">Mes visites</p>
-        <div>
+<!--        <div class="item_visite">
           <span class="panier_supprimer"><i class="fa fa-window-close"></i></span>
           <h4>Tour Eiffel </h4>
           <p class="content">Visite guidée le 22/01/2018 avec Jean</p>
         </div>
         <hr>
-        <div>
+        <div class="item_visite">
           <span class="panier_supprimer"><i class="fa fa-window-close"></i></span>
           <h4>Champs Elysées </h4>
           <p class="content">Visite non guidée (Envie d'un guide ?)</p>
-        </div>
+        </div>-->
         <div class="panier_bouton">
           <button class="bouton_visit">
             Valider mon parcours
@@ -85,9 +85,10 @@
               <img src="../assets/img/boy.png" alt="avatar" />
             </figure>
           </td>
-          <td>Jean</td>
+          <td class="guide">Jean</td>
           <td>28 ans</td>
           <td>4,5/5</td>
+          <td>12.00€</td>
         </tr>
         <tr>
           <td>
@@ -95,16 +96,17 @@
               <img src="../assets/img/boy.png" alt="avatar" />
             </figure>
           </td>
-          <td>George</td>
+          <td class="guide">George</td>
           <td>24 ans</td>
           <td>4.7/5</td>
+          <td>14.00€</td>
         </tr>
         </tbody>
       </table>
     </section>
     <footer class="modal-card-foot">
       <button class="close-modal button" data-modal-id="#my-modal">Annuler</button>
-      <button class="close-modal button bouton_vert" data-modal-id="#my-modal">Choisir ce guide</button>
+      <button class="close-modal button bouton_vert" data-modal-id="#my-modal" (click)="ajouterPanierGuide()">Choisir ce guide</button>
     </footer>
   </div>
 </div>

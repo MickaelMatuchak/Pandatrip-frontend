@@ -37,7 +37,7 @@ article.panier{
   right: 0;
 }
 
-.panier_supprimer {
+:host >>> .panier_supprimer {
   position: absolute;
   right: 2.5rem;
   cursor: pointer;
