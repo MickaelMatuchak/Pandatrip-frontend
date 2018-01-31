@@ -6,7 +6,7 @@ import { JwtHelper } from 'angular2-jwt';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css', '../../node_modules/bulma/css/bulma.css'],
+  styleUrls: ['./app.component.css', '../../node_modules/bulma/css/bulma.css', '../../node_modules/font-awesome/css/font-awesome.css'],
   providers: [ LoginService ]
 })
 
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnChanges {
       this.isGuide = false;
     }
     console.error("APP ON-INIT End");
-  } 
+  }
 
   ngOnChanges() {
     console.error("APP ON-CHANGES Begin");
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnChanges {
       this.isGuide = false;
     }
     console.error("APP ON-CHANGES End");
-  } 
+  }
 
   private decodeToken() {
     let recupTokenStored = localStorage.getItem("token");
@@ -56,12 +56,12 @@ export class AppComponent implements OnInit, OnChanges {
     }
   }
 
-  logOut (event: any) { 
+  logOut (event: any) {
     event.stopPropagation();
     this.loginService.logOut();
     this.isConnected = false;
     this.isGuide = false;
-    
+
     this.router.navigate( ['/home'] );
   }
 }
