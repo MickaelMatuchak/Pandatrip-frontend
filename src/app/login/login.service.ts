@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { LoginModel } from './login.model';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
+import { AppService } from '../app.service';
 
 @Injectable()
 export class LoginService {
 
-  constructor(private http: Http) { }
-  
-  save(username: string, password: string): Promise<any>  {
-    return this.post(username, password);
+  jwtHelper: JwtHelper = new JwtHelper();
+
+  constructor( private http: Http ) { }
+
+  logOut() {
+    localStorage.removeItem('token');
   }
 
-  // Add new TemplateStatistic
-  private post(username: string, password: string): Promise<any> {
-    let headers = new Headers();
-    headers.append("Content-Type", 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
+  loggedIn() {
+    return tokenNotExpired();
+  }
 
-    console.info("username");
-    console.info(username);
-    console.info("password");
-    console.info(password);
+  logIn(username: string, password: string): Promise<any> {
     
+    let url = AppService.entryPointUrl + '/login_check';
 
-    const bodyJSON = {'_username':"Loic",'_password':"admin"};
-
+    let headers = new Headers({ 'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' });
     
     let bodyFormData = '------WebKitFormBoundary7MA4YWxkTrZu0gW';
     bodyFormData += '\nContent-Disposition: form-data; name="_username"';
@@ -37,17 +37,26 @@ export class LoginService {
     bodyFormData += '\n\n' + password;
     bodyFormData += '\n------WebKitFormBoundary7MA4YWxkTrZu0gW--';
 
-    let logM = new LoginModel(username, password);
+    let options = new RequestOptions({ headers: headers })
 
-    let url = 'https://pandatrip.herokuapp.com/login_check';
-
-    console.error(bodyJSON);
-    console.info(bodyFormData);
     return this.http
-            .post(url, bodyFormData, {headers: headers})
+            .post(url, bodyFormData, options)
             .toPromise()
-            .then(res => res.json())
-            .catch(this.handleError);
+            .then(res => {
+              var data = res.json();
+              this.saveTokenInLocal(data.token);
+            })
+            .catch(error => Promise.reject(error.message || error));
+  }
+    
+
+  private saveTokenInLocal(token: string) {
+    console.info("token ");
+    console.info(token);
+    localStorage.setItem('token', token);
+    
+    console.log("this.jwtHelper.decodeToken(token) ");
+    console.log(this.jwtHelper.decodeToken(token));
   }
 
   private handleError(error: any) {

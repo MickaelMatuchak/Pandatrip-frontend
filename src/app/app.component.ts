@@ -1,29 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
+import { LoginService } from './login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css', '../../node_modules/bulma/css/bulma.css']
+  styleUrls: ['./app.component.css', '../../node_modules/bulma/css/bulma.css'],
+  providers: [ LoginService ]
 })
 
 
 
-export class AppComponent {
+export class AppComponent implements OnInit, OnChanges {
 
-  // private errorMsg: string;
-  // private errorFlag: boolean;
+  @Output() onVoted = new EventEmitter<boolean>();
+  isConnected: boolean = false;
 
-  // callService() {
-  //   this.appService.getVisits()
-  //     .subscribe(
-  //       (data: VisitModel[]) => { this.visits = data; },
-  //       (error) =>  { this.errorMsg = error; this.errorFlag = true; }
-  //     );
-  // }
+  constructor(
+    private router: Router,
+    private loginService: LoginService) {}
 
-  // constructor(private appService: AppService) {}
+  ngOnInit() {
+    this.isConnected = this.loginService.loggedIn();
+    console.error("APP ON-INIT");
+  } 
 
-  // ngOnInit() {
-  //   this.callService();
-  // }
+  ngOnChanges() {
+    this.isConnected = this.loginService.loggedIn();
+    console.error("APP ON-CHANGES");
+  } 
+
+  logOut (event: any) { 
+    event.stopPropagation();
+    this.loginService.logOut();
+    this.isConnected = false;
+    
+    this.router.navigate( ['/home'] );
+  }
 }
