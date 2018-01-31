@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
-import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css', '../../../node_modules/bulma/css/bulma.css', "../../../node_modules/font-awesome/css/font-awesome.css"],
-  providers: [ LoginService, AppService ]
+  providers: [ LoginService ]
 })
 export class LoginComponent implements OnInit {
 
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
         .then( res => { 
           this.router.navigate(['profil']);
          })
-        .catch( error => alert("Erreur sur la connection : " + error));
+        .catch( error => alert("Erreur sur la connection : \n" + error));
     ;
   }
 }

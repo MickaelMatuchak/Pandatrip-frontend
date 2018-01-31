@@ -48,7 +48,6 @@ export class LoginService {
             })
             .catch(error => Promise.reject(error.message || error));
   }
-    
 
   private saveTokenInLocal(token: string) {
     console.info("token ");
