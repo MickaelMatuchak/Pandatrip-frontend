@@ -8,37 +8,23 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
-          <p class="title">Nom</p>
+          <p class="title">
+            <span *ngIf="!show">{{title}}</span>
+            <input *ngIf="show" (input)="title = $event.target.value" [value]='title' class="input_edit" (blur)="toggle()">
+            <i class="fa fa-pencil-square" (click)="toggle()"></i>
+          </p>
+
           <div class="content">
             <table>
               <thead>
               <tr>
                 <th>Lieu</th>
                 <th>Nom du lieu</th>
-                <th>Date</th>
+                <th>Adresse</th>
                 <th>Guide</th>
               </tr>
               </thead>
-              <tbody>
-              <tr *ngFor="let recap of recap;">
-                <td>
-                  <figure class="image is-128x128">
-                    <img src="../assets/img/visit/{{ recap.image }}" alt="">
-                  </figure>
-                </td>
-                <td>{{ recap.nom }}</td>
-                <td>{{ recap.date }}</td>
-
-                <td *ngIf="recap.guide">
-                  <figure class="image is-64x64">
-                    <img src="../assets/img/{{ recap.guide_image }}" alt="">
-                  </figure>
-                  <p class="content">{{ recap.guide }}</p>
-                </td>
-                <td *ngIf="recap.guide==null">
-                  <p class="content">Aucun guide. <a href="#">Choisir un guide ?</a> </p>
-                </td>
-              </tr>
+              <tbody id="ligne_visite">
               </tbody>
             </table>
           </div>

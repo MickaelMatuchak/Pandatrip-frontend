@@ -23,21 +23,28 @@ article.panier{
   margin-right: 0.4rem;
 }
 
+#mon_panier {
+  overflow-y: auto;
+  max-height: 19.1rem;
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
 .panier{
   max-width: 22rem;
   width: 22rem;
 }
 
 .panier_bouton .bouton_visit {
-  position: absolute;
+  position: relative;
   bottom: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
 }
 
-.panier_supprimer {
+.panier_bouton{
+  text-align: center;
+}
+
+:host >>> .panier_supprimer {
   position: absolute;
   right: 2.5rem;
   cursor: pointer;
@@ -84,5 +91,13 @@ button.bouton_vert:hover{
 }
 
 .carousel-nav-list{
+  padding: 0;
+}
+
+carousel-slide {
+  padding: 0;
+}
+
+:host >>> .carousel-nav-list{
   padding: 0;
 }

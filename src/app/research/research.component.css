@@ -41,3 +41,12 @@ input.rechercher_barre::placeholder{
   text-align: center;
   margin-top: 0.7rem;
 }
+
+
+/* media queries*/
+@media (max-width: 1280px) {
+
+  .rechercher_valider{
+    display: none;
+  }
+}

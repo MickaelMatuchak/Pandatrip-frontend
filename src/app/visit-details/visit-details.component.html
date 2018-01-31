@@ -19,7 +19,7 @@
             <button class="bouton_visit open-modal" data-modal-id="#my-modal">
               Demander un guide
             </button>
-            <button class="bouton_visit">
+            <button class="bouton_visit" (click)="ajouterPanier()">
               Ajouter à mes visites
             </button>
           </div>
@@ -37,6 +37,7 @@
             {{ visitSelected.region }}
           </p>
           <p class="content">{{ visitSelected.description }}</p>
+          <p class="content" *ngIf="visitSelected.site != null"> <a href="{{ visitSelected.site }}" target="_blank">{{ visitSelected.site }}</a></p>
         </article>
       </div>
     </div>
@@ -45,27 +46,59 @@
   <div class="tile is-parent">
 
     <article class="tile is-child notification panier">
-      <div class="content">
-        <p class="title">Mes visites</p>
-        <div>
-          <span class="panier_supprimer"><i class="fa fa-window-close"></i></span>
-          <h4>Tour Eiffel </h4>
-          <p class="content">Visite guidée le 22/01/2018 avec Jean</p>
-        </div>
-        <hr>
-        <div>
-          <span class="panier_supprimer"><i class="fa fa-window-close"></i></span>
-          <h4>Champs Elysées </h4>
-          <p class="content">Visite non guidée (Envie d'un guide ?)</p>
-        </div>
-        <div class="panier_bouton">
-          <button class="bouton_visit">
-            Valider mon parcours
-          </button>
-        </div>
+      <p class="title">Mes visites</p>
+      <div class="content" id="mon_panier">
+
+      </div>
+      <div class="panier_bouton">
+        <button class="bouton_visit" routerLink="/recap">
+          Valider mon parcours
+        </button>
       </div>
     </article>
 
+  </div>
+</div>
+
+<div class="modal" id="my-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Choisir un guide</p>
+      <a class="delete close-modal" aria-label="close" data-modal-id="#my-modal"></a>
+    </header>
+    <section class="modal-card-body">
+      <table class="choisir_guide">
+        <tbody>
+        <tr>
+          <td>
+            <figure class="image is-64x64 avatar">
+              <img src="../assets/img/boy.png" alt="avatar" />
+            </figure>
+          </td>
+          <td class="guide">Jean</td>
+          <td>28 ans</td>
+          <td>4,5/5</td>
+          <td>12.00€</td>
+        </tr>
+        <tr>
+          <td>
+            <figure class="image is-64x64 avatar">
+              <img src="../assets/img/boy.png" alt="avatar" />
+            </figure>
+          </td>
+          <td class="guide">George</td>
+          <td>24 ans</td>
+          <td>4.7/5</td>
+          <td>14.00€</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="close-modal button" data-modal-id="#my-modal">Annuler</button>
+      <button class="close-modal button bouton_vert" data-modal-id="#my-modal" (click)="ajouterPanierGuide()">Choisir ce guide</button>
+    </footer>
   </div>
 </div>
 

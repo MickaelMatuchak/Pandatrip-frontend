@@ -16,3 +16,16 @@ article.bandeau-vert {
   display: inline-block;
   cursor: pointer;
 }
+
+.input_edit{
+  padding-left: 35px;
+  height: 2.45rem;
+  width: 30%;
+  max-width: 30%;
+  font-family: "Source Sans Pro";
+  font-size: 1.3rem;
+}
+
+.fa-pencil-square{
+  cursor: pointer;
+}

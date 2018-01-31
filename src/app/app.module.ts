@@ -22,6 +22,7 @@ import { RecapComponent } from './recap/recap.component';
 import { PartnersComponent } from './partners/partners.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { CarouselModule } from 'angular4-carousel';
+import { SearchComponent } from "./search/search.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'visit/:name', component: VisitDetailsComponent },
   { path: 'profil', component: ProfilComponent },
   { path: 'recap', component: RecapComponent },
-  { path: 'partners', component: PartnersComponent},
+  { path: 'partners', component: PartnersComponent },
+  { path: 'search', component: SearchComponent }
 ];
 
 @NgModule({
@@ -53,7 +55,8 @@ const routes: Routes = [
     ReviewsComponent,
     ProfilComponent,
     RecapComponent,
-    PartnersComponent
+    PartnersComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes), StarRatingModule.forRoot(), CarouselModule
