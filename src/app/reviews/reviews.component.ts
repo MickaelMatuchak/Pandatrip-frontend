@@ -43,9 +43,12 @@ export class ReviewsComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.noReviews = (this.reviews.length == 0);
     console.info("this.noReviews Avant");
     console.info(this.noReviews);
-    if (this.reviews) {
+    console.info("this.reviews Avant");
+    console.info(this.reviews);
+    if (this.noReviews) {
       this.noReviews = false;
       console.info("this.noReviews dans (if (this.reviews) ) ");
       console.info(this.noReviews);
@@ -54,8 +57,6 @@ export class ReviewsComponent implements OnInit {
       let i: number = 0;
       for (i = 0; i < reviewsObj.length; i++) {
         let user = reviewsObj[i].user;
-        console.info("reviewsObj[i].user  ");
-        console.info(reviewsObj[i].user);
         if (isNull(user["image"])) {
           if (user["gender"] == "male") {
             user["image"] = new ImageModel(0, "boy.png", "avatar.male");
@@ -65,8 +66,6 @@ export class ReviewsComponent implements OnInit {
         } else {
           user["image"] = new ImageModel(user["image"]["id"], user["image"]["url"], user["image"]["description"]);
         }
-        console.info("user  ");
-        console.info(user);
         this.reviews.push(new ReviewsModel(reviewsObj[i].id, reviewsObj[i].note, reviewsObj[i].title, reviewsObj[i].text, reviewsObj[i].date, user));
       }
     } else {

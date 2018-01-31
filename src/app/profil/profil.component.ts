@@ -27,7 +27,7 @@ export class ProfilComponent implements OnInit {
     this.initialiseIsGuide(tokenDecoded.roles);
 
     this.userLog = new UserModel(null, 
-      "", "", "","", "", new ImageModel(null, "", ""), new GuideModel(null, null, null, "", "", "", "", null, "", null));
+      "", "", "","", "", new ImageModel(null, "", ""), new GuideModel(null, null, null, null, "", "", "", "", null, "", null));
     console.info("AVANT getUserLog")
     this.getUserLog();
 
@@ -94,7 +94,7 @@ export class ProfilComponent implements OnInit {
         // }
         let arrayListVisits:VisitGuideModel[] = new Array();
         let recupGuide = recupUser.guide;
-        let guide = new GuideModel(recupGuide.id, recupGuide.billfold, null, recupGuide.address, recupGuide.country, 
+        let guide = new GuideModel(recupGuide.id, recupGuide.billfold, null, null, recupGuide.address, recupGuide.country, 
             recupGuide.region, recupGuide.city, recupGuide.postalCode, recupGuide.phoneNumber, arrayListVisits);
 
         this.userLog = new UserModel(recupUser.id, 
