@@ -6,6 +6,11 @@
         <p class="title">Ils parlent de ce lieu</p>
       </article>
     </div>
+    <div class="tile is-parent" *ngIf="noReviews">
+      <article class="tile is-child notification">
+        <p class="subtitle">Soyez le premier à commenter</p>
+      </article>
+    </div>
 
     <div class="tile" *ngFor="let review of reviews;">
 

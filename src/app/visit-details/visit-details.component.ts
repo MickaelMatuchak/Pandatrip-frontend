@@ -20,7 +20,6 @@ declare var jquery: any;
 export class VisitDetailsComponent implements OnInit {
   lineVisits = [];
   visitSelected: VisitModel;
-  noReviews: boolean = false;
   public imageSources: string[] = [];
   private sub: any;
 
@@ -39,17 +38,12 @@ export class VisitDetailsComponent implements OnInit {
         let i: number = 0;
 
         let images = visitTmp["images"];
-
         for (i = 0; i < images.length; i++) {
-
           arrayImages.push(new ImageModel(images[i].id, images[i].url, images[i].description));
           this.imageSources.push('./assets/img/' + images[i].url);
-
         }
 
         let reviews = visitTmp["reviews"];
-        this.noReviews = reviews.length <= 0;
-
         for (i = 0; i < reviews.length; i++) {
           arrayReviews.push(new ReviewsModel(reviews[i].id, reviews[i].note, reviews[i].title, reviews[i].text, reviews[i].date, reviews[i].user));
         }
@@ -68,7 +62,6 @@ export class VisitDetailsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       let nameVisit: any = params['name'];
       this.visitSelected = new VisitModel(null, '', [new ImageModel(null, '', '')], null, 0, 0, 'addresse', 'country', 'region', 'city', null, '', 0, 0, '');
-      this.noReviews = true;
 
       if (!isNull(nameVisit)) {
         this.getVisitDetails(nameVisit);
