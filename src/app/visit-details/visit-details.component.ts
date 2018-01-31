@@ -30,47 +30,49 @@ export class VisitDetailsComponent implements OnInit {
     private visitService: VisitService
   ) {}
 
+  private getVisitDetails(nameVisit: string) {
+    this.visitService.getVisit(nameVisit)
+      .then(visit => {
+        let visitTmp = visit["hydra:member"][0];
+        let arrayImages: ImageModel[] = new Array();
+        let arrayReviews: ReviewsModel[] = new Array();
+        let i: number = 0;
+
+        let images = visitTmp["images"];
+
+        for (i = 0; i < images.length; i++) {
+
+          arrayImages.push(new ImageModel(images[i].id, images[i].url, images[i].description));
+          this.imageSources.push('./assets/img/' + images[i].url);
+
+        }
+
+        let reviews = visitTmp["reviews"];
+
+        for (i = 0; i < reviews.length; i++) {
+          arrayReviews.push(new ReviewsModel(reviews[i].id, reviews[i].note, reviews[i].title, reviews[i].text, reviews[i].date, reviews[i].user));
+        }
+
+        this.noReviews = false;
+
+        this.visitSelected = new VisitModel(visitTmp["id"], visitTmp["name"],
+          arrayImages,
+          arrayReviews,
+          visitTmp["latitude"], visitTmp["longitude"], visitTmp["address"],
+          visitTmp["country"], visitTmp["region"], visitTmp["city"],
+          visitTmp["postalCode"], visitTmp["description"], visitTmp["note"],
+          visitTmp["nbNotes"], visitTmp["site"]);
+      });
+  }
+
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let nameVisit: any = params['name'];
-      this.visitSelected = new VisitModel(null, '', [new ImageModel(null, '', '')], null, 0, 0, 'adresse', 'country', 'region', 'city', null, '', 0, 0, '');
+      this.visitSelected = new VisitModel(null, '', [new ImageModel(null, '', '')], null, 0, 0, 'addresse', 'country', 'region', 'city', null, '', 0, 0, '');
       this.noReviews = true;
 
       if (!isNull(nameVisit)) {
-        this.visitService.getVisit(nameVisit)
-          .then(visit => {
-            let visitTmp = visit["hydra:member"][0];
-            let arrayImages: ImageModel[] = new Array();
-            let arrayReviews: ReviewsModel[] = new Array();
-            let i: number = 0;
-
-            let images = visitTmp["images"];
-
-            for (i = 0; i < images.length; i++) {
-
-              arrayImages.push(new ImageModel(images[i].id, images[i].url, images[i].description));
-              this.imageSources.push('./assets/img/' + images[i].url);
-
-            }
-
-            let reviews = visitTmp["reviews"];
-
-            for (i = 0; i < reviews.length; i++) {
-              arrayReviews.push(new ReviewsModel(reviews[i].id, reviews[i].note, reviews[i].title, reviews[i].text, reviews[i].date, reviews[i].user));
-            }
-
-            this.noReviews = false;
-
-            this.visitSelected = new VisitModel(visitTmp["id"], visitTmp["name"],
-              arrayImages,
-              arrayReviews,
-              visitTmp["latitude"], visitTmp["longitude"], visitTmp["address"],
-              visitTmp["country"], visitTmp["region"], visitTmp["city"],
-              visitTmp["postalCode"], visitTmp["description"], visitTmp["note"],
-              visitTmp["nbNotes"], visitTmp["site"]);
-          });
-      } else {
-
+        this.getVisitDetails(nameVisit);
       }
     });
 

@@ -13,24 +13,24 @@ export class ProfilService {
 
   constructor( private http: Http ) { }
 
-  getUserParcours() {
-    let recupTokenStored = localStorage.getItem("token");
-    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
-    console.info("tokenDecoded UserParcours ");
-    console.error(tokenDecoded);
-    let url = `${this.endpointUrlUserParcours}?user.username=${tokenDecoded["username"]}`;
-
-    return this.http.get(url)
-           .toPromise()
-           .then(response => response.json());
-  }
-
   getUser() {
     let recupTokenStored = localStorage.getItem("token");
     let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
     console.info("tokenDecoded User ");
     console.error(tokenDecoded);
     let url = `${this.endpointUrlUsers}?username=${tokenDecoded["username"]}`;
+
+    return this.http.get(url)
+           .toPromise()
+           .then(response => response.json());
+  }
+
+  getUserParcours() {
+    let recupTokenStored = localStorage.getItem("token");
+    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
+    console.info("tokenDecoded UserParcours ");
+    console.error(tokenDecoded);
+    let url = `${this.endpointUrlUserParcours}?user.username=${tokenDecoded["username"]}`;
 
     return this.http.get(url)
            .toPromise()
