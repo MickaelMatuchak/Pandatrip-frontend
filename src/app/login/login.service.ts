@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { LoginModel } from './login.model';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';

@@ -5,7 +5,7 @@ import { GuideModel } from "../guide/guide.model";
 export class UserModel {
     constructor(id: number, username: string, gender: string, 
         firstname: string, lastname: string, mail: string,
-        image: ImageModel) {
+        image: ImageModel, guide: GuideModel) {
         this.id = id;
         this.username = username;
         this.gender = gender;
@@ -13,6 +13,7 @@ export class UserModel {
         this.lastname = lastname;
         this.mail = mail;
         this.image = image;
+        this.guide = guide;
     }
 
     id: number;
@@ -22,6 +23,7 @@ export class UserModel {
     lastname: string;
     mail: string;
     image: ImageModel;
+    guide: GuideModel;
   }
 
   export class ParcoursModel {

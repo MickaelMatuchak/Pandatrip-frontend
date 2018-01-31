@@ -96,7 +96,7 @@
     <article class="tile is-child notification">
       <div class="content">
         <p class="title">Mon porte-monnaie</p>
-        <p class="subtitle has-text-centered">Solde : 48,00€</p>
+        <p class="subtitle has-text-centered">Solde : {{ userLog.guide.billfold }} €</p>
         <p class="content"><a href="#">Transférer mon argent</a></p>
       </div>
     </article>
@@ -123,10 +123,25 @@
             <div>
               Mail : {{ userLog.mail }}
             </div>
+            <div *ngIf="isGuide">
+              Tel : {{ userLog.guide.phoneNumber }}
+            </div>
+            <div *ngIf="isGuide">
+              Addresse : {{ userLog.guide.address }}
+            </div>
+            <div *ngIf="isGuide">
+              Ville : {{ userLog.guide.city }} ({{ userLog.guide.postalCode }})
+            </div>
+            <div *ngIf="isGuide">
+              Région : {{ userLog.guide.region }}
+            </div>
+            <div *ngIf="isGuide">
+              Pays : {{ userLog.guide.country }}
+            </div>
           </article>
         </article>
       </div>
-      <div class="tile is-parent">
+      <div class="tile is-parent" *ngIf="!isGuide">
         <article class="tile is-child notification">
           <div class="content">
             <p class="title">Devenir guide ?</p>
