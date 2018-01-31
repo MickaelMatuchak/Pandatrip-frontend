@@ -1,5 +1,5 @@
 <div class="tile is-ancestor">
-  <div class="tile is-vertical is-8">
+  <div class="tile is-vertical is-12">
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
@@ -56,22 +56,9 @@
       </div>
     </div>
   </div>
-  <div class="tile is-parent">
-    <article class="tile is-child notification">
-      <div class="content">
-        <p class="title">Devenir guide ?</p>
-        <div class="content">
-          Pandatrip partenaires est un programme unique vous permettant de devenir guide où que vous soyez, et qui que vous soyez.
-          Partagez votre goût pour l'aventure et faites vous rémunérer en partageant votre savoir et surtout vos histoires passionnantes.
-          Pandatrip partenaires vous met en relation avec des visiteurs au plus près de chez vous.
-          De là à nous rejoindre, il n'y a qu'un pas. A vous de le sauter !
-        </div>
-      </div>
-    </article>
-  </div>
 </div>
 
-<div class="tile is-ancestor">
+<div class="tile is-ancestor" *ngIf="isGuide">
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent is-vertical">
@@ -123,22 +110,33 @@
         <article class="tile is-child notification">
           <p class="title">Vos informations</p>
           <article class="message">
+              <img src="../assets/img/{{ userLog.image.url }}" alt="{{ userLog.image.description }}">
             <div>
-              pseudo
+              Username : {{ userLog.username }}
+            </div>
+            <div *ngIf="userLog.gender == 'male'">
+              M. {{ userLog.lastname }} {{ userLog.firstname }}
+            </div>
+            <div *ngIf="userLog.gender == 'female'">
+              Mme. {{ userLog.lastname }} {{ userLog.firstname }}
             </div>
             <div>
-              Prénom
-            </div>
-            <div>
-              Nom
-            </div>
-            <div>
-              Date de naissance
-            </div>
-            <div>
-              Mail
+              Mail : {{ userLog.mail }}
             </div>
           </article>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification">
+          <div class="content">
+            <p class="title">Devenir guide ?</p>
+            <div class="content">
+              Pandatrip partenaires est un programme unique vous permettant de devenir guide où que vous soyez, et qui que vous soyez.
+              Partagez votre goût pour l'aventure et faites vous rémunérer en partageant votre savoir et surtout vos histoires passionnantes.
+              Pandatrip partenaires vous met en relation avec des visiteurs au plus près de chez vous.
+              De là à nous rejoindre, il n'y a qu'un pas. A vous de le sauter !
+            </div>
+          </div>
         </article>
       </div>
     </div>
