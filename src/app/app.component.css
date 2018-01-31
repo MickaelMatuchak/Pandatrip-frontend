@@ -49,6 +49,14 @@
   margin-right:0;
 }
 
+.menu ul li.deconnexion:nth-child(5) {
+  background-image: none;
+  background-color: #5F5E5E;
+  box-shadow: none;
+  cursor: pointer;
+  width: 3rem;
+}
+
 .menu ul li:nth-child(5) a{
   color:white;
   opacity: 1;

@@ -43,3 +43,8 @@
   font-size: 1.3rem;
   text-align: center;
 }
+
+article.bandeau-vert {
+  background-color: #78ab66;
+  color: white;
+}
