@@ -28,33 +28,26 @@ export class ReviewsComponent implements OnInit {
   onRatingChangeResult: OnRatingChangeEven;
 
   onClick = ($event: OnClickEvent) => {
-    console.log('onClick $event: ', $event);
     this.onClickResult = $event;
   };
 
   onRatingChange = ($event: OnRatingChangeEven) => {
-    console.log('onRatingUpdated $event: ', $event);
     this.onRatingChangeResult = $event;
   };
 
   onHoverRatingChange = ($event: OnHoverRatingChangeEvent) => {
-    console.log('onHoverRatingChange $event: ', $event);
     this.onHoverRatingChangeResult = $event;
   };
 
   ngOnInit() {
-    this.noReviews = (this.reviews.length == 0);
-    console.info("this.noReviews Avant");
-    console.info(this.noReviews);
-    console.info("this.reviews Avant");
-    console.info(this.reviews);
-    if (this.noReviews) {
+    this.noReviews = (this.reviews.length === 0);
+
+    if (!this.noReviews) {
       this.noReviews = false;
-      console.info("this.noReviews dans (if (this.reviews) ) ");
-      console.info(this.noReviews);
+
       let reviewsObj = this.reviews;
       this.reviews = new Array;
-      let i: number = 0;
+      let i;
       for (i = 0; i < reviewsObj.length; i++) {
         let user = reviewsObj[i].user;
         if (isNull(user["image"])) {
