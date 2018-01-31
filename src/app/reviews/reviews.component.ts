@@ -50,7 +50,7 @@ export class ReviewsComponent implements OnInit {
       for (i = 0; i < reviewsObj.length; i++) {
         let user = reviewsObj[i].user;
         if (isNull(user["image"])) {
-          if (user["sexe"] == "male") {
+          if (user["gender"] == "male") {
             user["image"] = new ImageModel(0, "boy.png", "avatar.male");
           } else {
             user["image"] = new ImageModel(0, "girl.png", "avatar.female");

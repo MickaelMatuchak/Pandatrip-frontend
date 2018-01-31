@@ -51,10 +51,8 @@ export class VisitDetailsComponent implements OnInit {
               arrayImages.push(new ImageModel(images[i].id, images[i].url, images[i].description));
               this.imageSources.push('./assets/img/' + images[i].url);
 
-              console.log('./assets/img/' + images[i].url);
             }
 
-            console.log(this.imageSources);
             let reviews = visitTmp["reviews"];
 
             for (i = 0; i < reviews.length; i++) {

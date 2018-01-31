@@ -31,14 +31,6 @@ export class ThemeComponent implements OnInit{
     }
   }
 
-  readThemesPromise() {
-    this.themeService.getNumbersThemes(8).then(
-      (data: Object[]) => {
-        this.separateLine(4, data["hydra:member"]);
-      }
-    );
-  }
-
   onSelect(theme: ThemeModel, event: any) { 
     event.stopPropagation();
     this.selectedThemeModel = theme;
@@ -52,6 +44,10 @@ export class ThemeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.readThemesPromise();
+    this.themeService.getNumbersThemes(8).then(
+      (data: Object[]) => {
+        this.separateLine(4, data["hydra:member"]);
+      }
+    );
   }
 }
