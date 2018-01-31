@@ -86,11 +86,18 @@ export class RecapComponent implements OnInit {
     figure.setAttribute("_ngcontent-c2","");
 
     let img = document.createElement("img");
+    img.className = "image_visite_recap";
     img.setAttribute("_ngcontent-c2","");
     img.setAttribute("alt","");
     img.setAttribute("src","../assets/img/" + image.url);
 
-    figure.appendChild(img);
+    let a = document.createElement("a");
+    a.setAttribute("href","visit/"+visit.name);
+    a.setAttribute("alt", image.url)
+
+    a.appendChild(img);
+
+    figure.appendChild(a);
     tdLieu.appendChild(figure);
 
     let nomLieu = document.createTextNode(visit.name);
