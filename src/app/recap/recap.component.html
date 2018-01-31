@@ -25,25 +25,6 @@
               </tr>
               </thead>
               <tbody id="ligne_visite">
-              <tr *ngFor="let recap of recap;">
-                <td>
-                  <figure class="image is-128x128">
-                    <img src="../assets/img/visit/{{ recap.image }}" alt="">
-                  </figure>
-                </td>
-                <td>{{ recap.nom }}</td>
-                <td>{{ recap.date }}</td>
-
-                <td *ngIf="recap.guide">
-                  <figure class="image is-64x64">
-                    <img src="../assets/img/{{ recap.guide_image }}" alt="">
-                  </figure>
-                  <p class="content">{{ recap.guide }}</p>
-                </td>
-                <td *ngIf="recap.guide==null">
-                  <p class="content">Aucun guide. <a href="#">Choisir un guide ?</a> </p>
-                </td>
-              </tr>
               </tbody>
             </table>
           </div>
