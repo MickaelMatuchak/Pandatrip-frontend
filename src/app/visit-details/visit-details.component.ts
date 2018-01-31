@@ -173,7 +173,7 @@ export class VisitDetailsComponent implements OnInit {
     if (localStorage.getItem('visits') != undefined) {
       retrievedObject = JSON.parse(localStorage.getItem('visits'));
 
-      retrievedObject.forEach(function (element) {
+      retrievedObject.forEach(function (element, index) {
         let div = document.createElement("div");
         div.className = "panier_item";
 
@@ -182,8 +182,14 @@ export class VisitDetailsComponent implements OnInit {
 
         let i = document.createElement("i");
         i.className = "fa fa-window-close";
-        i.setAttribute("_ngcontent-c2", "")
+        i.setAttribute("_ngcontent-c2", "");
+        i.addEventListener("click", function(){
+          retrievedObject.splice(index, 1);
 
+          localStorage.setItem("visits", JSON.stringify(retrievedObject));
+
+          this.afficherPanier();
+        }.bind(this));
         span.appendChild(i);
 
         let h4 = document.createElement("h4");
@@ -216,7 +222,7 @@ export class VisitDetailsComponent implements OnInit {
         let panier = document.getElementById("mon_panier");
         panier.appendChild(div);
         div.appendChild(hr);
-      });
+      }, this);
     }
   }
 }

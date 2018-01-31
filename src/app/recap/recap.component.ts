@@ -96,8 +96,21 @@ export class RecapComponent implements OnInit {
     let nomLieu = document.createTextNode(visit.name);
     tdNomLieu.appendChild(nomLieu);
 
-    let date = document.createTextNode(visit.address);
-    tdDate.appendChild(date);
+    let address = document.createTextNode(
+      visit.address + ' ' +
+      visit.city + ' (' +
+      visit.postalCode + ') ');
+
+    let address2 = document.createTextNode(
+      visit.country + ' ' +
+      visit.region);
+
+    let p1 = document.createElement("p");
+    let p2 = document.createElement("p");
+    p1.appendChild(address);
+    p2.appendChild(address2);
+    tdDate.appendChild(p1);
+    tdDate.appendChild(p2);
 
     let nomGuide;
     if (item.guide != null){

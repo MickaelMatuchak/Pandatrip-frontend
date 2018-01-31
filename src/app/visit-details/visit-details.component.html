@@ -37,6 +37,7 @@
             {{ visitSelected.region }}
           </p>
           <p class="content">{{ visitSelected.description }}</p>
+          <p class="content" *ngIf="visitSelected.site != null"> <a href="{{ visitSelected.site }}" target="_blank">{{ visitSelected.site }}</a></p>
         </article>
       </div>
     </div>
@@ -47,17 +48,6 @@
     <article class="tile is-child notification panier">
       <div class="content" id="mon_panier">
         <p class="title">Mes visites</p>
-<!--        <div class="item_visite">
-          <span class="panier_supprimer"><i class="fa fa-window-close"></i></span>
-          <h4>Tour Eiffel </h4>
-          <p class="content">Visite guidée le 22/01/2018 avec Jean</p>
-        </div>
-        <hr>
-        <div class="item_visite">
-          <span class="panier_supprimer"><i class="fa fa-window-close"></i></span>
-          <h4>Champs Elysées </h4>
-          <p class="content">Visite non guidée (Envie d'un guide ?)</p>
-        </div>-->
         <div class="panier_bouton">
           <button class="bouton_visit" routerLink="/recap">
             Valider mon parcours
