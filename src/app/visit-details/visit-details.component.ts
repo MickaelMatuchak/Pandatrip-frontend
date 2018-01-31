@@ -48,12 +48,11 @@ export class VisitDetailsComponent implements OnInit {
         }
 
         let reviews = visitTmp["reviews"];
+        this.noReviews = reviews.length <= 0;
 
         for (i = 0; i < reviews.length; i++) {
           arrayReviews.push(new ReviewsModel(reviews[i].id, reviews[i].note, reviews[i].title, reviews[i].text, reviews[i].date, reviews[i].user));
         }
-
-        this.noReviews = false;
 
         this.visitSelected = new VisitModel(visitTmp["id"], visitTmp["name"],
           arrayImages,
