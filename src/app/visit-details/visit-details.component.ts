@@ -8,6 +8,9 @@ import {ReviewsModel} from '../reviews/reviews.model';
 
 import {ICarouselConfig, AnimationConfig} from 'angular4-carousel';
 import {ItemVisitModel} from "./item-visit.model";
+import {GuideVisitService} from "./guide-visit.service";
+import {VisitGuideModel} from "../profil/profil.model";
+import {GuideModel} from "../guide/guide.model";
 
 declare var $: any;
 declare var jquery: any;
@@ -16,7 +19,7 @@ declare var jquery: any;
   selector: 'visit-details',
   templateUrl: './visit-details.component.html',
   styleUrls: ['./visit-details.component.css', '../../../node_modules/bulma/css/bulma.css', '../../../node_modules/font-awesome/css/font-awesome.css'],
-  providers: [VisitService]
+  providers: [VisitService, GuideVisitService]
 })
 export class VisitDetailsComponent implements OnInit {
   lineVisits = [];
@@ -24,10 +27,12 @@ export class VisitDetailsComponent implements OnInit {
   noReviews: boolean = false;
   public imageSources: string[] = [];
   private sub: any;
+  itemsVisitGuide: VisitGuideModel[] = new Array();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private visitService: VisitService) {
+              private visitService: VisitService,
+              private guidevisit: GuideVisitService) {
   }
 
   private getVisitDetails(nameVisit: string) {
@@ -57,6 +62,30 @@ export class VisitDetailsComponent implements OnInit {
           visitTmp["country"], visitTmp["region"], visitTmp["city"],
           visitTmp["postalCode"], visitTmp["description"], visitTmp["note"],
           visitTmp["nbNotes"], visitTmp["site"]);
+
+        this.guidevisit.getGuidesByVisit(visitTmp["id"])
+          .then(guideVisit => {
+
+            let visitGuides = guideVisit["hydra:member"];
+
+            for (i = 0; i < visitGuides.length; i++) {
+              let guide = visitGuides[i].guide;
+              let image: ImageModel;
+
+              if (guide.user.image) {
+                image = new ImageModel(guide.user.image.id, guide.user.image.url, guide.user.image.description);
+              } else {
+                if (guide.user.gender == 'male') {
+                  image = new ImageModel(null, "boy.png", "boy");
+                } else {
+                  image = new ImageModel(null, "girl.png", "girl");
+                }
+              }
+
+              guide.user.image = image;
+              this.itemsVisitGuide.push(new VisitGuideModel(visitGuides[i].id, null, guide, visitGuides[i].date, visitGuides[i].duration, visitGuides[i].price, true));
+            }
+          });
       });
   }
 
@@ -73,12 +102,6 @@ export class VisitDetailsComponent implements OnInit {
 
     $('.open-modal').click(this.toggleModalClasses);
     $('.close-modal').click(this.toggleModalClasses);
-
-    $('tr').on('click', function () {
-      $('tr').removeClass('selected');
-      $(this).addClass('selected');
-
-    });
 
     this.afficherPanier();
 
@@ -100,6 +123,7 @@ export class VisitDetailsComponent implements OnInit {
 
   /* afficher pop-up*/
   toggleModalClasses(event) {
+
     let modalId = event.currentTarget.dataset.modalId;
     let modal = $(modalId);
     modal.toggleClass('is-active');
@@ -148,7 +172,7 @@ export class VisitDetailsComponent implements OnInit {
 
     let guide = null;
 
-    if(guideBalise != undefined) {
+    if (guideBalise != undefined) {
       guide = guideBalise.textContent;
     }
 
@@ -178,7 +202,7 @@ export class VisitDetailsComponent implements OnInit {
         let i = document.createElement("i");
         i.className = "fa fa-window-close";
         i.setAttribute("_ngcontent-c2", "");
-        i.addEventListener("click", function(){
+        i.addEventListener("click", function () {
           retrievedObject.splice(index, 1);
 
           localStorage.setItem("visits", JSON.stringify(retrievedObject));
@@ -198,7 +222,7 @@ export class VisitDetailsComponent implements OnInit {
 
         let contenu;
 
-        if(element.guide != null){
+        if (element.guide != null) {
           console.log(element.guide);
           contenu = document.createTextNode(element.guide);
         } else {
