@@ -123,7 +123,6 @@ export class VisitDetailsComponent implements OnInit {
 
   /* afficher pop-up*/
   toggleModalClasses(event) {
-
     let modalId = event.currentTarget.dataset.modalId;
     let modal = $(modalId);
     modal.toggleClass('is-active');

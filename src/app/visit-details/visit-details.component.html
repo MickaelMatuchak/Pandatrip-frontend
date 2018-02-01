@@ -22,6 +22,9 @@
             <button class="bouton_visit" (click)="ajouterPanier()">
               Ajouter à mes visites
             </button>
+            <button class="bouton_devenir_guide open-modal" data-modal-id="#guide-modal">
+              Devenir guide pour cette visite
+            </button>
           </div>
         </article>
       </div>
@@ -42,10 +45,9 @@
         </article>
       </div>
     </div>
-
   </div>
-  <div class="tile is-parent">
 
+  <div class="tile is-parent">
     <article class="tile is-child notification panier">
       <p class="title">Mes visites</p>
       <div class="content" id="mon_panier">
@@ -60,6 +62,7 @@
   </div>
 </div>
 
+<!-- Choisir un guide -->
 <div class="modal" id="my-modal">
   <div class="modal-background"></div>
   <div class="modal-card">
@@ -94,6 +97,61 @@
       <button class="close-modal button" data-modal-id="#my-modal">Annuler</button>
       <button class="close-modal button bouton_vert" data-modal-id="#my-modal" (click)="ajouterPanierGuide()">Choisir ce
         guide
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- Devenir guide -->
+<div class="modal" id="guide-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Voulez-vous devenir guide pour cette visite ?</p>
+      <a class="delete close-modal" aria-label="close" data-modal-id="#guide-modal"></a>
+    </header>
+    <section class="modal-card-body">
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <p>
+              <label class="label">Quel est votre tarif pour cette visite ?</label>
+              <i class="fa fa-eur fa-lg input_icone"></i>
+              <input class="login_input" placeholder="Prix moyen constaté : 12.00€" type="text">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="label">Combien de temps voulez-vous mener cette visite ?</label>
+            <div class="field has-addons">
+              <div class="control is-expanded">
+                <div class="select heure_select">
+                  <select name="heure">
+                    <option value="">15 minutes</option>
+                    <option value="">30 minutes</option>
+                    <option value="">45 minutes</option>
+                    <option value="">60 minutes</option>
+                    <option value="">90 minutes</option>
+                    <option value="">120 minutes</option>
+                    <option value="">150 minutes</option>
+                    <option value="">180 minutes</option>
+                    <option value="">210 minutes</option>
+                    <option value="">240 minutes</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="modal-card-foot">
+      <button class="close-modal button" data-modal-id="#guide-modal">Annuler</button>
+      <button class="close-modal button bouton_vert" data-modal-id="#guide-modal">Enregistrer
       </button>
     </footer>
   </div>
