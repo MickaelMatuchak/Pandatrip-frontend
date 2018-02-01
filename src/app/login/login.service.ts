@@ -8,17 +8,7 @@ import { AppService } from '../app.service';
 @Injectable()
 export class LoginService {
 
-  jwtHelper: JwtHelper = new JwtHelper();
-
   constructor( private http: Http ) { }
-
-  logOut() {
-    localStorage.removeItem('token');
-  }
-
-  loggedIn() {
-    return tokenNotExpired();
-  }
 
   logIn(username: string, password: string): Promise<any> {
     
@@ -41,20 +31,8 @@ export class LoginService {
     return this.http
             .post(url, bodyFormData, options)
             .toPromise()
-            .then(res => {
-              var data = res.json();
-              this.saveTokenInLocal(data.token);
-            })
+            .then(res =>  res.json().token)
             .catch(error => Promise.reject(error.message || error));
-  }
-
-  private saveTokenInLocal(token: string) {
-    console.info("token ");
-    console.info(token);
-    localStorage.setItem('token', token);
-    
-    console.log("this.jwtHelper.decodeToken(token) ");
-    console.log(this.jwtHelper.decodeToken(token));
   }
 
   private handleError(error: any) {

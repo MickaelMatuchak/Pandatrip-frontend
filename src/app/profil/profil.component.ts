@@ -5,6 +5,7 @@ import {ImageModel} from '../image/image.model';
 import {JwtHelper} from 'angular2-jwt';
 import {GuideModel} from '../guide/guide.model';
 import {ReviewsModel} from '../reviews/reviews.model';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-profil',
@@ -19,12 +20,14 @@ export class ProfilComponent implements OnInit {
   isGuide: boolean;
   jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private profilService: ProfilService) {
+  constructor(
+    private profilService: ProfilService,
+    private appService: AppService) {
   }
 
   ngOnInit() {
-    let tokenDecoded = this.decodeToken();
-    this.initialiseIsGuide(tokenDecoded.roles);
+    let tokenDecoded = this.appService.decodeToken();
+    this.isGuide = this.appService.initialiseIsGuide(tokenDecoded.roles);
 
     this.userLog = new UserModel(null,
       "", "", "", "", "", new ImageModel(null, "", ""), new GuideModel(null, null, null, null, "", "", "", "", null, "", null));
@@ -34,20 +37,6 @@ export class ProfilComponent implements OnInit {
     this.userParcours = [];
     console.info("AVANT getUserParcours")
     this.getUserParcours();
-  }
-
-  private decodeToken() {
-    let recupTokenStored = localStorage.getItem("token");
-    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
-    return tokenDecoded;
-  }
-
-  private initialiseIsGuide(roles: string[]) {
-    for (var i = 0; i < roles.length; i++) {
-      this.isGuide = ( roles[i] == "ROLE_GUIDE" );
-      console.info("this.isGuide " + i);
-      console.info(this.isGuide);
-    }
   }
 
   private getUserParcours() {
@@ -74,16 +63,7 @@ export class ProfilComponent implements OnInit {
         let recupUser = data["hydra:member"][0];
         console.info("recupUser");
         console.info(recupUser);
-        let image: ImageModel;
-        if (recupUser.image) {
-          image = new ImageModel(recupUser.image.id, recupUser.image.url, recupUser.image.description);
-        } else {
-          if (recupUser.gender == 'male') {
-            image = new ImageModel(null, "boy.png", "boy");
-          } else {
-            image = new ImageModel(null, "girl.png", "girl");
-          }
-        }
+        let image: ImageModel = this.appService.initialiseUserImage(recupUser);
 
         // let arrayReviews:ReviewsModel[] = new Array();
         // let reviews = recupUser.guide.reviews;

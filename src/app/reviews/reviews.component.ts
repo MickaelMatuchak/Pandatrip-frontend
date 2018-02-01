@@ -7,6 +7,8 @@ import {
   OnRatingChangeEven,
   OnHoverRatingChangeEvent
 } from './../../../node_modules/angular-star-rating/star-rating-struct';
+import { AppService } from '../app.service';
+import { UserModel } from '../profil/profil.model';
 
 
 @Component({
@@ -20,7 +22,8 @@ export class ReviewsComponent implements OnInit {
   reviews: ReviewsModel[];
   noReviews: boolean = true;
 
-  constructor() {
+  constructor(
+    private appService: AppService) {
   }
 
   onClickResult: OnClickEvent;
@@ -49,16 +52,9 @@ export class ReviewsComponent implements OnInit {
       this.reviews = new Array;
       let i;
       for (i = 0; i < reviewsObj.length; i++) {
-        let user = reviewsObj[i].user;
-        if (isNull(user["image"])) {
-          if (user["gender"] == "male") {
-            user["image"] = new ImageModel(0, "boy.png", "avatar.male");
-          } else {
-            user["image"] = new ImageModel(0, "girl.png", "avatar.female");
-          }
-        } else {
-          user["image"] = new ImageModel(user["image"]["id"], user["image"]["url"], user["image"]["description"]);
-        }
+        let user: any = reviewsObj[i].user;
+        let image = this.appService.initialiseUserImage(user);
+        user.image = image;
         this.reviews.push(new ReviewsModel(reviewsObj[i].id, reviewsObj[i].note, reviewsObj[i].title, reviewsObj[i].text, reviewsObj[i].date, user));
       }
     } else {

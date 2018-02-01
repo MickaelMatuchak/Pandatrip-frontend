@@ -4,7 +4,7 @@
         <li><a routerLink="/"><img src="../assets/img/pandatrip-logo-texte2.png" alt="pandatrip" class="logo_panda_texte" /></a></li>
         <research></research>
         <li *ngIf="isConnected && !isGuide"><a routerLink="/partners">Devenir Guide</a></li>
-        <li *ngIf="!isConnected || isGuide"><a routerLink="/partners"></a></li>
+        <li *ngIf="!isConnected || isGuide"><a routerLink=""></a></li>
         <li *ngIf="!isConnected"><a routerLink="/login">Se connecter</a></li>
         <li *ngIf="!isConnected"><a routerLink="/register">S'inscrire</a></li>
         <li *ngIf="isConnected"><a routerLink="/profil">Profil</a></li>

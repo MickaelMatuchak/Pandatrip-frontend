@@ -4,17 +4,20 @@ import { GuideService } from './guide.service';
 import { ReviewsModel } from '../reviews/reviews.model';
 import { VisitGuideModel, UserModel } from '../profil/profil.model';
 import { ImageModel } from '../image/image.model';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'guides',
   templateUrl: 'guide.component.html',
   styleUrls: ['guide.component.css', '../../../node_modules/bulma/css/bulma.css'],
-  providers: [ GuideService ]
+  providers: [ GuideService, AppService ]
 })
 
 export class GuideComponent implements OnInit {
   
-  constructor( private guideService: GuideService ) {}
+  constructor( 
+    private guideService: GuideService,
+    private appService: AppService ) {}
 
   guides: GuideModel[];
 
@@ -61,17 +64,8 @@ export class GuideComponent implements OnInit {
         for (var i = 0; i < guidesSelect.length; i++) {
           let guide = guidesSelect[i];
           let userRecup : UserModel = guide.user;
-          let image ;
+          let image = this.appService.initialiseUserImage(userRecup);
           
-          if (userRecup.image) {
-            image = new ImageModel(userRecup.image.id, userRecup.image.url, userRecup.image.description);
-          } else {
-            if (userRecup.gender == 'male') {
-              image = new ImageModel(null, "boy.png", "boy");
-            } else {
-              image = new ImageModel(null, "girl.png", "girl");
-            }
-          }
           let user = new UserModel(userRecup.id, userRecup.username,
             userRecup.gender, userRecup.firstname, "", "",
             image, null);
