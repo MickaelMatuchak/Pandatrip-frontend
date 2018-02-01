@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, RequestOptions} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import { AppService } from '../app.service';
 import { JwtHelper } from 'angular2-jwt';
 import {UserModel} from "./profil.model";
@@ -15,36 +15,28 @@ export class ProfilService {
 
   constructor( private http: Http ) { }
 
-  getUser() {
-    let recupTokenStored = localStorage.getItem("token");
-    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
-    console.info("tokenDecoded User ");
-    console.error(tokenDecoded);
-    let url = `${this.endpointUrlUsers}?username=${tokenDecoded["username"]}`;
+  getUser(username: string) {
+    let url = `${this.endpointUrlUsers}?username=${username}`;
 
     return this.http.get(url)
            .toPromise()
            .then(response => response.json());
   }
 
-  getGuide() {
-    let recupTokenStored = localStorage.getItem("token");
-    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
-    console.info("tokenDecoded User ");
-    console.error(tokenDecoded);
-    let url = `${this.endpointUrlUserGuides}?username=${tokenDecoded["username"]}`;
+  getGuide(username: string) {
+    let url = `${this.endpointUrlUserGuides}?user.username=${username}`;
 
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json());
+      .then(response => {
+        console.info("response.json()");
+        console.info(response.json());
+        return response.json();
+      });
   }
 
-  getUserParcours() {
-    let recupTokenStored = localStorage.getItem("token");
-    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
-    console.info("tokenDecoded UserParcours ");
-    console.error(tokenDecoded);
-    let url = `${this.endpointUrlUserParcours}?user.username=${tokenDecoded["username"]}`;
+  getUserParcours(username: string) {
+    let url = `${this.endpointUrlUserParcours}?user.username=${username}`;
 
     return this.http.get(url)
            .toPromise()
@@ -56,13 +48,15 @@ export class ProfilService {
 
     const headers = new Headers({ 'Content-Type': 'application/json' });
 
+    let options = new RequestOptions({ headers: headers })
+
     const bodyJSON = JSON.stringify ({
       'name': name,
       'user': user.id
     });
 
     return this.http
-      .post(url, bodyJSON, headers)
+      .post(url, bodyJSON, options)
       .toPromise()
       .then()
       .catch(error => Promise.reject(error.message || error));

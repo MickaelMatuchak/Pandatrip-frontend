@@ -38,6 +38,10 @@ export class ProfilComponent implements OnInit {
 
   ngOnInit() {
     let tokenDecoded = this.appService.decodeToken();
+    
+    console.info("tokenDecoded");
+    console.info(tokenDecoded);
+
     this.isGuide = this.appService.initialiseIsGuide(tokenDecoded.roles);
 
     this.userLog = new UserModel(null,
@@ -47,15 +51,15 @@ export class ProfilComponent implements OnInit {
       '', '', '', null, '', null);
 
     console.info("AVANT getUserLog")
-    this.getUserLog();
+    this.getUserLog(tokenDecoded.username);
 
     this.userParcours = [];
     console.info("AVANT getUserParcours")
-    this.getUserParcours();
+    this.getUserParcours(tokenDecoded.username);
   }
 
-  private getUserParcours() {
-    this.profilService.getUserParcours()
+  private getUserParcours(username: string) {
+    this.profilService.getUserParcours(username)
       .then(data => {
         console.info(data["hydra:member"]);
         let parcours = data["hydra:member"];
@@ -72,9 +76,9 @@ export class ProfilComponent implements OnInit {
       });
   }
 
-  private getUserLog() {
+  private getUserLog(username: string) {
     if (this.isGuide) {
-      this.profilService.getGuide().then(data => {
+      this.profilService.getGuide(username).then(data => {
         const guide = data['hydra:member'][0];
 
         const arrayListVisits: VisitGuideModel[] = new Array();
@@ -95,11 +99,12 @@ export class ProfilComponent implements OnInit {
         this.userLog = new UserModel(guide.user.id,
           guide.user.username, guide.user.gender, guide.user.firstname,
           guide.user.lastname, guide.user.mail, image);
-
+        console.info("this.userLog isGuide");
+        console.info(this.userLog);
       });
 
     } else {
-      this.profilService.getUser()
+      this.profilService.getUser(username)
         .then(data => {
           const user = data['hydra:member'][0];
 
@@ -108,6 +113,8 @@ export class ProfilComponent implements OnInit {
           this.userLog = new UserModel(user.id,
             user.username, user.gender, user.firstname,
             user.lastname, user.mail, image);
+          console.info("this.userLog");
+          console.info(this.userLog);
         });
     }
   }
