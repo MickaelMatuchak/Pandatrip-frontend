@@ -5,7 +5,7 @@ import {ImageModel} from '../image/image.model';
 import {JwtHelper} from 'angular2-jwt';
 import {GuideModel} from '../guide/guide.model';
 import {ReviewsModel} from '../reviews/reviews.model';
-import { AppService } from '../app.service';
+import {AppService} from '../app.service';
 
 @Component({
   selector: 'app-profil',
@@ -16,21 +16,21 @@ import { AppService } from '../app.service';
 export class ProfilComponent implements OnInit {
 
   userLog: UserModel;
+  userGuide: GuideModel;
   userParcours: ParcoursModel[];
   isGuide: boolean;
   jwtHelper: JwtHelper = new JwtHelper();
-  public show:boolean = false;
-  public buttonName:any = 'Show';
+  public show: boolean = false;
+  public buttonName: any = 'Show';
 
-  constructor(
-    private profilService: ProfilService,
-    private appService: AppService) {
+  constructor(private profilService: ProfilService,
+              private appService: AppService) {
   }
 
   toggle() {
     this.show = !this.show;
 
-    if(this.show)
+    if (this.show)
       this.buttonName = "Hide";
     else
       this.buttonName = "Show";
@@ -41,7 +41,11 @@ export class ProfilComponent implements OnInit {
     this.isGuide = this.appService.initialiseIsGuide(tokenDecoded.roles);
 
     this.userLog = new UserModel(null,
-      "", "", "", "", "", new ImageModel(null, "", ""), new GuideModel(null, null, null, null, "", "", "", "", null, "", null));
+      "", "", "", "", "", new ImageModel(null, "", ""));
+
+    this.userGuide = new GuideModel(null, null, null, null, '',
+      '', '', '', null, '', null);
+
     console.info("AVANT getUserLog")
     this.getUserLog();
 
@@ -65,16 +69,15 @@ export class ProfilComponent implements OnInit {
           this.userParcours.push(parcoursAdd);
         }
 
-      })
+      });
   }
 
   private getUserLog() {
-    this.profilService.getUser()
-      .then(data => {
-        let recupUser = data["hydra:member"][0];
-        console.info("recupUser");
-        console.info(recupUser);
-        let image: ImageModel = this.appService.initialiseUserImage(recupUser);
+    if (this.isGuide) {
+      this.profilService.getGuide().then(data => {
+        const guide = data['hydra:member'][0];
+
+        const arrayListVisits: VisitGuideModel[] = new Array();
 
         // let arrayReviews:ReviewsModel[] = new Array();
         // let reviews = recupUser.guide.reviews;
@@ -83,18 +86,29 @@ export class ProfilComponent implements OnInit {
         //   console.info("review i " + i);
         //   console.info(review);
         // }
-        let arrayListVisits: VisitGuideModel[] = new Array();
 
-        let guide = null;
-        if (recupUser.guide !== null) {
-          let recupGuide = recupUser.guide;
+        this.userGuide = new GuideModel(guide.id, guide.billfold, guide.reviews, guide.user, guide.address,
+          guide.country, guide.region, guide.city, guide.postalCode, guide.phoneNumber, arrayListVisits);
 
-          guide = new GuideModel(recupGuide.id, recupGuide.billfold, null, null, recupGuide.address, recupGuide.country,
-            recupGuide.region, recupGuide.city, recupGuide.postalCode, recupGuide.phoneNumber, arrayListVisits);
-        }
-        this.userLog = new UserModel(recupUser.id,
-          recupUser.username, recupUser.gender, recupUser.firstname,
-          recupUser.lastname, recupUser.mail, image, guide);
+        const image: ImageModel = this.appService.initialiseUserImage(guide.user);
+
+        this.userLog = new UserModel(guide.user.id,
+          guide.user.username, guide.user.gender, guide.user.firstname,
+          guide.user.lastname, guide.user.mail, image);
+
       });
+
+    } else {
+      this.profilService.getUser()
+        .then(data => {
+          const user = data['hydra:member'][0];
+
+          const image: ImageModel = this.appService.initialiseUserImage(user);
+
+          this.userLog = new UserModel(user.id,
+            user.username, user.gender, user.firstname,
+            user.lastname, user.mail, image);
+        });
+    }
   }
 }

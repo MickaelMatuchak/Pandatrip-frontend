@@ -86,7 +86,7 @@
     <article class="tile is-child notification">
       <div class="content">
         <p class="title">Mon porte-monnaie</p>
-        <p class="subtitle has-text-centered">Solde : {{ userLog.guide.billfold }} €</p>
+        <p class="subtitle has-text-centered">Solde : {{ userGuide.billfold }} €</p>
         <p class="content">
           <button class="login_valider">
           Retirer mon argent
@@ -151,33 +151,33 @@
 
           <p class="content" *ngIf="isGuide">
             <span>Tel : </span>
-            <span *ngIf="!show">{{ userLog.guide.phoneNumber }}</span>
-            <input *ngIf="show" (input)="userLog.guide.phoneNumber = $event.target.value" [value]='userLog.guide.phoneNumber' class="input_edit" (blur)="toggle()">
+            <span *ngIf="!show">{{ userGuide.phoneNumber }}</span>
+            <input *ngIf="show" (input)="userGuide.phoneNumber = $event.target.value" [value]='userGuide.phoneNumber' class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Adresse : </span>
-            <span *ngIf="!show">{{ userLog.guide.address }} ({{ userLog.guide.postalCode }})</span>
-            <input *ngIf="show" (input)="userLog.guide.address = $event.target.value" [value]='userLog.guide.address' class="input_edit" (blur)="toggle()">
-            <input *ngIf="show" (input)="userLog.guide.postalCode = $event.target.value" [value]='userLog.guide.postalCode' class="input_edit" (blur)="toggle()">
+            <span *ngIf="!show">{{ userGuide.address }} ({{ userGuide.postalCode }})</span>
+            <input *ngIf="show" (input)="userGuide.address = $event.target.value" [value]='userGuide.address' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.postalCode = $event.target.value" [value]='userGuide.postalCode' class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Ville : </span>
-            <span *ngIf="!show">{{ userLog.guide.city }}</span>
-            <input *ngIf="show" (input)="userLog.guide.city = $event.target.value" [value]='userLog.guide.city' class="input_edit" (blur)="toggle()">
+            <span *ngIf="!show">{{ userGuide.city }}</span>
+            <input *ngIf="show" (input)="userGuide.city = $event.target.value" [value]='userGuide.city' class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Région : </span>
-            <span *ngIf="!show">{{ userLog.guide.region }}</span>
-            <input *ngIf="show" (input)="userLog.guide.region = $event.target.value" [value]='userLog.guide.region' class="input_edit" (blur)="toggle()">
+            <span *ngIf="!show">{{ userGuide.region }}</span>
+            <input *ngIf="show" (input)="userGuide.region = $event.target.value" [value]='userGuide.region' class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Pays : </span>
-            <span *ngIf="!show">{{ userLog.guide.country }}</span>
-            <input *ngIf="show" (input)="userLog.guide.country = $event.target.value" [value]='userLog.guide.country' class="input_edit" (blur)="toggle()">
+            <span *ngIf="!show">{{ userGuide.country }}</span>
+            <input *ngIf="show" (input)="userGuide.country = $event.target.value" [value]='userGuide.country' class="input_edit" (blur)="toggle()">
           </p>
         </article>
       </div>

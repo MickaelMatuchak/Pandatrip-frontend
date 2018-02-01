@@ -51,7 +51,7 @@ export class GuideComponent implements OnInit {
     let nbGuideAccueil = 3;
     for (var i = 0; i < nbGuideAccueil; i++) {
       let user = new UserModel(null, "", "", "", "", "",
-        new ImageModel(null, "", ""), null);
+        new ImageModel(null, "", ""));
 
       this.guides.push( new GuideModel(null, null,
       null, user, "", "", "", "", null, "", null) );
@@ -69,7 +69,7 @@ export class GuideComponent implements OnInit {
 
           let user = new UserModel(userRecup.id, userRecup.username,
             userRecup.gender, userRecup.firstname, userRecup.lastname, "",
-            image, null);
+            image);
 
           console.log(user);
 

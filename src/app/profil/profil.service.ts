@@ -9,6 +9,7 @@ export class ProfilService {
 
   private endpointUrlUsers = AppService.entryPointUrl + '/users';
   private endpointUrlUserParcours = AppService.entryPointUrl + '/parcours';
+  private endpointUrlUserGuides = AppService.entryPointUrl + '/guides';
 
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -24,6 +25,18 @@ export class ProfilService {
     return this.http.get(url)
            .toPromise()
            .then(response => response.json());
+  }
+
+  getGuide() {
+    let recupTokenStored = localStorage.getItem("token");
+    let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
+    console.info("tokenDecoded User ");
+    console.error(tokenDecoded);
+    let url = `${this.endpointUrlUserGuides}?username=${tokenDecoded["username"]}`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json());
   }
 
   getUserParcours() {
