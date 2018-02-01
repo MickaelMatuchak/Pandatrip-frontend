@@ -49,10 +49,20 @@
     <article class="tile is-child notification panier">
       <p class="title">Mes visites</p>
       <div class="content" id="mon_panier">
-
+        <div class="panier_item" *ngFor="let itemVisit of itemsVisit">
+          <span class="panier_supprimer">
+            <i class="fa fa-window-close" (click)="supprimerItemPanier(itemVisit.visit.name);"></i>
+          </span>
+          <h4>{{ itemVisit.visit.name }}</h4>
+          <p *ngIf="itemVisit.guideVisit != null">{{ itemVisit.guideVisit.guide.user.firstname }} {{ itemVisit.guideVisit.guide.user.lastname }}</p>
+          <p *ngIf="itemVisit.guideVisit == null">Visite non guidée (Envie d'un guide ?)</p>
+          <hr>
+        </div>
       </div>
+
       <div class="panier_bouton">
-        <button class="bouton_visit" routerLink="/recap">
+        <p *ngIf="itemsVisit.length == 0">Ajoutez les visites qui vous plaisent.</p>
+        <button *ngIf="itemsVisit.length != 0" class="bouton_visit" routerLink="/recap">
           Valider mon parcours
         </button>
       </div>
@@ -73,16 +83,15 @@
       </p>
 
       <table class="choisir_guide" *ngIf="itemsVisitGuide.length > 0">
-
         <tbody>
-        <tr *ngFor="let visitGuide of itemsVisitGuide;" onclick="$('tr').removeClass('selected'); $(this).addClass('selected');">
-          <td>
+        <tr (click)="selectedTR($event);" *ngFor="let visitGuide of itemsVisitGuide; let i = index">
+          <td class="{{ i }}">
             <figure class="image is-64x64 avatar">
               <img src="../assets/img/{{ visitGuide.guide.user.image.url }}"
                    alt="{{ visitGuide.guide.user.image.description }}"/>
             </figure>
           </td>
-          <td class="guide">{{ visitGuide.guide.user.firstname }} {{ visitGuide.guide.user.lastname }}</td>
+          <td class="guide"><span class="name_guide">{{ visitGuide.guide.user.firstname }} {{ visitGuide.guide.user.lastname }}</span>
           <td>{{ visitGuide.duration }} minutes</td>
           <td>{{ visitGuide.price }} €</td>
         </tr>
@@ -92,8 +101,8 @@
 
     <footer class="modal-card-foot">
       <button class="close-modal button" data-modal-id="#my-modal">Annuler</button>
-      <button class="close-modal button bouton_vert" data-modal-id="#my-modal" (click)="ajouterPanierGuide()">Choisir ce
-        guide
+      <button class="close-modal button bouton_vert" data-modal-id="#my-modal"
+              (click)="ajouterPanierGuide()">Choisir ce guide
       </button>
     </footer>
   </div>

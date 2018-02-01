@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import {Http, RequestOptions} from '@angular/http';
 import { AppService } from '../app.service';
 import { JwtHelper } from 'angular2-jwt';
+import {UserModel} from "./profil.model";
 
 @Injectable()
 export class ProfilService {
@@ -35,5 +36,22 @@ export class ProfilService {
     return this.http.get(url)
            .toPromise()
            .then(response => response.json());
+  }
+
+  postUserParcours(name: string, user: UserModel) {
+    const url = AppService.entryPointUrl + '/parcours';
+
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+
+    const bodyJSON = JSON.stringify ({
+      'name': name,
+      'user': user.id
+    });
+
+    return this.http
+      .post(url, bodyJSON, headers)
+      .toPromise()
+      .then()
+      .catch(error => Promise.reject(error.message || error));
   }
 }
