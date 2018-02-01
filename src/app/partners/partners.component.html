@@ -13,27 +13,27 @@
   <p class="title">Deviens un guide</p>
   <p>
     <i class="fa fa-globe fa-lg input_icone"></i>
-    <input class="login_input" type="text" placeholder="Ville">
+    <input class="login_input" type="text" [(ngModel)]="city" placeholder="Ville">
   </p>
   <p>
     <i class="fa fa-globe fa-lg input_icone"></i>
-    <input class="login_input" type="text" placeholder="Adresse">
+    <input class="login_input" type="text" [(ngModel)]="address" placeholder="Adresse">
   </p>
   <p>
     <i class="fa fa-globe fa-lg input_icone"></i>
-    <input class="login_input" type="text" placeholder="Code Postal">
+    <input class="login_input" type="text" [(ngModel)]="postalCode" placeholder="Code Postal">
   </p>
   <p>
     <i class="fa fa-globe fa-lg input_icone"></i>
-    <input class="login_input" type="text" placeholder="Pays" value="France">
+    <input class="login_input" type="text" [(ngModel)]="country" placeholder="Pays" value="France">
   </p>
   <p>
     <i class="fa fa-globe fa-lg input_icone"></i>
-    <input class="login_input" type="text" placeholder="Région">
+    <input class="login_input" type="text" [(ngModel)]="region" placeholder="Région">
   </p>
   <p>
     <i class="fa fa-phone fa-lg input_icone"></i>
-    <input class="login_input" type="text" placeholder="Telephone">
+    <input class="login_input" type="text" [(ngModel)]="phoneNumber" placeholder="Telephone">
   </p>
   <p>
     <i class="fa fa-lock fa-lg input_icone"></i>
@@ -41,11 +41,11 @@
   </p>
   <br/>
   <label class="checkbox">
-    <input type="checkbox">
+    <input type="checkbox" [(ngModel)]="conditionsChecked">
     J'accepte <a href="#">conditions du service</a>.
   </label>
 
-  <button class="partners_valider">
+  <button class="partners_valider" (click)="onSubmit($event)">
     Devenir guide
   </button>
 </div>
