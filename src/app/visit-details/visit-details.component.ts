@@ -28,6 +28,7 @@ export class VisitDetailsComponent implements OnInit {
   public imageSources: string[] = [];
   private sub: any;
   itemsVisitGuide: VisitGuideModel[] = new Array();
+  itemsVisit: ItemVisitModel[] = new Array();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -103,8 +104,9 @@ export class VisitDetailsComponent implements OnInit {
     $('.open-modal').click(this.toggleModalClasses);
     $('.close-modal').click(this.toggleModalClasses);
 
-    this.afficherPanier();
-
+    if (localStorage.getItem('visits') != null) {
+      this.itemsVisit = JSON.parse(localStorage.getItem('visits'));
+    }
   }
 
   ngOnDestroy() {
@@ -123,125 +125,67 @@ export class VisitDetailsComponent implements OnInit {
 
   /* afficher pop-up*/
   toggleModalClasses(event) {
-
     let modalId = event.currentTarget.dataset.modalId;
     let modal = $(modalId);
     modal.toggleClass('is-active');
     $('html').toggleClass('is-clipped');
   }
 
-  stockerEnSession(visit: ItemVisitModel) {
-    let retrievedObject = null;
+  selectedTR(event) {
+    $('tr').removeClass('selected');
+    event.currentTarget.setAttribute('class', 'selected');
+  }
 
-    if (localStorage.getItem('visits') != null) {
-      retrievedObject = JSON.parse(localStorage.getItem('visits'));
-    }
+  stockerEnSession(itemVisit: ItemVisitModel) {
 
     // Sauvegarder les informations dans l'espace local courant
 
-    if (retrievedObject != null) {
+    if (this.itemsVisit != null) {
       let isExist = false;
 
-      retrievedObject.forEach(function (element) {
-        if (element.name == visit.name) {
+      this.itemsVisit.forEach(function (element) {
+        if (element.visit.name == itemVisit.visit.name) {
           isExist = true;
         }
       });
 
       if (isExist == false) {
-        retrievedObject.push(visit);
+        this.itemsVisit.push(itemVisit);
       }
     } else {
-      retrievedObject = [visit];
+      this.itemsVisit = [itemVisit];
     }
 
-    localStorage.setItem("visits", JSON.stringify(retrievedObject));
+    localStorage.setItem("visits", JSON.stringify(this.itemsVisit));
   }
 
   ajouterPanier() {
-    let visit = new ItemVisitModel(this.visitSelected["name"], null);
+    let visit = new ItemVisitModel(this.visitSelected, null);
 
     this.stockerEnSession(visit);
-
-    this.afficherPanier();
   }
 
   ajouterPanierGuide() {
     let trSelected = document.getElementsByClassName("selected")[0];
-    let guideBalise = trSelected.getElementsByClassName("guide")[0];
+    let indexGuide = trSelected.getElementsByTagName('td')[0].getAttribute('class');
 
-    let guide = null;
+    if (trSelected != undefined) {
+      let visit = new ItemVisitModel(this.visitSelected, this.itemsVisitGuide[indexGuide]);
 
-    if (guideBalise != undefined) {
-      guide = guideBalise.textContent;
+      this.stockerEnSession(visit);
     }
-
-    let visit = new ItemVisitModel(this.visitSelected["name"], guide);
-
-    this.stockerEnSession(visit);
-
-    this.afficherPanier();
   }
 
-  afficherPanier() {
+  supprimerItemPanier(itemVisitName) {
+    let indexToDelete = null;
 
-    $(".panier_item").remove();
+    this.itemsVisit.forEach(function(element, index) {
+      if (element.visit.name == itemVisitName) {
+        indexToDelete = index;
+      }
+    });
 
-    let retrievedObject = null;
-
-    if (localStorage.getItem('visits') != undefined) {
-      retrievedObject = JSON.parse(localStorage.getItem('visits'));
-
-      retrievedObject.forEach(function (element, index) {
-        let div = document.createElement("div");
-        div.className = "panier_item";
-
-        let span = document.createElement("span");
-        span.className = "panier_supprimer";
-
-        let i = document.createElement("i");
-        i.className = "fa fa-window-close";
-        i.setAttribute("_ngcontent-c2", "");
-        i.addEventListener("click", function () {
-          retrievedObject.splice(index, 1);
-
-          localStorage.setItem("visits", JSON.stringify(retrievedObject));
-
-          this.afficherPanier();
-        }.bind(this));
-        span.appendChild(i);
-
-        let h4 = document.createElement("h4");
-        h4.setAttribute("_ngcontent-c2", "");
-        let titre = document.createTextNode(element.name);
-        h4.appendChild(titre);
-
-        let p = document.createElement("p");
-        p.setAttribute("_ngcontent-c2", "");
-        p.className = "content";
-
-        let contenu;
-
-        if (element.guide != null) {
-          console.log(element.guide);
-          contenu = document.createTextNode(element.guide);
-        } else {
-          contenu = document.createTextNode("Visite non guidée (Envie d'un guide ?)");
-        }
-
-        p.appendChild(contenu);
-
-        div.appendChild(span);
-        div.appendChild(h4);
-        div.appendChild(p)
-
-        let hr = document.createElement("hr");
-        hr.setAttribute("_ngcontent-c2", "");
-
-        let panier = document.getElementById("mon_panier");
-        panier.appendChild(div);
-        div.appendChild(hr);
-      }, this);
-    }
+    this.itemsVisit.splice(indexToDelete, 1);
+    localStorage.setItem("visits", JSON.stringify(this.itemsVisit));
   }
 }

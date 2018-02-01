@@ -10,7 +10,8 @@
         <article class="tile is-child notification">
           <p class="title">
             <span *ngIf="!show">{{title}}</span>
-            <input *ngIf="show" (input)="title = $event.target.value" [value]='title' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="title = $event.target.value" [value]='title' class="input_edit"
+                   (blur)="toggle()">
             <i class="fa fa-pencil-square" (click)="toggle()"></i>
           </p>
 
@@ -24,15 +25,41 @@
                 <th>Guide</th>
               </tr>
               </thead>
-              <tbody id="ligne_visite">
+              <tbody id="ligne_visite" *ngFor="let itemVisit of itemsVisit">
+              <tr>
+                <td>
+                  <figure class="image is-128x128">
+                    <a href="visit/{{ itemVisit.visit.name }}">
+                      <img src="../assets/img/{{ itemVisit.visit.images[0].url }}"
+                           alt="{{ itemVisit.visit.images[0].description }}" class="image_visite_recap">
+                    </a>
+                  </figure>
+                </td>
+                <td>{{ itemVisit.visit.name }}</td>
+                <td>
+                  {{ itemVisit.visit.address }} {{ itemVisit.visit.city }} ({{ itemVisit.visit.postalCode }})<br>
+                  {{ itemVisit.visit.country }} {{ itemVisit.visit.region }}
+                </td>
+
+                <td *ngIf="itemVisit.guideVisit == null">Visite libre</td>
+                <td *ngIf="itemVisit.guideVisit != null">
+                  <figure class="image is-128x128">
+                    <img src="../assets/img/{{ itemVisit.guideVisit.guide.user.image.url  }}"
+                         alt="{{ itemVisit.guideVisit.guide.user.firstname  }}" class="image_visite_recap">
+                    {{ itemVisit.guideVisit.guide.user.firstname }} {{ itemVisit.guideVisit.guide.user.lastname}}
+                  </figure>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
           <article class="tile is-child">
             <div class="content has-text-centered">
+              <!--
               <button class="recap_valider">
                 Sauvegarder comme un brouillon
               </button>
+              -->
               <button class="recap_valider">
                 Valider mon parcours
               </button>

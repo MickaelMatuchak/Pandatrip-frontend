@@ -1,8 +1,11 @@
+import {VisitModel} from '../visit/visit.model';
+import {GuideVisitModel} from './guide-visit.model';
+
 export class ItemVisitModel {
-  constructor(name: string, guide: string) {
-    this.name = name;
-    this.guide = guide;
+  constructor(visit: VisitModel, guideVisit: GuideVisitModel) {
+    this.visit = visit;
+    this.guideVisit = guideVisit;
   }
-  name: string;
-  guide: string;
+  visit: VisitModel;
+  guideVisit: GuideVisitModel;
 }
