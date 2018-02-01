@@ -11,8 +11,8 @@
       </div>
       <div class="card-content">
         <div class="content">
-          <h2>{{ guide.firstname }}</h2>
-          <div><label>note: </label>{{ guide.note }} / 5</div>
+          <h2>{{ guide.user.firstname }} {{ guide.user.lastname }}</h2>
+         <star-rating-comp [starType]="'svg'" [size]="'large'" [showHalfStars]="true" [readOnly]="true" [rating]="3" title="3.2/5"></star-rating-comp>
         </div>
       </div>
     </div>

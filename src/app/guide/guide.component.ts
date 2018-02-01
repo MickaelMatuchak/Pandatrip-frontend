@@ -8,12 +8,12 @@ import { ImageModel } from '../image/image.model';
 @Component({
   selector: 'guides',
   templateUrl: 'guide.component.html',
-  styleUrls: ['guide.component.css', '../../../node_modules/bulma/css/bulma.css'],
+  styleUrls: ['guide.component.css', '../../../node_modules/bulma/css/bulma.css', '../reviews/star-rating.scss'],
   providers: [ GuideService ]
 })
 
 export class GuideComponent implements OnInit {
-  
+
   constructor( private guideService: GuideService ) {}
 
   guides: GuideModel[];
@@ -26,7 +26,7 @@ export class GuideComponent implements OnInit {
           let guide = guides[i];
           let arrayReviews: ReviewsModel[] = new Array();
           for (var j = 0; j < guide.reviews.length; j++) {
-            // To Complete
+            let note = guide.reviews
           }
 
           let arrayVisits: VisitGuideModel[] = new Array();
@@ -35,7 +35,7 @@ export class GuideComponent implements OnInit {
           }
 
           this.guides.push( new GuideModel(guide.id, guide.billfold,
-            arrayReviews, guide.user, guide.address, guide.country, 
+            arrayReviews, guide.user, guide.address, guide.country,
             guide.region, guide.city, guide.postalCode, guide.phoneNumber,
             arrayVisits) );
         }
@@ -62,7 +62,7 @@ export class GuideComponent implements OnInit {
           let guide = guidesSelect[i];
           let userRecup : UserModel = guide.user;
           let image ;
-          
+
           if (userRecup.image) {
             image = new ImageModel(userRecup.image.id, userRecup.image.url, userRecup.image.description);
           } else {
@@ -73,16 +73,17 @@ export class GuideComponent implements OnInit {
             }
           }
           let user = new UserModel(userRecup.id, userRecup.username,
-            userRecup.gender, userRecup.firstname, "", "",
+            userRecup.gender, userRecup.firstname, userRecup.lastname, "",
             image, null);
-          
-          
+
+          console.log(user);
+
           this.guides.push( new GuideModel(guide.id, null,
             null, user, "", "", "", "", null, "", null) );
           console.info(guide.user);
           console.info(this.guides[i]);
         }
-        
+
       });
   }
 }
