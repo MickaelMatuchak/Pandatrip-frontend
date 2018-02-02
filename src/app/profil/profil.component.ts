@@ -61,7 +61,6 @@ export class ProfilComponent implements OnInit {
   private getUserParcours(username: string) {
     this.profilService.getUserParcours(username)
       .then(data => {
-        console.info(data["hydra:member"]);
         let parcours = data["hydra:member"];
         for (var i = 0; i < parcours.length; i++) {
           let parcoursI = parcours[i];
@@ -80,6 +79,8 @@ export class ProfilComponent implements OnInit {
     if (this.isGuide) {
       this.profilService.getGuide(username).then(data => {
         const guide = data['hydra:member'][0];
+        console.info("getGuide data[\"hydra:member\"][0]");
+        console.info(data["hydra:member"][0]);
 
         const arrayListVisits: VisitGuideModel[] = new Array();
 
@@ -101,6 +102,8 @@ export class ProfilComponent implements OnInit {
           guide.user.lastname, guide.user.mail, image);
         console.info("this.userLog isGuide");
         console.info(this.userLog);
+        console.info("this.userGuide isGuide");
+        console.info(this.userGuide);
       });
 
     } else {

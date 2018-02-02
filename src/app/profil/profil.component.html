@@ -41,12 +41,12 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Parcours Lille 1</td>
-                <td>En attente</td>
+              <tr *ngFor="let parcours of userParcours;">
+                <td>{{ parcours.name }} (dynamique)</td>
+                <td>"En attente" (static)</td>
               </tr>
               <tr>
-                <td>Parcours Lille 2</td>
+                <td>Parcours Lille 1 (old)</td>
                 <td>Brouillon</td>
               </tr>
               </tbody>
