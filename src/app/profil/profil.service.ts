@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import { AppService } from '../app.service';
 import { JwtHelper } from 'angular2-jwt';
-import {UserModel, VisitUser} from "./profil.model";
+import {UserModel, VisitGuideModel, VisitUser} from "./profil.model";
 import {ItemVisitModel} from "../visit-details/item-visit.model";
 
 @Injectable()
