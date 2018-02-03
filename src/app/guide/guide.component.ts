@@ -29,7 +29,7 @@ export class GuideComponent implements OnInit {
           let guide = guides[i];
           let arrayReviews: ReviewsModel[] = new Array();
           for (var j = 0; j < guide.reviews.length; j++) {
-            let note = guide.reviews
+
           }
 
           let arrayVisits: VisitGuideModel[] = new Array();
@@ -61,8 +61,20 @@ export class GuideComponent implements OnInit {
       .then(data => {
         this.guides = [];
         let guidesSelect = data["hydra:member"];
+        let guide;
+        let nbNotes;
+
         for (var i = 0; i < guidesSelect.length; i++) {
-          let guide = guidesSelect[i];
+          guide = guidesSelect[i];
+          let arrayReviews: ReviewsModel[] = new Array();
+
+          // compter reviews
+          for (var j = 0; j < guide.reviews.length; j++) {
+            arrayReviews.push(new ReviewsModel(guide.reviews[j].id, guide.reviews[j].note, null, null, null, null));
+          }
+          nbNotes = guide.reviews.length;
+          //console.log(nbNotes);
+
           let userRecup : UserModel = guide.user;
 
           let image = this.appService.initialiseUserImage(userRecup);
@@ -71,14 +83,33 @@ export class GuideComponent implements OnInit {
             userRecup.gender, userRecup.firstname, userRecup.lastname, "",
             image);
 
-          console.log(user);
+          //console.log(user);
 
           this.guides.push( new GuideModel(guide.id, null,
-            null, user, "", "", "", "", null, "", null) );
-          console.info(guide.user);
-          console.info(this.guides[i]);
-        }
+            arrayReviews, user, "", "", "", "", null, "", null) );
+          //console.info(guide.user);
+          //console.info(this.guides[i]);
 
+          this.calculMoyenne();
+        }
       });
+  }
+
+  calculMoyenne() {
+    for (let i = 0; i < this.guides.length; i++) {
+      let somme = 0;
+
+      if (this.guides[i].reviews.length != 0) {
+        this.guides[i].reviews.forEach(function(element){
+          somme += element.note;
+        });
+
+        somme /= this.guides[i].reviews.length;
+      } else {
+        somme = 2.5;
+      }
+
+      this.guides[i].note = somme;
+    }
   }
 }

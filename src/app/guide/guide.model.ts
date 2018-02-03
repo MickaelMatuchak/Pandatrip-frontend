@@ -30,4 +30,5 @@ export class GuideModel {
   postalCode: number;
   phoneNumber: string;
   listVisits: VisitGuideModel[];
+  note: number;
 }
