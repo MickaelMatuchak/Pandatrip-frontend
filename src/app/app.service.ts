@@ -32,8 +32,12 @@ export class AppService {
     localStorage.setItem('token', token);
   }
 
+  getLocalVar(key : string) {
+    return localStorage.getItem(key);
+  }
+
   decodeToken() {
-    let recupTokenStored = localStorage.getItem("token");
+    let recupTokenStored = this.getLocalVar("token");
     let tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
     return tokenDecoded;
   }

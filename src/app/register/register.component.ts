@@ -3,6 +3,7 @@ import { RegisterService } from './register.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../login/login.service';
 import { DatePipe } from '@angular/common';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private registerService: RegisterService,
     private loginService: LoginService,
+    private appService: AppService,
     private datePipe: DatePipe,
     private router: Router) { }
 
@@ -47,7 +49,8 @@ export class RegisterComponent implements OnInit {
         this.firstname, this.lastname, this.mail, date)
         .then( res => {
           this.loginService.logIn(this.username, this.password)
-          .then(res => {
+          .then(token => {
+            this.appService.saveTokenInLocal(token);
             this.router.navigate(['profil']);
           })
           .catch( error => alert("Erreur sur la connection : \n" + error));

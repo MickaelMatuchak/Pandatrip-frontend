@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PartnersService } from './partners.service';
-import { LoginService } from '../login/login.service';
 import { AppService } from '../app.service';
+import { ProfilService } from '../profil/profil.service';
+import { UserModel } from '../profil/profil.model';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-partners',
   templateUrl: './partners.component.html',
   styleUrls: ['./partners.component.css', '../../../node_modules/bulma/css/bulma.css', "../../../node_modules/font-awesome/css/font-awesome.css"],
-  providers: [ PartnersService, LoginService ]
+  providers: [ PartnersService, ProfilService, LoginService ]
 })
 export class PartnersComponent implements OnInit {
 
@@ -21,19 +23,20 @@ export class PartnersComponent implements OnInit {
   conditionsChecked: boolean;
 
   constructor(
-    private loginService: LoginService,
+    private profilService: ProfilService,
     private partnersService: PartnersService,
     private appService: AppService,
+    private loginService: LoginService,
     // private datePipe: DatePipe,
     private router: Router) { }
 
   ngOnInit() {
-    this.address = "4 rue Gaston Baratte";
-    this.country = "France";
-    this.region = "Hauts-de-France";
-    this.city = "Villeneuve d'Ascq";
+    this.address = "adresse";
+    this.country = "pays";
+    this.region = "région";
+    this.city = "ville";
     this.postalCode = 59000;
-    this.phoneNumber = "0123456666";
+    this.phoneNumber = "0123456789";
     this.conditionsChecked = false;
     }
   
@@ -53,13 +56,18 @@ export class PartnersComponent implements OnInit {
       let token = localStorage.getItem("token");
       console.info("token");
       console.info(token);
+      let tokenDecoded = this.appService.decodeToken();
+
+      let userId = localStorage.getItem("idUser");
       this.partnersService.becomeGuide(this.address, this.country, this.region, 
-        this.city, this.postalCode, this.phoneNumber, token)
+        this.city, this.postalCode, this.phoneNumber, token, userId)
         .then(res => {
           
           console.info("res");
           console.info(res);
-          this.router.navigate(['profil']);
+          this.appService.logOut();
+          this.router.navigate(['login']);
+          alert("Vous devez vous reconnecter pour voir votre changement de statut");
         });
     }
   }

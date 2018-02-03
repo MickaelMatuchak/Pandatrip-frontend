@@ -92,18 +92,20 @@ export class ProfilComponent implements OnInit {
         //   console.info(review);
         // }
 
-        this.userGuide = new GuideModel(guide.id, guide.billfold, guide.reviews, guide.user, guide.address,
-          guide.country, guide.region, guide.city, guide.postalCode, guide.phoneNumber, arrayListVisits);
-
         const image: ImageModel = this.appService.initialiseUserImage(guide.user);
 
         this.userLog = new UserModel(guide.user.id,
           guide.user.username, guide.user.gender, guide.user.firstname,
           guide.user.lastname, guide.user.mail, image);
+
+        this.userGuide = new GuideModel(guide.id, guide.billfold, guide.reviews, this.userLog, guide.address,
+          guide.country, guide.region, guide.city, guide.postalCode, guide.phoneNumber, arrayListVisits);
+
         console.info("this.userLog isGuide");
         console.info(this.userLog);
         console.info("this.userGuide isGuide");
         console.info(this.userGuide);
+        localStorage.setItem("idUser", guide.user["@id"]);
       });
 
     } else {
@@ -118,7 +120,9 @@ export class ProfilComponent implements OnInit {
             user.lastname, user.mail, image);
           console.info("this.userLog");
           console.info(this.userLog);
+          localStorage.setItem("idUser", user["@id"]);
         });
     }
+    
   }
 }

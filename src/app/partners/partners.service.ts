@@ -10,26 +10,28 @@ export class PartnersService {
 
   becomeGuide(
     address: string, country: string, region: string, 
-    city: string, postalCode: number, phoneNumber: string, token: string) {
+    city: string, postalCode: number, phoneNumber: string,
+    token: string, userId: string): Promise<any>  {
       
       let url = AppService.entryPointUrl + '/guides';
   
       let headers = new Headers({ 'Content-Type':'application/json',
                                   'Authorization':'Bearer '+token });
       
+      let options = new RequestOptions({ headers: headers })
+
       let bodyJSON = JSON.stringify ( {
-        'address' : address,
-        'country' : country,
-        'region' : region,
-        'city' : city,
-        'postalCode': postalCode,
-        'phoneNumber' : phoneNumber
+        "address" : address,
+        "country" : country,
+        "region" : region,
+        "city" : city,
+        "postalCode": postalCode,
+        "phoneNumber" : phoneNumber,
+        "user" : userId
       });
   
-      let options = new RequestOptions({ headers: headers })
-  
       return this.http
-              .post(url, bodyJSON, { headers: headers })
+              .post(url, bodyJSON, options)
               .toPromise()
               .then()
               .catch(error => Promise.reject(error.message || error));
