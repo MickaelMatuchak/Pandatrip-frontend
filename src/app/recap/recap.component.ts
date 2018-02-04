@@ -57,14 +57,16 @@ export class RecapComponent implements OnInit {
 
               // Pour chaque visite séléctionnée par l'utilisateur
               this.itemsVisit.forEach(function (element, index) {
-              let createdParcours = JSON.parse(parcours['_body']);
+                const createdParcours = JSON.parse(parcours['_body']);
 
                 element.parcours = '/api/parcours/' + createdParcours.id;
                 element.user = '/api/users/' + idUser;
                 element.isValidated = false;
 
+                const itemVisit = element;
+
                 // Créer une VISITUSER associée au PARCOURS
-                this.profilService.postUserVisit(element, token)
+                this.profilService.postUserVisit(itemVisit, token)
                   .then(visitUser => {
                     if (index + 1 === this.itemsVisit.length) {
                       localStorage.removeItem('visits');

@@ -212,10 +212,14 @@ export class VisitDetailsComponent implements OnInit {
 
           let date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
 
-          const visitGuide = new VisitGuideModel(null, this.visitSelected, guide['hydra:member'][0], null, parseInt(this.duration), parseInt(this.price), true);
+          let visitGuide = new VisitGuideModel(null, this.visitSelected, guide['hydra:member'][0], null, parseInt(this.duration), parseInt(this.price), true);
 
           this.guideVisit.postGuideVisit(visitGuide, token)
             .then(guideVisit => {
+              let postVisitGuide = JSON.parse(guideVisit['_body']);
+
+              visitGuide.id = postVisitGuide.id;
+
               this.itemsVisitGuide.push(visitGuide);
               alert('Vous êtes disponible en tant que guide sur cette visite');
             });
