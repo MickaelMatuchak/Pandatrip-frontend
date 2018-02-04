@@ -97,6 +97,10 @@ export class ReviewsComponent implements OnInit {
                 // Associe l'avis à la visite
                 this.visitService.addReview(this.visitSelected, token)
                   .then(data => {
+                    this.reviewTitle = null;
+                    this.reviewMessage = null;
+                    this.reviewNote = 3;
+
                     alert('Avis ajouté');
                   });
               });
