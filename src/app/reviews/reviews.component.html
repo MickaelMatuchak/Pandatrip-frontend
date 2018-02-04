@@ -36,9 +36,10 @@
       <article class="tile is-parent">
         <div class="tile is-child notification">
           <p class="title">Racontez votre expérience</p>
-          <star-rating-comp [starType]="'svg'" [hoverEnabled]="true" [labelText]="'Ma note '" [labelPosition]="'left'" [size]="'large'" [step]="0.5" [showHalfStars]="true" [rating]="3"></star-rating-comp>
-          <textarea class="textarea is-success is-large" type="text" placeholder="Vous avez aimez ce lieu ? Témoignez !"></textarea>
-          <button class="bouton_commenter">
+          <star-rating-comp [starType]="'svg'" [hoverEnabled]="true" [labelText]="'Ma note '" [labelPosition]="'left'" [size]="'large'" [rating]="3"
+                            [step]="0.5" [showHalfStars]="true" (onClick)="onClick($event)"></star-rating-comp>
+          <textarea class="textarea is-success is-large" type="text" placeholder="Vous avez aimez ce lieu ? Témoignez !" [(ngModel)]="reviewMessage"></textarea>
+          <button class="bouton_commenter" (click)="ajouterReview()">
             Commentez la visite
           </button>
         </div>

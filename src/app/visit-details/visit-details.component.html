@@ -153,6 +153,6 @@
 </div>
 
 <div *ngIf="!noReviews">
-  <reviews [Reviews]=visitSelected.reviews></reviews>
+  <reviews [Reviews]=visitSelected.reviews [visit]=visitSelected></reviews>
 </div>
 <visits-suggestion></visits-suggestion>
