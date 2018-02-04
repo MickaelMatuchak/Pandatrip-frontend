@@ -74,7 +74,7 @@ export class ReviewsComponent implements OnInit {
     const token = localStorage.getItem('token');
 
     // Vérifie si connecté et les champs remplis
-    if (token !== null && this.reviewMessage !== null) {
+    if (token !== null && this.reviewMessage !== null && this.reviewTitle != null) {
       const tokenDecoded = this.appService.decodeToken();
 
         // Récupére l'utilisateur
@@ -84,7 +84,7 @@ export class ReviewsComponent implements OnInit {
 
             const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
             //this.reviewTitle
-            const review = new ReviewsModel(null, this.reviewNote, "title", this.reviewMessage, date, user);
+            const review = new ReviewsModel(null, this.reviewNote, this.reviewTitle, this.reviewMessage, date, user);
 
             // Ajoute l'avis
             this.reviewService.postReview(review, token)

@@ -38,8 +38,11 @@
           <p class="title">Racontez votre expérience</p>
           <star-rating-comp [starType]="'svg'" [hoverEnabled]="true" [labelText]="'Ma note '" [labelPosition]="'left'" [size]="'large'" [rating]="3"
                             [step]="0.5" [showHalfStars]="true" (onClick)="onClick($event)"></star-rating-comp>
+          <p>
+            <input class="login_input" placeholder="Ajoutez un titre">
+          </p>
           <textarea class="textarea is-success is-large" type="text" placeholder="Vous avez aimez ce lieu ? Témoignez !" [(ngModel)]="reviewMessage"></textarea>
-          <button class="bouton_commenter" (click)="ajouterReview()">
+          <button class="bouton_commenter" (click)="ajouterReview()" [(ngModel)]="reviewTitle">
             Commentez la visite
           </button>
         </div>
