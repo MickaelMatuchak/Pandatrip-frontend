@@ -16,19 +16,14 @@ export class VisitFilterPipe implements PipeTransform {
   }
 
   applyFilter(visit: VisitModel, filter: VisitModel): boolean {
-    for (let field in filter) {
-      if (filter[field]) {
-        if (typeof filter[field] === 'string') {
-          if (visit[field].toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
-            return false;
-          }
-        } else if (typeof filter[field] === 'number') {
-          if (visit[field] !== filter[field]) {
-            return false;
-          }
-        }
+      let postalCode = visit['postalCode'] + '';
+
+      if (visit['name'].toLowerCase().indexOf(filter['name'].toLowerCase()) !== -1 || visit['region'].toLowerCase().indexOf(filter['name'].toLowerCase()) !== -1 ||
+        visit['address'].toLowerCase().indexOf(filter['name'].toLowerCase()) !== -1 || visit['city'].toLowerCase().indexOf(filter['name'].toLowerCase()) !== -1 ||
+        postalCode.toLowerCase().indexOf(filter['name'].toLowerCase()) !== -1) {
+        return true;
       }
-    }
-    return true;
+
+    return false;
   }
 }
