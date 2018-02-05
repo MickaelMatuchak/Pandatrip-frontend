@@ -44,6 +44,20 @@ export class AppComponent implements OnInit, OnChanges {
     console.error("APP ON-CHANGES End");
   }
 
+
+
+  logIn (event: any) {
+    this.router.navigate( ['/login'] )
+    .then(
+      data => {
+        console.info("data");
+        console.info(data);
+        console.info("event");
+        console.info(event);
+        data
+      });
+  }
+
   logOut (event: any) {
     event.stopPropagation();
     this.appService.logOut();

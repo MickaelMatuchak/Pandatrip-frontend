@@ -45,26 +45,13 @@ export class PartnersComponent implements OnInit {
     if(! this.conditionsChecked ) {
       alert("Il faut accepter les conditions.");
     } else {
-      
-      console.info(this.address);
-      console.info(this.country);
-      console.info(this.region);
-      console.info(this.city);
-      console.info(this.postalCode);
-      console.info(this.phoneNumber);
-      console.info(this.conditionsChecked);
       let token = localStorage.getItem("token");
-      console.info("token");
-      console.info(token);
       let tokenDecoded = this.appService.decodeToken();
 
       let userId = localStorage.getItem("idUser");
       this.partnersService.becomeGuide(this.address, this.country, this.region, 
         this.city, this.postalCode, this.phoneNumber, token, userId)
         .then(res => {
-          
-          console.info("res");
-          console.info(res);
           this.appService.logOut();
           this.router.navigate(['login']);
           alert("Vous devez vous reconnecter pour voir votre changement de statut");
