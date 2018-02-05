@@ -1,10 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfilService} from './profil.service';
-import {UserModel, ParcoursModel, VisitGuideModel} from './profil.model';
+import {UserModel, ParcoursModel, VisitGuideModel, VisitUser} from './profil.model';
 import {ImageModel} from '../image/image.model';
 import {JwtHelper} from 'angular2-jwt';
 import {GuideModel} from '../guide/guide.model';
 import {AppService} from '../app.service';
+import {Router} from '@angular/router';
+
+declare var $: any;
+declare var jquery: any;
 
 @Component({
   selector: 'app-profil',
@@ -17,13 +21,15 @@ export class ProfilComponent implements OnInit {
   userLog: UserModel;
   userGuide: GuideModel;
   userParcours: ParcoursModel[];
+  parcoursSelected: ParcoursModel;
   isGuide: boolean;
   jwtHelper: JwtHelper = new JwtHelper();
   public show: boolean = false;
   public buttonName: any = 'Show';
 
   constructor(private profilService: ProfilService,
-              private appService: AppService) {
+              private appService: AppService,
+              private router: Router) {
   }
 
   toggle() {
@@ -35,8 +41,32 @@ export class ProfilComponent implements OnInit {
       this.buttonName = "Show";
   }
 
+  /* fermer pop-up récapitulatif d'un parcours enregistré */
+  closeModalRecap(event) {
+    const modalId = event.currentTarget.dataset.modalId;
+    const modal = $(modalId);
+    modal.toggleClass('is-active');
+    $('html').toggleClass('is-clipped');
+    console.info('closeModal');
+    this.parcoursSelected = new ParcoursModel(null, [], '', '');
+  }
+
+  /* afficher pop-up récapitulatif d'un parcours enregistré */
+  openModalRecap(event: any, parcours: ParcoursModel) {
+    this.parcoursSelected = parcours;
+    const modalId = event.currentTarget.dataset.modalId;
+    const modal = $(modalId);
+    modal.toggleClass('is-active');
+    $('html').toggleClass('is-clipped');
+  }
+
   ngOnInit() {
+    $('.open-modal').click(this.openModalRecap);
+    $('.close-modal').click(this.closeModalRecap);
+
     let tokenDecoded = this.appService.decodeToken();
+
+    this.parcoursSelected = new ParcoursModel(null, [], '', '');
 
     this.isGuide = this.appService.initialiseIsGuide(tokenDecoded.roles);
 
@@ -59,9 +89,18 @@ export class ProfilComponent implements OnInit {
 
         for (let i = 0; i < parcours.length; i++) {
           const parcoursI = parcours[i];
+          console.info('parcoursI ' + i);
+          console.info(parcoursI);
           const visitUser = [];
 
-          const parcoursAdd = new ParcoursModel(parcoursI.id, visitUser, parcoursI.user, parcoursI.name);
+          for(let j=0; j < parcoursI.visitUser.length; j++) {
+            if(parcoursI.visitUser[j].visitGuide) {
+              parcoursI.visitUser[j].visitGuide.guide.user.image = this.appService.initialiseUserImage(parcoursI.visitUser[j].visitGuide.guide.user);
+            }
+            visitUser.push( parcoursI.visitUser[j] );
+          }
+
+          const parcoursAdd = new ParcoursModel(parcoursI.id, visitUser, username, parcoursI.name);
 
           this.userParcours.push(parcoursAdd);
         }
@@ -73,8 +112,6 @@ export class ProfilComponent implements OnInit {
     if (this.isGuide) {
       this.profilService.getGuide(username).then(data => {
         const guide = data['hydra:member'][0];
-
-        console.log(guide);
 
         const arrayListVisits: VisitGuideModel[] = new Array();
 

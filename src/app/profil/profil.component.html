@@ -37,17 +37,13 @@
               <thead>
               <tr>
                 <th>Cliquez pour voir le détail</th>
-                <th>Statut</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let parcours of userParcours;">
-                <td>{{ parcours.name }} (dynamique)</td>
-                <td>"En attente" (static)</td>
-              </tr>
-              <tr>
-                <td>Parcours Lille 1 (old)</td>
-                <td>Brouillon</td>
+                <td>
+                    <a class="open-modal" data-modal-id="#UserParcours-modal"(click)='openModalRecap($event, parcours)'>{{ parcours.name }}</a>
+                </td>
               </tr>
               </tbody>
             </table>
@@ -55,6 +51,64 @@
         </article>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Détails parcours enregistré -->
+<div class="modal" id="UserParcours-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card modal_taille">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Détails du parcours "{{ parcoursSelected.name }}" </p>
+      <a class="delete close-modal" aria-label="close" data-modal-id="#UserParcours-modal"></a>
+    </header>
+    <section class="modal-card-body">
+      <p *ngIf="parcoursSelected.visitUser.length == 0">
+        Aucune visite dans ce parcours
+      </p>
+
+      <table *ngIf="parcoursSelected.visitUser.length > 0" class="table_recap">
+        <thead>
+          <tr>
+            <th>Lieu</th>
+            <th>Nom du lieu</th>
+            <th>Adresse</th>
+            <th>Guide</th>
+          </tr>
+        </thead>
+        <tbody id="ligne_visite" *ngFor="let itemVisit of parcoursSelected.visitUser">
+          <tr>
+            <td>
+              <figure class="image is-128x128">
+                <a href="visit/{{ itemVisit.visit.name }}">
+                  <img src="../assets/img/{{ itemVisit.visit.images[0].url }}"
+                      alt="{{ itemVisit.visit.images[0].description }}" class="image_visite_recap">
+                </a>
+              </figure>
+            </td>
+            <td>{{ itemVisit.visit.name }}</td>
+            <td>
+              {{ itemVisit.visit.address }}, {{ itemVisit.visit.city }} ({{ itemVisit.visit.postalCode }})<br>
+              {{ itemVisit.visit.country }} {{ itemVisit.visit.region }}
+            </td>
+
+            <td *ngIf="itemVisit.visitGuide == null">Visite libre</td>
+            <td *ngIf="itemVisit.visitGuide != null">
+              <figure class="image is-96x96">
+                <img src="../assets/img/{{ itemVisit.visitGuide.guide.user.image.url  }}"
+                    alt="{{ itemVisit.visitGuide.guide.user.firstname  }}" class="image_visite_recap">
+                {{ itemVisit.visitGuide.guide.user.firstname }} {{ itemVisit.visitGuide.guide.user.lastname}}
+              </figure>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="modal-card-foot">
+      <button class="close-modal button" data-modal-id="#UserParcours-modal">Annuler</button>
+      <button class="close-modal button bouton_vert" data-modal-id="#UserParcours-modal">Revenir à la page Profil</button>
+    </footer>
   </div>
 </div>
 
