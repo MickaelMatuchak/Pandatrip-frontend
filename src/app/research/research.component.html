@@ -1,5 +1,5 @@
 <div class="rechercher">
-  <input class="rechercher_barre" type="text" placeholder="{{researchValue}}">
+  <input class="rechercher_barre" type="text" placeholder="{{researchValue}}" [(ngModel)]="valueResearch" (keyup)="search()">
   <a class="rechercher_valider">
     <img src="assets/img/search.png" alt="rechercher"/>
   </a>

@@ -39,7 +39,7 @@ export class VisitComponent implements OnInit {
   };
 
   readVisitsPromise() {
-    this.visitService.getNumbersVisits(8, 59)
+    this.visitService.getNumbersVisits(8)
       .then((data: Object[]) => {
           this.separateLine(4, data['hydra:member']);
         }
@@ -77,7 +77,7 @@ export class VisitSuggestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.visitService.getNumbersVisits(4, parseInt(this.visitSelected.postalCode / 1000 + '', 10))
+    this.visitService.getNumbersVisits(4)
       .then((data: Object[]) => {
           const visits = data['hydra:member'];
 

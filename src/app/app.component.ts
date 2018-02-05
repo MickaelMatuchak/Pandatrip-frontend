@@ -13,10 +13,13 @@ export class AppComponent implements OnInit, OnChanges {
 
   isConnected: boolean = false;
   isGuide: boolean = false;
+  search: string = '';
 
-  constructor(private router: Router,
-              private appService: AppService) {
-  }
+  constructor(
+    private router: Router,
+    private appService: AppService) {
+
+    }
 
   ngOnInit() {
     this.isConnected = this.appService.loggedIn();
