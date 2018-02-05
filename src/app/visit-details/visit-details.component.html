@@ -153,4 +153,6 @@
 <div *ngIf="!noReviews">
   <reviews [Reviews]=visitSelected.reviews [visit]=visitSelected></reviews>
 </div>
-<visits-suggestion></visits-suggestion>
+<div *ngIf="visitSelected.name !== ''">
+  <visits-suggestion [visitSelected]=visitSelected></visits-suggestion>
+</div>

@@ -1,19 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+///<reference path="../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {VisitModel, VisitModel2} from './visit.model';
+import {VisitModel} from './visit.model';
 import {VisitService} from './visit.service';
-
-const VISITS: VisitModel2[] = [
-  {id: 1, name: 'Arc de Triomphe', address: '1 rue mock'},
-  {id: 2, name: 'Tour Eiffel', address: '2 rue mock'},
-  {id: 3, name: 'Jardin de Majorelle', address: '3 rue mock'},
-  {id: 4, name: 'Château de Versailles', address: '4 rue mock'},
-  {id: 5, name: 'Pont d Avignon', address: '5 rue mock'},
-  {id: 6, name: 'Invalides', address: '6 rue mock'},
-  {id: 7, name: 'Lieu 7', address: '7 rue mock'},
-  {id: 8, name: 'Lieu 8', address: '8 rue mock'},
-];
 
 @Component({
   selector: 'visits',
@@ -74,27 +64,35 @@ export class VisitComponent implements OnInit {
 @Component({
   selector: 'visits-suggestion',
   templateUrl: 'visit-suggestion.component.html',
-  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css']
+  styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css'],
+  providers: [VisitService]
 })
 
 export class VisitSuggestionComponent implements OnInit {
-  lineVisits = [];
+  visits: VisitModel[] = [];
+  @Input('visitSelected')
+  visitSelected: VisitModel;
 
-  separateLine = function (nbElementPerLine) {
-    let array = new Array();
+  constructor(private visitService: VisitService, private router: Router) {
+  }
 
-    for (let i = 0; i < 3; i++) {
+  ngOnInit(): void {
+    this.visitService.getNumbersVisits(4, parseInt(this.visitSelected.postalCode / 1000 + '', 10))
+      .then((data: Object[]) => {
+          const visits = data['hydra:member'];
 
-      if (i % nbElementPerLine === 0) {
-        array = new Array();
-        this.lineVisits.push(array);
-      }
+          for (let i = 0; i < visits.length; i++) {
+            if (visits[i].name !== this.visitSelected.name) {
+              this.visits.push(new VisitModel(visits[i].id, visits[i].name, visits[i].images, null, null, null,
+                visits[i].address, visits[i].country, visits[i].region, visits[i].city, visits[i].postalCode,
+                visits[i].description, visits[i].note, null, null));
+            }
+          }
+        }
+      );
+  }
 
-      array.push(VISITS[i]);
-    }
-  };
-
-  ngOnInit() {
-    this.separateLine(1);
+  onSelect(visit, event) {
+    this.router.navigate(['visit/' + visit.name]);
   }
 }

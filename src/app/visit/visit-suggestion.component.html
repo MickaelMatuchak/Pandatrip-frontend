@@ -8,11 +8,11 @@
     </div>
 
     <div class="tile">
-      <div class="tile is-parent is-vertical is-3.5" *ngFor="let line of lineVisits;">
-        <div class="card tile is-child" *ngFor="let visit of line;">
+      <div class="tile is-parent is-vertical is-3.5" *ngFor="let visit of visits;" (click)="onSelect(visit, $event)">
+        <div class="card tile is-child">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/img/visit/{{ visit.name }}.jpg" alt="{{ visit.name }}">
+              <img src="./assets/img/{{ visit.images[0].url }}" alt="{{ visit.images[0].description }}">
             </figure>
           </div>
           <div class="card-content">
