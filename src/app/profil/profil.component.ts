@@ -30,6 +30,11 @@ export class ProfilComponent implements OnInit {
   constructor(private profilService: ProfilService,
               private appService: AppService,
               private router: Router) {
+      if(! this.appService.loggedIn()) {
+        this.appService.logOut();
+        this.router.navigate(['home']);
+        alert('Vous n\'avez pas accés à cette page en étant déconnecté');
+    }
   }
 
   toggle() {

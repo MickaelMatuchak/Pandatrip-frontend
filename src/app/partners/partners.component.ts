@@ -27,6 +27,11 @@ export class PartnersComponent implements OnInit {
               private appService: AppService,
               private loginService: LoginService,
               private router: Router) {
+      if(! this.appService.loggedIn()) {
+        this.appService.logOut();
+        this.router.navigate(['home']);
+        alert('Vous n\'avez pas accés à cette page en étant déconnecté');
+    }
   }
 
   ngOnInit() {
