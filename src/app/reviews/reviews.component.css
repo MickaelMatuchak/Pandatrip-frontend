@@ -37,3 +37,30 @@ button.bouton_vert:hover{
 star-rating-comp{
   cursor: pointer;
 }
+
+.login_input{
+  padding-left: 0.8rem;
+  height: 2.45rem;
+  width: 30%;
+  max-width: 100%;
+  font-family: "Source Sans Pro";
+  font-size: 1.3rem;
+}
+
+.login_input::-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.login_input::-webkit-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.login_input:focus {
+  animation-timing-function: ease-in-out;
+  animation: agrandirInput 0.7s forwards;
+}
+
+@keyframes agrandirInput {
+  from {width: 30%}
+  to {width: 100%}
+}

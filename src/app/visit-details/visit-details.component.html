@@ -22,7 +22,7 @@
             <button class="bouton_visit" (click)="ajouterPanier()">
               Ajouter à mes visites
             </button>
-            <button class="bouton_devenir_guide open-modal" data-modal-id="#guide-modal">
+            <button class="bouton_devenir_guide open-modal" data-modal-id="#guide-modal" *ngIf="isGuide" (click)="toggleModalClasses($event)">
               Devenir guide pour cette visite
             </button>
           </div>
@@ -127,31 +127,17 @@
             <p>
               <label class="label">Quel est votre tarif pour cette visite ?</label>
               <i class="fa fa-eur fa-lg input_icone"></i>
-              <input class="login_input" placeholder="Prix moyen constaté : 12.00€" type="text">
+              <input class="login_input" placeholder="Prix moyen : 12.00€" type="text" [(ngModel)]="price">
             </p>
           </td>
         </tr>
         <tr>
           <td>
-            <label class="label">Combien de temps voulez-vous mener cette visite ?</label>
-            <div class="field has-addons">
-              <div class="control is-expanded">
-                <div class="select heure_select">
-                  <select name="heure">
-                    <option value="">15 minutes</option>
-                    <option value="">30 minutes</option>
-                    <option value="">45 minutes</option>
-                    <option value="">60 minutes</option>
-                    <option value="">90 minutes</option>
-                    <option value="">120 minutes</option>
-                    <option value="">150 minutes</option>
-                    <option value="">180 minutes</option>
-                    <option value="">210 minutes</option>
-                    <option value="">240 minutes</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <p>
+              <label class="label">Combien de temps voulez-vous mener cette visite ?</label>
+              <i class="fa fa-clock-o fa-lg input_icone"></i>
+              <input class="login_input" placeholder="Durée moyenne : 30min" type="text" [(ngModel)]="duration">
+            </p>
           </td>
         </tr>
         </tbody>
@@ -160,13 +146,13 @@
 
     <footer class="modal-card-foot">
       <button class="close-modal button" data-modal-id="#guide-modal">Annuler</button>
-      <button class="close-modal button bouton_vert" data-modal-id="#guide-modal">Enregistrer
+      <button class="close-modal button bouton_vert" data-modal-id="#guide-modal" (click)="enregistrerGuide()">Enregistrer
       </button>
     </footer>
   </div>
 </div>
 
 <div *ngIf="!noReviews">
-  <reviews [Reviews]=visitSelected.reviews></reviews>
+  <reviews [Reviews]=visitSelected.reviews [visit]=visitSelected></reviews>
 </div>
 <visits-suggestion></visits-suggestion>

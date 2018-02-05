@@ -8,4 +8,7 @@ export class ItemVisitModel {
   }
   visit: VisitModel;
   guideVisit: GuideVisitModel;
+  parcours: string;
+  user: string;
+  isValidated: boolean = false;
 }

@@ -8,9 +8,12 @@ import {ReviewsModel} from '../reviews/reviews.model';
 
 import {ICarouselConfig, AnimationConfig} from 'angular4-carousel';
 import {ItemVisitModel} from "./item-visit.model";
-import {GuideVisitService} from "./guide-visit.service";
 import {VisitGuideModel} from "../profil/profil.model";
 import {GuideModel} from "../guide/guide.model";
+import {AppService} from "../app.service";
+import {GuideService} from "../guide/guide.service";
+import {GuideVisitService} from "./guide-visit.service";
+import {DatePipe} from "@angular/common";
 
 declare var $: any;
 declare var jquery: any;
@@ -19,7 +22,7 @@ declare var jquery: any;
   selector: 'visit-details',
   templateUrl: './visit-details.component.html',
   styleUrls: ['./visit-details.component.css', '../../../node_modules/bulma/css/bulma.css', '../../../node_modules/font-awesome/css/font-awesome.css'],
-  providers: [VisitService, GuideVisitService]
+  providers: [VisitService, GuideVisitService, GuideService, DatePipe ]
 })
 export class VisitDetailsComponent implements OnInit {
   lineVisits = [];
@@ -29,11 +32,17 @@ export class VisitDetailsComponent implements OnInit {
   private sub: any;
   itemsVisitGuide: VisitGuideModel[] = new Array();
   itemsVisit: ItemVisitModel[] = new Array();
+  price: null;
+  duration: null;
+  isGuide: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private visitService: VisitService,
-              private guidevisit: GuideVisitService) {
+              private guideVisit: GuideVisitService,
+              private appService: AppService,
+              private guideService: GuideService,
+              private datePipe: DatePipe) {
   }
 
   private getVisitDetails(nameVisit: string) {
@@ -64,7 +73,7 @@ export class VisitDetailsComponent implements OnInit {
           visitTmp["postalCode"], visitTmp["description"], visitTmp["note"],
           visitTmp["nbNotes"], visitTmp["site"]);
 
-        this.guidevisit.getGuidesByVisit(visitTmp["id"])
+        this.guideVisit.getGuidesByVisit(visitTmp["id"])
           .then(guideVisit => {
 
             let visitGuides = guideVisit["hydra:member"];
@@ -106,6 +115,10 @@ export class VisitDetailsComponent implements OnInit {
 
     if (localStorage.getItem('visits') != null) {
       this.itemsVisit = JSON.parse(localStorage.getItem('visits'));
+    }
+
+    if (localStorage.getItem('token') != null) {
+      this.isGuide = this.appService.initialiseIsGuide(this.appService.decodeToken().roles);
     }
   }
 
@@ -187,5 +200,30 @@ export class VisitDetailsComponent implements OnInit {
 
     this.itemsVisit.splice(indexToDelete, 1);
     localStorage.setItem("visits", JSON.stringify(this.itemsVisit));
+  }
+
+  enregistrerGuide() {
+    if (this.isGuide && this.duration != null && this.price != null) {
+      const token = localStorage.getItem('token');
+      const tokenDecoded = this.appService.decodeToken();
+
+      this.guideService.getGuide(tokenDecoded.username)
+        .then(guide => {
+
+          let date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
+
+          let visitGuide = new VisitGuideModel(null, this.visitSelected, guide['hydra:member'][0], null, parseInt(this.duration), parseInt(this.price), true);
+
+          this.guideVisit.postGuideVisit(visitGuide, token)
+            .then(guideVisit => {
+              let postVisitGuide = JSON.parse(guideVisit['_body']);
+
+              visitGuide.id = postVisitGuide.id;
+
+              this.itemsVisitGuide.push(visitGuide);
+              alert('Vous êtes disponible en tant que guide sur cette visite');
+            });
+        });
+    }
   }
 }

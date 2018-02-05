@@ -9,37 +9,43 @@ import {
 } from './../../../node_modules/angular-star-rating/star-rating-struct';
 import { AppService } from '../app.service';
 import { UserModel } from '../profil/profil.model';
+import {ReviewService} from "./review.service";
+import {DatePipe} from "@angular/common";
+import {ProfilService} from "../profil/profil.service";
+import {VisitModel} from "../visit/visit.model";
+import {VisitService} from "../visit/visit.service";
 
 
 @Component({
   selector: 'reviews',
   templateUrl: './reviews.component.html',
-  styleUrls: ['./reviews.component.css', '../../../node_modules/bulma/css/bulma.css', './star-rating.scss']
+  styleUrls: ['./reviews.component.css', '../../../node_modules/bulma/css/bulma.css', './star-rating.scss'],
+  providers: [ DatePipe, ReviewService, ProfilService, AppService, VisitService ]
 })
 export class ReviewsComponent implements OnInit {
 
   @Input('Reviews')
   reviews: ReviewsModel[];
+  @Input('visit')
+  visitSelected: VisitModel;
   noReviews: boolean = true;
+  reviewNote: number = 3;
+  reviewTitle: string = null;
+  reviewMessage: string = null;
 
   constructor(
-    private appService: AppService) {
+    private appService: AppService,
+    private reviewService: ReviewService,
+    private profilService: ProfilService,
+    private visitService: VisitService,
+    private datePipe: DatePipe) {
   }
 
   onClickResult: OnClickEvent;
-  onHoverRatingChangeResult: OnHoverRatingChangeEvent;
-  onRatingChangeResult: OnRatingChangeEven;
 
   onClick = ($event: OnClickEvent) => {
+    this.reviewNote = $event.rating;
     this.onClickResult = $event;
-  };
-
-  onRatingChange = ($event: OnRatingChangeEven) => {
-    this.onRatingChangeResult = $event;
-  };
-
-  onHoverRatingChange = ($event: OnHoverRatingChangeEvent) => {
-    this.onHoverRatingChangeResult = $event;
   };
 
   ngOnInit() {
@@ -64,4 +70,43 @@ export class ReviewsComponent implements OnInit {
     }
   }
 
+  ajouterReview() {
+    const token = localStorage.getItem('token');
+
+    // Vérifie si connecté et les champs remplis
+    if (token !== null && this.reviewMessage !== null && this.reviewTitle != null) {
+      const tokenDecoded = this.appService.decodeToken();
+
+        // Récupére l'utilisateur
+        this.profilService.getUser(tokenDecoded.username)
+          .then(data => {
+            const user = data['hydra:member'][0];
+
+            const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
+            //this.reviewTitle
+            const review = new ReviewsModel(null, this.reviewNote, this.reviewTitle, this.reviewMessage, date, user);
+
+            // Ajoute l'avis
+            this.reviewService.postReview(review, token)
+              .then(postReview => {
+                let review = JSON.parse(postReview['_body']);
+                let createdReview = new ReviewsModel(review.id, review.note, review.title, review.text, review.date, user);
+
+                this.visitSelected.reviews.push(createdReview);
+
+                // Associe l'avis à la visite
+                this.visitService.addReview(this.visitSelected, token)
+                  .then(data => {
+                    this.reviewTitle = null;
+                    this.reviewMessage = null;
+                    this.reviewNote = 3;
+
+                    alert('Avis ajouté');
+                  });
+              });
+          });
+    } else {
+      alert('Vous devez être connecté pour poster un avis');
+    }
+  }
 }

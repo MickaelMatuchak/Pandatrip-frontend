@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import { AppService } from '../app.service';
 import { JwtHelper } from 'angular2-jwt';
-import {UserModel} from "./profil.model";
+import {UserModel, VisitGuideModel, VisitUser} from "./profil.model";
+import {ItemVisitModel} from "../visit-details/item-visit.model";
 
 @Injectable()
 export class ProfilService {
@@ -43,16 +44,50 @@ export class ProfilService {
            .then(response => response.json());
   }
 
-  postUserParcours(name: string, user: UserModel) {
+  postUserParcours(name: string, idUser: string, token: string) {
     const url = AppService.entryPointUrl + '/parcours';
 
-    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
 
-    let options = new RequestOptions({ headers: headers })
+    const options = new RequestOptions({ headers: headers });
 
     const bodyJSON = JSON.stringify ({
       'name': name,
-      'user': user.id
+      'user': '/api/users/' + idUser
+    });
+
+    return this.http
+      .post(url, bodyJSON, options)
+      .toPromise()
+      .then()
+      .catch(error => Promise.reject(error.message || error));
+  }
+
+  postUserVisit(itemVisit: ItemVisitModel, token: string) {
+    const url = AppService.entryPointUrl + '/visit_users';
+
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    const options = new RequestOptions({ headers: headers });
+
+    let visitGuide = null;
+
+    if (itemVisit.guideVisit !== null) {
+      visitGuide = '/api/visit_guides/' + itemVisit.guideVisit.id;
+    }
+
+    const bodyJSON = JSON.stringify ({
+      'visit': '/api/visits/' + itemVisit.visit.id,
+      'user': itemVisit.user,
+      'visitGuide': visitGuide,
+      'isValidated': itemVisit.isValidated,
+      'parcours': itemVisit.parcours
     });
 
     return this.http
