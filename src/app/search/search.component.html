@@ -1,47 +1,46 @@
 <div class="tile is-ancestor">
   <div class="tile is-vertical is-12">
-
     <div class="tile is-parent">
       <article class="tile is-child notification bandeau-vert">
-        <p class="title">Résultat Recherche</p>
+        <p class="title">Résultat {{filter.name}}</p>
       </article>
     </div>
-
   </div>
 </div>
 
-<div class="tile is-ancestor" *ngFor="let search of searchs">
-  <div class="tile is-vertical is-12">
+<!--<form>
+  <table>
+    <tbody>
+    <tr *ngFor="let visit of visits | visitfilter:filter">
+      <td>{{visit.name}}</td>
+      <td>{{visit.region}}</td>
+      <td>{{visit.address}}</td>
+      <td>{{visit.country}}</td>
+    </tr>
+    </tbody>
+  </table>
+</form>-->
 
-    <div class="tile">
-      <div class="tile is-parent">
-        <article class="tile is-child is-2">
-          <figure class="search_image">
-            <img src="./assets/img/visit/Arc de Triomphe.jpg" alt="" class="search_image" />
-          </figure>
-        </article>
-        <article class="tile is-child notification">
-          <p class="title"><a href="#" class="search_image">Parc animalier et botanique & Parcabout de Branféré</a> (note 4/5)</p>
-          <p class="content"> {{search.name}} {{ search.city}} {{ search.postalCode }} {{ search.country }} {{ search.region}} </p>
-          <p class="content">{{ search.description }}.</p>
-        </article>
+<form>
+  <div class="tile is-ancestor" *ngFor="let visit of visits | visitfilter:filter">
+    <div class="tile is-vertical is-12">
+      <div class="tile">
+        <div class="tile is-parent">
+          <article class="tile is-child is-2">
+            <figure class="search_image">
+              <a href="visit/{{visit.name }}" class="search_image">
+              <img src="./assets/img/{{visit.images[0].url }}" alt="{{visit.images[0].description }}" class="search_image" />
+              </a>
+            </figure>
+          </article>
+          <article class="tile is-child notification">
+            <p class="title"><a href="visit/{{visit.name }}" class="search_image">{{visit.name }}</a></p>
+            <p class="content"> {{visit.name }}  </p>
+            <p class="content"> {{visit.address }} ({{ visit.postalCode }}), {{visit.region }} {{ visit.country }}  </p>
+            <p class="content"> {{visit.description }}</p>
+          </article>
+        </div>
       </div>
     </div>
-
-   <!-- <div class="tile">
-      <div class="tile is-parent">
-        <article class="tile is-child is-2">
-          <figure class="search_image">
-            <img src="./assets/img/visit/Arc de Triomphe.jpg" alt="" class="search_image" />
-          </figure>
-        </article>
-        <article class="tile is-child notification">
-          <p class="title"><a href="#" class="search_image">Parc animalier et botanique & Parcabout de Branféré</a> (note 4/5)</p>
-          <p class="content">Parc animalier et botanique & Parcabout de Branféré, Le Guerno (56190) France, Bretagne </p>
-          <p class="content">C'est un parc vraiment très chouette.</p>
-        </article>
-      </div>
-    </div>-->
-
   </div>
-</div>
+</form>

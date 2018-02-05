@@ -25,6 +25,16 @@ export class VisitService {
       .then(response => response.json());
   }
 
+  getVisitsObervable(): Observable<VisitModel[]> {
+    return this.http.get(this.endpointUrl + '?pagination=false')
+      .map(res => {
+        return JSON.parse(res['_body'])['hydra:member'];
+      })
+      .catch((error: any) => {
+        return Observable.throw(error.statusText);
+      });
+  }
+
   getNumbersVisits(nbVisits: number): Promise<VisitModel[]> {
     let url = `${this.endpointUrl}?postalCode[between]=59000..59999&itemsPerPage=` + nbVisits;
 

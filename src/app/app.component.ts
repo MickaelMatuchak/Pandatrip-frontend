@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
 import { AppService } from './app.service';
@@ -14,13 +14,16 @@ export class AppComponent implements OnInit, OnChanges {
 
   isConnected: boolean = false;
   isGuide: boolean = false;
+  search: string = '';
   jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
     private router: Router,
-    private appService: AppService) {}
+    private appService: AppService) {
 
-  ngOnInit() {
+    }
+
+    ngOnInit(){
     console.error("APP ON-INIT Begin");
     this.isConnected = this.appService.loggedIn();
     if(this.isConnected) {
@@ -52,4 +55,6 @@ export class AppComponent implements OnInit, OnChanges {
 
     this.router.navigate( ['/home'] );
   }
+
+
 }

@@ -23,6 +23,7 @@ import { PartnersComponent } from './partners/partners.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { CarouselModule } from 'angular4-carousel';
 import { SearchComponent } from "./search/search.component";
+import { VisitFilterPipe } from './search/visit-filter.pipe';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -56,7 +57,8 @@ const routes: Routes = [
     ProfilComponent,
     RecapComponent,
     PartnersComponent,
-    SearchComponent
+    SearchComponent,
+    VisitFilterPipe
   ],
   imports: [
     BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes), StarRatingModule.forRoot(), CarouselModule
