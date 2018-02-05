@@ -89,7 +89,7 @@
         <p class="subtitle has-text-centered">Solde : {{ userGuide.billfold }} €</p>
         <p class="content">
           <button class="login_valider">
-          Retirer mon argent
+            Retirer mon argent
           </button>
         </p>
       </div>
@@ -105,8 +105,10 @@
           <div class="content">
             <p class="title">Devenir guide ?</p>
             <div class="content">
-              Pandatrip partenaires est un programme unique vous permettant de devenir guide où que vous soyez, et qui que vous soyez.
-              Partagez votre goût pour l'aventure et faites vous rémunérer en partageant votre savoir et surtout vos histoires passionnantes.
+              Pandatrip partenaires est un programme unique vous permettant de devenir guide où que vous soyez, et qui
+              que vous soyez.
+              Partagez votre goût pour l'aventure et faites vous rémunérer en partageant votre savoir et surtout vos
+              histoires passionnantes.
               Pandatrip partenaires vous met en relation avec des visiteurs au plus près de chez vous.
               De là à nous rejoindre, il n'y a qu'un pas. A vous de le sauter !
             </div>
@@ -132,52 +134,62 @@
         <article class="tile is-child notification">
           <p class="title">
             <span *ngIf="!show">{{ userLog.username }}</span>
-            <input *ngIf="show" (input)="userLog.username = $event.target.value" [value]='userLog.username' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userLog.username = $event.target.value" [value]='userLog.username'
+                   class="input_edit" (blur)="toggle()">
             <i class="fa fa-pencil-square" (click)="toggle()"></i>
           </p>
 
           <p class="content">
             <span *ngIf="userLog.gender == 'male'">M. </span><span *ngIf="userLog.gender == 'female'">Mme. </span>
             <span *ngIf="!show">{{ userLog.lastname }} {{ userLog.firstname }}</span>
-            <input *ngIf="show" (input)="userLog.lastname = $event.target.value" [value]='userLog.lastname' class="input_edit" (blur)="toggle()">
-            <input *ngIf="show" (input)="userLog.firstname = $event.target.value" [value]='userLog.firstname' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userLog.lastname = $event.target.value" [value]='userLog.lastname'
+                   class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userLog.firstname = $event.target.value" [value]='userLog.firstname'
+                   class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content">
             <span>Mail: </span>
             <span *ngIf="!show">{{ userLog.mail }}</span>
-            <input *ngIf="show" (input)="userLog.mail = $event.target.value" [value]='userLog.mail' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userLog.mail = $event.target.value" [value]='userLog.mail' class="input_edit"
+                   (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Tel : </span>
             <span *ngIf="!show">{{ userGuide.phoneNumber }}</span>
-            <input *ngIf="show" (input)="userGuide.phoneNumber = $event.target.value" [value]='userGuide.phoneNumber' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.phoneNumber = $event.target.value" [value]='userGuide.phoneNumber'
+                   class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Adresse : </span>
             <span *ngIf="!show">{{ userGuide.address }} ({{ userGuide.postalCode }})</span>
-            <input *ngIf="show" (input)="userGuide.address = $event.target.value" [value]='userGuide.address' class="input_edit" (blur)="toggle()">
-            <input *ngIf="show" (input)="userGuide.postalCode = $event.target.value" [value]='userGuide.postalCode' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.address = $event.target.value" [value]='userGuide.address'
+                   class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.postalCode = $event.target.value" [value]='userGuide.postalCode'
+                   class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Ville : </span>
             <span *ngIf="!show">{{ userGuide.city }}</span>
-            <input *ngIf="show" (input)="userGuide.city = $event.target.value" [value]='userGuide.city' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.city = $event.target.value" [value]='userGuide.city'
+                   class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Région : </span>
             <span *ngIf="!show">{{ userGuide.region }}</span>
-            <input *ngIf="show" (input)="userGuide.region = $event.target.value" [value]='userGuide.region' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.region = $event.target.value" [value]='userGuide.region'
+                   class="input_edit" (blur)="toggle()">
           </p>
 
           <p class="content" *ngIf="isGuide">
             <span>Pays : </span>
             <span *ngIf="!show">{{ userGuide.country }}</span>
-            <input *ngIf="show" (input)="userGuide.country = $event.target.value" [value]='userGuide.country' class="input_edit" (blur)="toggle()">
+            <input *ngIf="show" (input)="userGuide.country = $event.target.value" [value]='userGuide.country'
+                   class="input_edit" (blur)="toggle()">
           </p>
         </article>
       </div>

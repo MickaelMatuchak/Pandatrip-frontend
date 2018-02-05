@@ -1,19 +1,17 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {isNull} from 'util';
 import {VisitService} from '../visit/visit.service';
 import {VisitModel} from '../visit/visit.model';
 import {ImageModel} from '../image/image.model';
 import {ReviewsModel} from '../reviews/reviews.model';
-
 import {ICarouselConfig, AnimationConfig} from 'angular4-carousel';
-import {ItemVisitModel} from "./item-visit.model";
-import {VisitGuideModel} from "../profil/profil.model";
-import {GuideModel} from "../guide/guide.model";
-import {AppService} from "../app.service";
-import {GuideService} from "../guide/guide.service";
-import {GuideVisitService} from "./guide-visit.service";
-import {DatePipe} from "@angular/common";
+import {ItemVisitModel} from './item-visit.model';
+import {VisitGuideModel} from '../profil/profil.model';
+import {AppService} from '../app.service';
+import {GuideService} from '../guide/guide.service';
+import {GuideVisitService} from './guide-visit.service';
+import {DatePipe} from '@angular/common';
 
 declare var $: any;
 declare var jquery: any;
@@ -22,8 +20,9 @@ declare var jquery: any;
   selector: 'visit-details',
   templateUrl: './visit-details.component.html',
   styleUrls: ['./visit-details.component.css', '../../../node_modules/bulma/css/bulma.css', '../../../node_modules/font-awesome/css/font-awesome.css'],
-  providers: [VisitService, GuideVisitService, GuideService, DatePipe ]
+  providers: [VisitService, GuideVisitService, GuideService, DatePipe]
 })
+
 export class VisitDetailsComponent implements OnInit {
   lineVisits = [];
   visitSelected: VisitModel;
@@ -48,52 +47,49 @@ export class VisitDetailsComponent implements OnInit {
   private getVisitDetails(nameVisit: string) {
     this.visitService.getVisit(nameVisit)
       .then(visit => {
-        let visitTmp = visit["hydra:member"][0];
-        let arrayImages: ImageModel[] = new Array();
-        let arrayReviews: ReviewsModel[] = new Array();
-        let i: number = 0;
+        const visitTmp = visit['hydra:member'][0];
+        const arrayImages: ImageModel[] = new Array();
+        const arrayReviews: ReviewsModel[] = new Array();
 
-        let images = visitTmp["images"];
-        for (i = 0; i < images.length; i++) {
+        const images = visitTmp['images'];
+
+        for (let i = 0; i < images.length; i++) {
           arrayImages.push(new ImageModel(images[i].id, images[i].url, images[i].description));
           this.imageSources.push('./assets/img/' + images[i].url);
         }
 
-        let reviews = visitTmp["reviews"];
-        for (i = 0; i < reviews.length; i++) {
-          arrayReviews.push(new ReviewsModel(reviews[i].id, reviews[i].note, reviews[i].title, reviews[i].text, reviews[i].date, reviews[i].user));
+        const reviews = visitTmp['reviews'];
+
+        for (let i = 0; i < reviews.length; i++) {
+          arrayReviews.push(
+            new ReviewsModel(reviews[i].id, reviews[i].note, reviews[i].title, reviews[i].text, reviews[i].date, reviews[i].user)
+          );
         }
+
         this.noReviews = false;
 
-        this.visitSelected = new VisitModel(visitTmp["id"], visitTmp["name"],
+        this.visitSelected = new VisitModel(visitTmp['id'], visitTmp['name'],
           arrayImages,
           arrayReviews,
-          visitTmp["latitude"], visitTmp["longitude"], visitTmp["address"],
-          visitTmp["country"], visitTmp["region"], visitTmp["city"],
-          visitTmp["postalCode"], visitTmp["description"], visitTmp["note"],
-          visitTmp["nbNotes"], visitTmp["site"]);
+          visitTmp['latitude'], visitTmp['longitude'], visitTmp['address'],
+          visitTmp['country'], visitTmp['region'], visitTmp['city'],
+          visitTmp['postalCode'], visitTmp['description'], visitTmp['note'],
+          visitTmp['nbNotes'], visitTmp['site']);
 
-        this.guideVisit.getGuidesByVisit(visitTmp["id"])
+        this.guideVisit.getGuidesByVisit(visitTmp['id'])
           .then(guideVisit => {
 
-            let visitGuides = guideVisit["hydra:member"];
+            const visitGuides = guideVisit['hydra:member'];
 
-            for (i = 0; i < visitGuides.length; i++) {
-              let guide = visitGuides[i].guide;
-              let image: ImageModel;
+            for (let i = 0; i < visitGuides.length; i++) {
+              const guide = visitGuides[i].guide;
 
-              if (guide.user.image) {
-                image = new ImageModel(guide.user.image.id, guide.user.image.url, guide.user.image.description);
-              } else {
-                if (guide.user.gender == 'male') {
-                  image = new ImageModel(null, "boy.png", "boy");
-                } else {
-                  image = new ImageModel(null, "girl.png", "girl");
-                }
-              }
+              guide.user.image = this.appService.initialiseUserImage(guide.user);
 
-              guide.user.image = image;
-              this.itemsVisitGuide.push(new VisitGuideModel(visitGuides[i].id, null, guide, visitGuides[i].date, visitGuides[i].duration, visitGuides[i].price, true));
+              this.itemsVisitGuide.push(
+                new VisitGuideModel(visitGuides[i].id, null, guide, visitGuides[i].date,
+                  visitGuides[i].duration, visitGuides[i].price, true)
+              );
             }
           });
       });
@@ -101,8 +97,11 @@ export class VisitDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      let nameVisit: any = params['name'];
-      this.visitSelected = new VisitModel(null, '', [new ImageModel(null, '', '')], null, 0, 0, 'addresse', 'country', 'region', 'city', null, '', 0, 0, '');
+      const nameVisit: any = params['name'];
+
+      this.visitSelected = new VisitModel(null, '', [new ImageModel(null, '', '')], null, 0, 0, 'addresse', 'country',
+        'region', 'city', null, '', 0, 0, '');
+
       this.noReviews = true;
 
       if (!isNull(nameVisit)) {
@@ -113,11 +112,13 @@ export class VisitDetailsComponent implements OnInit {
     $('.open-modal').click(this.toggleModalClasses);
     $('.close-modal').click(this.toggleModalClasses);
 
-    if (localStorage.getItem('visits') != null) {
+    const visits = localStorage.getItem('visits');
+    if (visits != null) {
       this.itemsVisit = JSON.parse(localStorage.getItem('visits'));
     }
 
-    if (localStorage.getItem('token') != null) {
+    const token = this.appService.getLocalVar('token');
+    if (token != null) {
       this.isGuide = this.appService.initialiseIsGuide(this.appService.decodeToken().roles);
     }
   }
@@ -126,7 +127,7 @@ export class VisitDetailsComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public config: ICarouselConfig = {
+  config: ICarouselConfig = {
     verifyBeforeLoad: true,
     log: false,
     animation: true,
@@ -138,8 +139,8 @@ export class VisitDetailsComponent implements OnInit {
 
   /* afficher pop-up*/
   toggleModalClasses(event) {
-    let modalId = event.currentTarget.dataset.modalId;
-    let modal = $(modalId);
+    const modalId = event.currentTarget.dataset.modalId;
+    const modal = $(modalId);
     modal.toggleClass('is-active');
     $('html').toggleClass('is-clipped');
   }
@@ -152,38 +153,37 @@ export class VisitDetailsComponent implements OnInit {
   stockerEnSession(itemVisit: ItemVisitModel) {
 
     // Sauvegarder les informations dans l'espace local courant
-
     if (this.itemsVisit != null) {
       let isExist = false;
 
       this.itemsVisit.forEach(function (element) {
-        if (element.visit.name == itemVisit.visit.name) {
+        if (element.visit.name === itemVisit.visit.name) {
           isExist = true;
         }
       });
 
-      if (isExist == false) {
+      if (isExist === false) {
         this.itemsVisit.push(itemVisit);
       }
     } else {
       this.itemsVisit = [itemVisit];
     }
 
-    localStorage.setItem("visits", JSON.stringify(this.itemsVisit));
+    localStorage.setItem('visits', JSON.stringify(this.itemsVisit));
   }
 
   ajouterPanier() {
-    let visit = new ItemVisitModel(this.visitSelected, null);
+    const visit = new ItemVisitModel(this.visitSelected, null);
 
     this.stockerEnSession(visit);
   }
 
   ajouterPanierGuide() {
-    let trSelected = document.getElementsByClassName("selected")[0];
-    let indexGuide = trSelected.getElementsByTagName('td')[0].getAttribute('class');
+    const trSelected = document.getElementsByClassName('selected')[0];
+    const indexGuide = trSelected.getElementsByTagName('td')[0].getAttribute('class');
 
-    if (trSelected != undefined) {
-      let visit = new ItemVisitModel(this.visitSelected, this.itemsVisitGuide[indexGuide]);
+    if (trSelected !== undefined) {
+      const visit = new ItemVisitModel(this.visitSelected, this.itemsVisitGuide[indexGuide]);
 
       this.stockerEnSession(visit);
     }
@@ -192,31 +192,32 @@ export class VisitDetailsComponent implements OnInit {
   supprimerItemPanier(itemVisitName) {
     let indexToDelete = null;
 
-    this.itemsVisit.forEach(function(element, index) {
-      if (element.visit.name == itemVisitName) {
+    this.itemsVisit.forEach(function (element, index) {
+      if (element.visit.name === itemVisitName) {
         indexToDelete = index;
       }
     });
 
     this.itemsVisit.splice(indexToDelete, 1);
-    localStorage.setItem("visits", JSON.stringify(this.itemsVisit));
+    localStorage.setItem('visits', JSON.stringify(this.itemsVisit));
   }
 
   enregistrerGuide() {
     if (this.isGuide && this.duration != null && this.price != null) {
-      const token = localStorage.getItem('token');
+      const token = this.appService.getLocalVar('token');
       const tokenDecoded = this.appService.decodeToken();
 
       this.guideService.getGuide(tokenDecoded.username)
         .then(guide => {
 
-          let date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
+          const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
 
-          let visitGuide = new VisitGuideModel(null, this.visitSelected, guide['hydra:member'][0], null, parseInt(this.duration), parseInt(this.price), true);
+          const visitGuide = new VisitGuideModel(null, this.visitSelected, guide['hydra:member'][0], null,
+            parseInt(this.duration, 10), parseInt(this.price, 10), true);
 
           this.guideVisit.postGuideVisit(visitGuide, token)
             .then(guideVisit => {
-              let postVisitGuide = JSON.parse(guideVisit['_body']);
+              const postVisitGuide = JSON.parse(guideVisit['_body']);
 
               visitGuide.id = postVisitGuide.id;
 

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
-import { AppService } from '../app.service';
-import { JwtHelper } from 'angular2-jwt';
+import {AppService} from '../app.service';
+import {JwtHelper} from 'angular2-jwt';
 import {UserModel, VisitGuideModel, VisitUser} from "./profil.model";
 import {ItemVisitModel} from "../visit-details/item-visit.model";
 
@@ -14,14 +14,15 @@ export class ProfilService {
 
   jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor( private http: Http ) { }
+  constructor(private http: Http) {
+  }
 
   getUser(username: string) {
     let url = `${this.endpointUrlUsers}?username=${username}`;
 
     return this.http.get(url)
-           .toPromise()
-           .then(response => response.json());
+      .toPromise()
+      .then(response => response.json());
   }
 
   getGuide(username: string) {
@@ -30,8 +31,6 @@ export class ProfilService {
     return this.http.get(url)
       .toPromise()
       .then(response => {
-        console.info("response.json()");
-        console.info(response.json());
         return response.json();
       });
   }
@@ -40,8 +39,8 @@ export class ProfilService {
     let url = `${this.endpointUrlUserParcours}?user.username=${username}`;
 
     return this.http.get(url)
-           .toPromise()
-           .then(response => response.json());
+      .toPromise()
+      .then(response => response.json());
   }
 
   postUserParcours(name: string, idUser: string, token: string) {
@@ -52,9 +51,9 @@ export class ProfilService {
       'Authorization': 'Bearer ' + token
     });
 
-    const options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({headers: headers});
 
-    const bodyJSON = JSON.stringify ({
+    const bodyJSON = JSON.stringify({
       'name': name,
       'user': '/api/users/' + idUser
     });
@@ -74,7 +73,7 @@ export class ProfilService {
       'Authorization': 'Bearer ' + token
     });
 
-    const options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({headers: headers});
 
     let visitGuide = null;
 
@@ -82,7 +81,7 @@ export class ProfilService {
       visitGuide = '/api/visit_guides/' + itemVisit.guideVisit.id;
     }
 
-    const bodyJSON = JSON.stringify ({
+    const bodyJSON = JSON.stringify({
       'visit': '/api/visits/' + itemVisit.visit.id,
       'user': itemVisit.user,
       'visitGuide': visitGuide,

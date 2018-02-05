@@ -1,17 +1,10 @@
-
-.square_theme
-{
+.square_theme {
   background: #8eadEE;
   height: 10rem;
-  border:solid 4px white;
+  border: solid 4px white;
 }
-/*
-.title_theme
-{
-  margin-top: 5rem;
-}*/
 
-.card-content .content h2{
+.card-content .content h2 {
   margin: 0;
 }
 

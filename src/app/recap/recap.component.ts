@@ -2,29 +2,30 @@ import {Component, OnInit} from '@angular/core';
 import {ItemVisitModel} from '../visit-details/item-visit.model';
 import {ProfilService} from '../profil/profil.service';
 import {AppService} from '../app.service';
-import { Router } from '@angular/router';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recap',
   templateUrl: './recap.component.html',
   styleUrls: ['./recap.component.css', '../../../node_modules/bulma/css/bulma.css', '../../../node_modules/font-awesome/css/font-awesome.css'],
-  providers: [ ProfilService, AppService ]
+  providers: [ProfilService, AppService]
 })
+
 export class RecapComponent implements OnInit {
   title: string;
   public show: boolean = false;
   public buttonName: any = 'Show';
   itemsVisit: ItemVisitModel[];
 
-  constructor(private profilService: ProfilService, private appService: AppService, private router: Router) {
+  constructor(private profilService: ProfilService,
+              private appService: AppService,
+              private router: Router) {
     this.title = 'Parcours Sans Nom';
   }
 
   toggle() {
     this.show = !this.show;
 
-    // CHANGE THE NAME OF THE BUTTON.
     if (!this.show) {
       this.buttonName = 'Show';
     } else {
@@ -41,7 +42,7 @@ export class RecapComponent implements OnInit {
   onSubmit(event: any) {
     event.stopPropagation();
 
-    const token = localStorage.getItem('token');
+    const token = this.appService.getLocalVar('token');
 
     if (token !== null) {
       const tokenDecoded = this.appService.decodeToken();

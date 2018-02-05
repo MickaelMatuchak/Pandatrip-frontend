@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GuideModel } from '../guide/guide.model';
 
 @Component({
   selector: 'research',

@@ -4,16 +4,11 @@
 
       <div class="tile is-parent is-vertical">
         <article class="tile is-child">
-          <!--
-          <figure class="image is-4by3">
-            <img src="../assets/img/{{ visitSelected.images[0].url }}">
-          </figure>
-          -->
-
           <div *ngIf="imageSources.length != 0" class="carousel-container">
             <carousel [sources]="imageSources" [config]="config"></carousel>
           </div>
         </article>
+
         <article class="tile is-child is-centered">
           <div class="content">
             <button class="bouton_visit open-modal" data-modal-id="#my-modal">
@@ -22,7 +17,8 @@
             <button class="bouton_visit" (click)="ajouterPanier()">
               Ajouter à mes visites
             </button>
-            <button class="bouton_devenir_guide open-modal" data-modal-id="#guide-modal" *ngIf="isGuide" (click)="toggleModalClasses($event)">
+            <button class="bouton_devenir_guide open-modal" data-modal-id="#guide-modal" *ngIf="isGuide"
+                    (click)="toggleModalClasses($event)">
               Devenir guide pour cette visite
             </button>
           </div>
@@ -56,7 +52,8 @@
             <i class="fa fa-window-close" (click)="supprimerItemPanier(itemVisit.visit.name);"></i>
           </span>
           <h4>{{ itemVisit.visit.name }}</h4>
-          <p *ngIf="itemVisit.guideVisit != null">{{ itemVisit.guideVisit.guide.user.firstname }} {{ itemVisit.guideVisit.guide.user.lastname }}</p>
+          <p *ngIf="itemVisit.guideVisit != null">{{ itemVisit.guideVisit.guide.user.firstname }} {{
+            itemVisit.guideVisit.guide.user.lastname }}</p>
           <p *ngIf="itemVisit.guideVisit == null">Visite non guidée (Envie d'un guide ?)</p>
           <hr>
         </div>
@@ -146,7 +143,8 @@
 
     <footer class="modal-card-foot">
       <button class="close-modal button" data-modal-id="#guide-modal">Annuler</button>
-      <button class="close-modal button bouton_vert" data-modal-id="#guide-modal" (click)="enregistrerGuide()">Enregistrer
+      <button class="close-modal button bouton_vert" data-modal-id="#guide-modal" (click)="enregistrerGuide()">
+        Enregistrer
       </button>
     </footer>
   </div>

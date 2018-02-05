@@ -6,6 +6,7 @@ export class ItemVisitModel {
     this.visit = visit;
     this.guideVisit = guideVisit;
   }
+
   visit: VisitModel;
   guideVisit: GuideVisitModel;
   parcours: string;

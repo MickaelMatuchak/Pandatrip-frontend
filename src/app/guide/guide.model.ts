@@ -1,11 +1,11 @@
-import { ReviewsModel } from "../reviews/reviews.model";
-import { UserModel, VisitGuideModel } from "../profil/profil.model";
+import {ReviewsModel} from "../reviews/reviews.model";
+import {UserModel, VisitGuideModel} from "../profil/profil.model";
 
 export class GuideModel {
   constructor(id: number, billfold: number, reviews: ReviewsModel[],
-    user: UserModel, address: string, country: string,
-    region: string, city: string, postalCode: number,
-    phoneNumber: string, listVisits: VisitGuideModel[]) {
+              user: UserModel, address: string, country: string,
+              region: string, city: string, postalCode: number,
+              phoneNumber: string, listVisits: VisitGuideModel[]) {
     this.id = id;
     this.billfold = billfold;
     this.reviews = reviews;

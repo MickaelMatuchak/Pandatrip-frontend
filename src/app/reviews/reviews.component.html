@@ -17,7 +17,7 @@
       <div class="tile is-parent is-vertical is-2">
         <article class="tile is-child">
           <figure class="image is-64x64 avatar">
-            <img src="../assets/img/{{ review.user.image.url }}" alt="avatar" />
+            <img src="../assets/img/{{ review.user.image.url }}" alt="avatar"/>
           </figure>
           <p class="content has-text-centered">{{ review.user.username }}, {{ review.date }} </p>
         </article>
@@ -25,7 +25,8 @@
 
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
-          <p class="subtitle">{{ review.title }} (note : {{ review.note }}/5)<span *ngFor="let item of items; let i = index"></span></p>
+          <p class="subtitle">{{ review.title }} (note : {{ review.note }}/5)<span
+            *ngFor="let item of items; let i = index"></span></p>
           <p class="content">{{ review.text }}</p>
         </article>
       </div>
@@ -36,18 +37,19 @@
       <article class="tile is-parent">
         <div class="tile is-child notification">
           <p class="title">Racontez votre expérience</p>
-          <star-rating-comp [starType]="'svg'" [hoverEnabled]="true" [labelText]="'Ma note '" [labelPosition]="'left'" [size]="'large'" [rating]="3"
+          <star-rating-comp [starType]="'svg'" [hoverEnabled]="true" [labelText]="'Ma note '" [labelPosition]="'left'"
+                            [size]="'large'" [rating]="3"
                             [step]="0.5" [showHalfStars]="true" (onClick)="onClick($event)"></star-rating-comp>
           <p>
             <input class="login_input" placeholder="Ajoutez un titre" [(ngModel)]="reviewTitle">
           </p>
-          <textarea class="textarea is-success is-large" type="text" placeholder="Vous avez aimez ce lieu ? Témoignez !" [(ngModel)]="reviewMessage"></textarea>
+          <textarea class="textarea is-success is-large" type="text" placeholder="Vous avez aimé ce lieu ? Témoignez !"
+                    [(ngModel)]="reviewMessage"></textarea>
           <button class="bouton_commenter" (click)="ajouterReview()">
             Commentez la visite
           </button>
         </div>
       </article>
     </div>
-
   </div>
 </div>

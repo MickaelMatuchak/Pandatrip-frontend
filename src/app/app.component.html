@@ -1,18 +1,23 @@
 <div class="container">
-    <nav class="menu">
-      <ul class="container">
-        <li><a routerLink="/"><img src="../assets/img/pandatrip-logo-texte2.png" alt="pandatrip" class="logo_panda_texte" /></a></li>
-        <research></research>
-        <li *ngIf="isConnected && !isGuide"><a routerLink="/partners">Devenir Guide</a></li>
-        <li *ngIf="!isConnected || isGuide"><a routerLink=""></a></li>
-        <li *ngIf="!isConnected"><a (click)="logIn($event)">Se connecter</a></li>
-        <li *ngIf="!isConnected"><a routerLink="/register">S'inscrire</a></li>
-        <li *ngIf="isConnected"><a routerLink="/profil">Profil</a></li>
-        <li *ngIf="isConnected" class="deconnexion"><a (click)="logOut($event)"><i class="fa fa-power-off fa-lg input_icone"></i></a></li>
-      </ul>
-    </nav>
+  <nav class="menu">
+    <ul class="container">
+      <li>
+        <a routerLink="/">
+          <img src="../assets/img/pandatrip-logo-texte2.png" alt="pandatrip" class="logo_panda_texte"/>
+        </a>
+      </li>
+      <research></research>
+      <li *ngIf="isConnected && !isGuide"><a routerLink="/partners">Devenir Guide</a></li>
+      <li *ngIf="!isConnected || isGuide"><a routerLink=""></a></li>
+      <li *ngIf="!isConnected"><a (click)="logIn($event)">Se connecter</a></li>
+      <li *ngIf="!isConnected"><a routerLink="/register">S'inscrire</a></li>
+      <li *ngIf="isConnected"><a routerLink="/profil">Profil</a></li>
+      <li *ngIf="isConnected" class="deconnexion"><a (click)="logOut($event)"><i
+        class="fa fa-power-off fa-lg input_icone"></i></a></li>
+    </ul>
+  </nav>
 
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 
 <footer>

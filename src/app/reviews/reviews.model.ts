@@ -1,7 +1,7 @@
-import {UserModel} from "../profil/profil.model";
+import {UserModel} from '../profil/profil.model';
 
 export class ReviewsModel {
-  constructor(id: number, note : number, title : string, text : string, date : string, user: UserModel) {
+  constructor(id: number, note: number, title: string, text: string, date: string, user: UserModel) {
     this.id = id;
     this.note = note;
     this.title = title;
@@ -10,10 +10,10 @@ export class ReviewsModel {
     this.user = user;
   }
 
-  id : number;
-  note : number;
-  title : string;
-  text : string;
-  date : string;
+  id: number;
+  note: number;
+  title: string;
+  text: string;
+  date: string;
   user: UserModel;
 }

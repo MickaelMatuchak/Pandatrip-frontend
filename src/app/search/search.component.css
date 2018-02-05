@@ -3,20 +3,20 @@ article.bandeau-vert {
   color: white;
 }
 
-.search_image{
-  height:100%;
+.search_image {
+  height: 100%;
 }
 
-.notification[_ngcontent-c2] a[_ngcontent-c2]:not(.button){
-  color:#78ab66;
+.notification[_ngcontent-c2] a[_ngcontent-c2]:not(.button) {
+  color: #78ab66;
   text-decoration: none;
 }
 
-a.search_image{
-  color:#78ab66;
+a.search_image {
+  color: #78ab66;
 }
 
-.notification[_ngcontent-c2] a[_ngcontent-c2]:not(.button):hover{
-  color:#78ab66;
+.notification[_ngcontent-c2] a[_ngcontent-c2]:not(.button):hover {
+  color: #78ab66;
   text-decoration: underline;
 }

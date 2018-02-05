@@ -8,17 +8,17 @@ article.bandeau-vert {
   margin: 0 auto;
 }
 
-button.bouton_vert{
+button.bouton_vert {
   background-color: #78ab66;
   color: white;
   text-align: center;
 }
 
-button.bouton_vert:hover{
+button.bouton_vert:hover {
   color: white;
 }
 
-.bouton_commenter{
+.bouton_commenter {
   background-color: #78ab66;
   padding: 0.7rem;
   border-radius: 3px;
@@ -29,16 +29,15 @@ button.bouton_vert:hover{
   font-family: "Source Sans Pro";
   font-size: 1.3rem;
   display: block;
-  margin:0 auto;
-  margin-top: 0.5rem;
+  margin: 0.5rem auto 0;
   cursor: pointer;
 }
 
-star-rating-comp{
+star-rating-comp {
   cursor: pointer;
 }
 
-.login_input{
+.login_input {
   padding-left: 0.8rem;
   height: 2.45rem;
   width: 30%;
@@ -61,6 +60,10 @@ star-rating-comp{
 }
 
 @keyframes agrandirInput {
-  from {width: 30%}
-  to {width: 100%}
+  from {
+    width: 30%
+  }
+  to {
+    width: 100%
+  }
 }

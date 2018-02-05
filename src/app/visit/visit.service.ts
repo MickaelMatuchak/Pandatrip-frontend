@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
 import {VisitModel} from './visit.model';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {AppService} from '../app.service';
-import {ReviewsModel} from "../reviews/reviews.model";
+import {ReviewsModel} from '../reviews/reviews.model';
 
 @Injectable()
 export class VisitService {
@@ -17,8 +17,9 @@ export class VisitService {
   private endpointUrl = AppService.entryPointUrl + '/visits';
 
   getVisits(): Promise<VisitModel[]> {
-    let headers = new Headers();
-    headers.append("Content-Type", 'application/json');
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
 
     return this.http.get(this.endpointUrl)
       .toPromise()
@@ -26,7 +27,7 @@ export class VisitService {
   }
 
   getNumbersVisits(nbVisits: number): Promise<VisitModel[]> {
-    let url = `${this.endpointUrl}?postalCode[between]=59000..59999&itemsPerPage=` + nbVisits;
+    const url = `${this.endpointUrl}?postalCode[between]=59000..59999&itemsPerPage=` + nbVisits;
 
     return this.http.get(url)
       .toPromise()
@@ -34,7 +35,7 @@ export class VisitService {
   }
 
   getVisit(name: string) {
-    let url = `${this.endpointUrl}?name=${name}`;
+    const url = `${this.endpointUrl}?name=${name}`;
 
     return this.http.get(url)
       .toPromise()
@@ -52,7 +53,7 @@ export class VisitService {
 
     const options = new RequestOptions({headers: headers});
 
-    let arrayReviews: Array<string> = [];
+    const arrayReviews: Array<string> = [];
 
     visit.reviews.forEach(function (element: ReviewsModel) {
       arrayReviews.push('/api/reviews/' + element.id);

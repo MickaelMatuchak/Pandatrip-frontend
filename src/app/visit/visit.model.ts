@@ -1,12 +1,12 @@
-import { ImageModel } from "../image/image.model";
-import { ReviewsModel } from "../reviews/reviews.model";
+import {ImageModel} from '../image/image.model';
+import {ReviewsModel} from '../reviews/reviews.model';
 
 export class VisitModel {
   constructor(id: number, name: string, images: ImageModel[],
-    reviews: ReviewsModel[], latitude: number, longitude: number,
-    address: string, country: string, region: string,
-    city: string, postalCode: number, description: string,
-    note: number, nbNotes: number, site: string) {
+              reviews: ReviewsModel[], latitude: number, longitude: number,
+              address: string, country: string, region: string,
+              city: string, postalCode: number, description: string,
+              note: number, nbNotes: number, site: string) {
     this.id = id;
     this.name = name;
     this.images = images;
@@ -47,6 +47,7 @@ export class VisitModel2 {
     this.name = name;
     this.address = address;
   }
+
   id: number;
   name: string;
   address: string;

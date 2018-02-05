@@ -1,4 +1,4 @@
-.bouton_visit{
+.bouton_visit {
   background-color: #78ab66;
   padding: 0.7rem;
   border-radius: 3px;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.bouton_devenir_guide{
+.bouton_devenir_guide {
   background-color: #f86e55;
   padding: 0.7rem;
   border-radius: 3px;
@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-.login_input{
+.login_input {
   padding-left: 35px;
   height: 2.45rem;
   font-family: "Source Sans Pro";
@@ -45,12 +45,12 @@ heure_select {
   padding-right: 12rem;
 }
 
-article.panier{
+article.panier {
   position: fixed;
   min-height: 24.3rem;
 }
 
-.marker{
+.marker {
   width: 28px;
   vertical-align: middle;
   margin-right: 0.4rem;
@@ -63,7 +63,7 @@ article.panier{
   margin-bottom: 2.5rem;
 }
 
-.panier{
+.panier {
   max-width: 22rem;
   width: 22rem;
 }
@@ -73,7 +73,7 @@ article.panier{
   bottom: 2rem;
 }
 
-.panier_bouton{
+.panier_bouton {
   text-align: center;
 }
 
@@ -83,47 +83,47 @@ article.panier{
   cursor: pointer;
 }
 
-.fa-window-close{
+.fa-window-close {
   background: white;
   color: #F64343;
 }
 
-.choisir_guide tr:hover{
+.choisir_guide tr:hover {
   background-color: #f5f5f5;
   cursor: pointer;
 }
 
-.choisir_guide tr.selected{
+.choisir_guide tr.selected {
   background-color: #85CA54;
 }
 
-.choisir_guide td{
+.choisir_guide td {
   vertical-align: middle;
 }
 
-table.choisir_guide{
+table.choisir_guide {
   width: 100%;
 }
 
-button.bouton_vert{
+button.bouton_vert {
   background-color: #78ab66;
   color: white;
 }
 
-button.bouton_vert:hover{
+button.bouton_vert:hover {
   color: white;
 }
 
-.carousel-wrapper{
+.carousel-wrapper {
   height: 22.3rem;
 }
 
-.carousel-container{
+.carousel-container {
   height: 22.3rem;
   padding: 0;
 }
 
-.carousel-nav-list{
+.carousel-nav-list {
   padding: 0;
 }
 
@@ -131,6 +131,6 @@ carousel-slide {
   padding: 0;
 }
 
-:host >>> .carousel-nav-list{
+:host >>> .carousel-nav-list {
   padding: 0;
 }

@@ -4,17 +4,16 @@ import {UserModel, ParcoursModel, VisitGuideModel} from './profil.model';
 import {ImageModel} from '../image/image.model';
 import {JwtHelper} from 'angular2-jwt';
 import {GuideModel} from '../guide/guide.model';
-import {ReviewsModel} from '../reviews/reviews.model';
 import {AppService} from '../app.service';
 
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css', '../../../node_modules/bulma/css/bulma.css', "../../../node_modules/font-awesome/css/font-awesome.css"],
+  styleUrls: ['./profil.component.css', '../../../node_modules/bulma/css/bulma.css', '../../../node_modules/font-awesome/css/font-awesome.css'],
   providers: [ProfilService]
 })
-export class ProfilComponent implements OnInit {
 
+export class ProfilComponent implements OnInit {
   userLog: UserModel;
   userGuide: GuideModel;
   userParcours: ParcoursModel[];
@@ -38,37 +37,32 @@ export class ProfilComponent implements OnInit {
 
   ngOnInit() {
     let tokenDecoded = this.appService.decodeToken();
-    
-    console.info("tokenDecoded");
-    console.info(tokenDecoded);
 
     this.isGuide = this.appService.initialiseIsGuide(tokenDecoded.roles);
 
     this.userLog = new UserModel(null,
-      "", "", "", "", "", new ImageModel(null, "", ""));
+      '', '', '', '', '', new ImageModel(null, '', ''));
 
     this.userGuide = new GuideModel(null, null, null, null, '',
       '', '', '', null, '', null);
 
-    console.info("AVANT getUserLog")
     this.getUserLog(tokenDecoded.username);
 
     this.userParcours = [];
-    console.info("AVANT getUserParcours")
     this.getUserParcours(tokenDecoded.username);
   }
 
   private getUserParcours(username: string) {
     this.profilService.getUserParcours(username)
       .then(data => {
-        let parcours = data["hydra:member"];
-        for (var i = 0; i < parcours.length; i++) {
-          let parcoursI = parcours[i];
-          let visitUser = [];
+        const parcours = data['hydra:member'];
 
-          let parcoursAdd = new ParcoursModel(parcoursI.id, visitUser, parcoursI.user, parcoursI.name);
-          console.info("parcoursAdd ");
-          console.info(parcoursAdd);
+        for (let i = 0; i < parcours.length; i++) {
+          const parcoursI = parcours[i];
+          const visitUser = [];
+
+          const parcoursAdd = new ParcoursModel(parcoursI.id, visitUser, parcoursI.user, parcoursI.name);
+
           this.userParcours.push(parcoursAdd);
         }
 
@@ -79,8 +73,6 @@ export class ProfilComponent implements OnInit {
     if (this.isGuide) {
       this.profilService.getGuide(username).then(data => {
         const guide = data['hydra:member'][0];
-        console.info("getGuide data[\"hydra:member\"][0]");
-        console.info(data["hydra:member"][0]);
 
         const arrayListVisits: VisitGuideModel[] = new Array();
 
@@ -101,11 +93,7 @@ export class ProfilComponent implements OnInit {
         this.userGuide = new GuideModel(guide.id, guide.billfold, guide.reviews, this.userLog, guide.address,
           guide.country, guide.region, guide.city, guide.postalCode, guide.phoneNumber, arrayListVisits);
 
-        console.info("this.userLog isGuide");
-        console.info(this.userLog);
-        console.info("this.userGuide isGuide");
-        console.info(this.userGuide);
-        localStorage.setItem("idUser", guide.user["@id"]);
+        localStorage.setItem('idUser', guide.user['@id']);
       });
 
     } else {
@@ -118,11 +106,9 @@ export class ProfilComponent implements OnInit {
           this.userLog = new UserModel(user.id,
             user.username, user.gender, user.firstname,
             user.lastname, user.mail, image);
-          console.info("this.userLog");
-          console.info(this.userLog);
-          localStorage.setItem("idUser", user["@id"]);
+
+          localStorage.setItem('idUser', user['@id']);
         });
     }
-    
   }
 }

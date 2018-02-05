@@ -7,8 +7,8 @@ import {
   OnRatingChangeEven,
   OnHoverRatingChangeEvent
 } from './../../../node_modules/angular-star-rating/star-rating-struct';
-import { AppService } from '../app.service';
-import { UserModel } from '../profil/profil.model';
+import {AppService} from '../app.service';
+import {UserModel} from '../profil/profil.model';
 import {ReviewService} from "./review.service";
 import {DatePipe} from "@angular/common";
 import {ProfilService} from "../profil/profil.service";
@@ -20,10 +20,10 @@ import {VisitService} from "../visit/visit.service";
   selector: 'reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.css', '../../../node_modules/bulma/css/bulma.css', './star-rating.scss'],
-  providers: [ DatePipe, ReviewService, ProfilService, AppService, VisitService ]
+  providers: [DatePipe, ReviewService, ProfilService, AppService, VisitService]
 })
-export class ReviewsComponent implements OnInit {
 
+export class ReviewsComponent implements OnInit {
   @Input('Reviews')
   reviews: ReviewsModel[];
   @Input('visit')
@@ -33,12 +33,11 @@ export class ReviewsComponent implements OnInit {
   reviewTitle: string = null;
   reviewMessage: string = null;
 
-  constructor(
-    private appService: AppService,
-    private reviewService: ReviewService,
-    private profilService: ProfilService,
-    private visitService: VisitService,
-    private datePipe: DatePipe) {
+  constructor(private appService: AppService,
+              private reviewService: ReviewService,
+              private profilService: ProfilService,
+              private visitService: VisitService,
+              private datePipe: DatePipe) {
   }
 
   onClickResult: OnClickEvent;
@@ -56,57 +55,56 @@ export class ReviewsComponent implements OnInit {
 
       let reviewsObj = this.reviews;
       this.reviews = new Array;
-      let i;
-      for (i = 0; i < reviewsObj.length; i++) {
+
+      for (let i = 0; i < reviewsObj.length; i++) {
         let user: any = reviewsObj[i].user;
+
         let image = this.appService.initialiseUserImage(user);
         user.image = image;
+
         this.reviews.push(new ReviewsModel(reviewsObj[i].id, reviewsObj[i].note, reviewsObj[i].title, reviewsObj[i].text, reviewsObj[i].date, user));
       }
     } else {
       this.noReviews = true;
-      console.info("this.noReviews dans (else) ");
-      console.info(this.noReviews);
     }
   }
 
   ajouterReview() {
-    const token = localStorage.getItem('token');
+    const token = this.appService.getLocalVar('token');
 
-    // Vérifie si connecté et les champs remplis
     if (token !== null && this.reviewMessage !== null && this.reviewTitle != null) {
       const tokenDecoded = this.appService.decodeToken();
 
-        // Récupére l'utilisateur
-        this.profilService.getUser(tokenDecoded.username)
-          .then(data => {
-            const user = data['hydra:member'][0];
+      // Récupére l'utilisateur
+      this.profilService.getUser(tokenDecoded.username)
+        .then(data => {
+          const user = data['hydra:member'][0];
 
-            const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
-            //this.reviewTitle
-            const review = new ReviewsModel(null, this.reviewNote, this.reviewTitle, this.reviewMessage, date, user);
+          const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
+          //this.reviewTitle
+          const review = new ReviewsModel(null, this.reviewNote, this.reviewTitle, this.reviewMessage, date, user);
 
-            // Ajoute l'avis
-            this.reviewService.postReview(review, token)
-              .then(postReview => {
-                let review = JSON.parse(postReview['_body']);
-                let createdReview = new ReviewsModel(review.id, review.note, review.title, review.text, review.date, user);
+          // Ajoute l'avis
+          this.reviewService.postReview(review, token)
+            .then(postReview => {
+              let review = JSON.parse(postReview['_body']);
+              let createdReview = new ReviewsModel(review.id, review.note, review.title, review.text, review.date, user);
 
-                this.visitSelected.reviews.push(createdReview);
+              this.visitSelected.reviews.push(createdReview);
 
-                // Associe l'avis à la visite
-                this.visitService.addReview(this.visitSelected, token)
-                  .then(data => {
-                    this.reviewTitle = null;
-                    this.reviewMessage = null;
-                    this.reviewNote = 3;
+              // Associe l'avis à la visite
+              this.visitService.addReview(this.visitSelected, token)
+                .then(data => {
+                  this.reviewTitle = null;
+                  this.reviewMessage = null;
+                  this.reviewNote = 3;
 
-                    alert('Avis ajouté');
-                  });
-              });
-          });
+                  alert('Avis ajouté');
+                });
+            });
+        });
     } else {
-      alert('Vous devez être connecté pour poster un avis');
+      alert('Une erreur est survenue, votre avis n\'a pas été ajouté');
     }
   }
 }

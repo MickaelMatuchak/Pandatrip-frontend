@@ -3,7 +3,7 @@ article.bandeau-vert {
   color: white;
 }
 
-.recap_valider{
+.recap_valider {
   background-color: #78ab66;
   padding: 0.7rem;
   border-radius: 3px;
@@ -17,7 +17,7 @@ article.bandeau-vert {
   cursor: pointer;
 }
 
-.input_edit{
+.input_edit {
   padding-left: 35px;
   height: 2.45rem;
   width: 30%;
@@ -26,6 +26,6 @@ article.bandeau-vert {
   font-size: 1.3rem;
 }
 
-.fa-pencil-square{
+.fa-pencil-square {
   cursor: pointer;
 }
