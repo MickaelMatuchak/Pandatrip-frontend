@@ -1,11 +1,10 @@
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import {Injectable} from '@angular/core';
 import {VisitModel} from './visit.model';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {AppService} from '../app.service';
 import {ReviewsModel} from '../reviews/reviews.model';
 
@@ -26,8 +25,8 @@ export class VisitService {
       .then(response => response.json());
   }
 
-  getNumbersVisits(nbVisits: number): Promise<VisitModel[]> {
-    const url = `${this.endpointUrl}?postalCode[between]=59000..59999&itemsPerPage=` + nbVisits;
+  getNumbersVisits(nbVisits: number, postalCode): Promise<VisitModel[]> {
+    const url = `${this.endpointUrl}?postalCode[between]=` + postalCode + `000..` + postalCode + `999&itemsPerPage=` + nbVisits;
 
     return this.http.get(url)
       .toPromise()

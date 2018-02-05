@@ -49,7 +49,7 @@ export class VisitComponent implements OnInit {
   };
 
   readVisitsPromise() {
-    this.visitService.getNumbersVisits(8)
+    this.visitService.getNumbersVisits(8, 59)
       .then((data: Object[]) => {
           this.separateLine(4, data['hydra:member']);
         }
