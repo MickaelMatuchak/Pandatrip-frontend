@@ -12,6 +12,7 @@ import {AppService} from '../app.service';
 import {GuideService} from '../guide/guide.service';
 import {GuideVisitService} from './guide-visit.service';
 import {DatePipe} from '@angular/common';
+import {GuideModel} from "../guide/guide.model";
 
 declare var $: any;
 declare var jquery: any;
@@ -212,7 +213,11 @@ export class VisitDetailsComponent implements OnInit {
 
           const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
 
-          const visitGuide = new VisitGuideModel(null, this.visitSelected, guide['hydra:member'][0], null,
+          const userGuide: GuideModel = guide['hydra:member'][0];
+
+          userGuide.user.image = this.appService.initialiseUserImage(userGuide.user);
+
+          const visitGuide = new VisitGuideModel(null, this.visitSelected, userGuide, date,
             parseInt(this.duration, 10), parseInt(this.price, 10), true);
 
           this.guideVisit.postGuideVisit(visitGuide, token)

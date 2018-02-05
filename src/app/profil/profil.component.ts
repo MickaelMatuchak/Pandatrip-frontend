@@ -74,6 +74,8 @@ export class ProfilComponent implements OnInit {
       this.profilService.getGuide(username).then(data => {
         const guide = data['hydra:member'][0];
 
+        console.log(guide);
+
         const arrayListVisits: VisitGuideModel[] = new Array();
 
         // let arrayReviews:ReviewsModel[] = new Array();

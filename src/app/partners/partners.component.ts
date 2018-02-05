@@ -39,8 +39,7 @@ export class PartnersComponent implements OnInit {
     if (!this.conditionsChecked) {
       alert('Il faut accepter les conditions.');
     } else {
-      const token = localStorage.getItem('token');
-      const tokenDecoded = this.appService.decodeToken();
+      const token = this.appService.getLocalVar('token');
       const userId = localStorage.getItem('idUser');
 
       this.partnersService.becomeGuide(this.address, this.country, this.region,

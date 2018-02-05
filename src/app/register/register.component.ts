@@ -44,7 +44,6 @@ export class RegisterComponent implements OnInit {
       alert('Les mots de passe ne sont pas identiques');
     } else {
       const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
-
       this.registerService.signUp(this.username, this.gender, this.password, this.firstname, this.lastname, this.mail, date)
         .then(res => {
           this.loginService.logIn(this.username, this.password)

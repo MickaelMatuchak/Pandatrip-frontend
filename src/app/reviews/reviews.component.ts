@@ -81,6 +81,9 @@ export class ReviewsComponent implements OnInit {
           const user = data['hydra:member'][0];
 
           const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd HH:mm:ss');
+
+          user.image = this.appService.initialiseUserImage(user);
+
           //this.reviewTitle
           const review = new ReviewsModel(null, this.reviewNote, this.reviewTitle, this.reviewMessage, date, user);
 
@@ -97,7 +100,6 @@ export class ReviewsComponent implements OnInit {
                 .then(data => {
                   this.reviewTitle = null;
                   this.reviewMessage = null;
-                  this.reviewNote = 3;
 
                   alert('Avis ajouté');
                 });

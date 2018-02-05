@@ -20,7 +20,7 @@ export class GuideService {
 
 
   getNumbersGuides(nbGuides: number): Promise<GuideModel[]> {
-    let url = `${this.endpointUrlGuides}?itemsPerPage=` + nbGuides;
+    const url = `${this.endpointUrlGuides}?itemsPerPage=` + nbGuides;
 
     return this.http.get(url)
       .toPromise()
@@ -28,7 +28,7 @@ export class GuideService {
   }
 
   getGuide(name: string) {
-    let url = `${this.endpointUrlGuides}?username=${name}`;
+    const url = `${this.endpointUrlGuides}?user.username=${name}`;
 
     return this.http.get(url)
       .toPromise()

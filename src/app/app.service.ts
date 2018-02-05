@@ -30,13 +30,39 @@ export class AppService {
   }
 
   getLocalVar(key: string) {
-    return localStorage.getItem(key);
+    // Regarde si le token n'est pas expiré
+    if (key === 'token') {
+      if (localStorage.getItem(key) !== null) {
+
+        const tokenDecoded = this.decodeToken();
+        const timeNow = parseInt(Date.now() / 1000 + '', 10);
+
+        console.log('now : ' + timeNow);
+        console.log('token : ' + tokenDecoded['exp']);
+
+        if (tokenDecoded['exp'] < timeNow) {
+          this.logOut();
+          alert('Votre session a expiré');
+        }
+      }
+    }
+
+    if (localStorage.getItem(key) !== null) {
+      return localStorage.getItem(key);
+    }
+
+    return null;
   }
 
   decodeToken() {
-    const recupTokenStored = this.getLocalVar('token');
-    const tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
-    return tokenDecoded;
+    const recupTokenStored = localStorage.getItem('token');
+
+    if (recupTokenStored !== null) {
+      const tokenDecoded = this.jwtHelper.decodeToken(recupTokenStored);
+      return tokenDecoded;
+    }
+
+    return null;
   }
 
   initialiseIsGuide(roles: string[]): boolean {
