@@ -118,20 +118,44 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
           <p class="title">Demandes en attente</p>
-          <div>
-            <span class="supprimer_demande"><i class="fa fa-window-close"></i></span>
-            <span class="valider_demande"><i class="fa fa-check-square"></i></span>
-            <h4>Tour Eiffel </h4>
-            <p class="content">22/01/2018 à 14h00</p>
-          </div>
-          <hr>
-          <div>
-            <span class="supprimer_demande"><i class="fa fa-window-close"></i></span>
-            <span class="valider_demande"><i class="fa fa-check-square"></i></span>
-            <h4>Champs Elysées </h4>
-          </div>
-          <p class="content">22/01/2018 à 15h00</p>
-          <p class="content">(*Expire après 48h en absence de réponse)</p>
+          <p *ngIf="visitsUserWaiting.length == 0">
+            Vous n'avez aucune demande en attente
+          </p>
+    
+          <table *ngIf="visitsUserWaiting.length > 0">
+            <thead>
+              <tr>
+                <th>Lieu</th>
+                <th>Nom du lieu</th>
+                <th>Visiteur</th>
+                <th>Durée</th>
+                <th>Prix</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="ligne_visite" *ngFor="let visitUser of visitsUserWaiting; let i = index">
+              <tr>
+                <td>
+                  <figure class="image is-128x128">
+                    <a href="visit/{{ visitUser.visit.name }}">
+                      <img src="../assets/img/{{ visitUser.visit.images[0].url }}"
+                          alt="{{ visitUser.visit.images[0].description }}" class="image_visite_recap">
+                    </a>
+                  </figure>
+                </td>
+                <td>{{ visitUser.visit.name }}</td>
+                <td>{{ visitUser.user }}</td>
+                <td>{{ visitUser.visitGuide.duration }} min</td>
+                <td>{{ visitUser.visitGuide.price }} €</td>
+                <td (click)='declineVisitUser($event, visitUser, i)'><span class="supprimer_demande"><i class="fa fa-window-close"></i></span></td>
+                <td (click)='validateVisitUser($event, visitUser, i)'><span class="valider_demande"><i class="fa fa-check-square"></i></span></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr><p class="content">(*Expire après 48h en absence de réponse)</p></tr>
+            </tfoot>
+          </table>
         </article>
       </div>
     </div>

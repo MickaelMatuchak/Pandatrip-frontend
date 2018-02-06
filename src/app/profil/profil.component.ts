@@ -5,7 +5,7 @@ import {ImageModel} from '../image/image.model';
 import {GuideModel} from '../guide/guide.model';
 import {AppService} from '../app.service';
 import {Router} from '@angular/router';
-import { forEach } from '@angular/router/src/utils/collection';
+import {VisitModel} from '../visit/visit.model';
 
 declare var $: any;
 declare var jquery: any;
@@ -21,7 +21,7 @@ export class ProfilComponent implements OnInit {
   userLog: UserModel;
   userGuide: GuideModel;
   userParcours: ParcoursModel[];
-  visitsUser: VisitUser[];
+  visitsUserWaiting: VisitUser[];
   parcoursSelected: ParcoursModel;
   isGuide: boolean;
   public show: boolean = false;
@@ -87,16 +87,22 @@ export class ProfilComponent implements OnInit {
     this.userParcours = [];
     this.getUserParcours(tokenDecoded.username);
 
-    this.visitsUser = [];
+    this.visitsUserWaiting = [];
     this.getVisitsUser(tokenDecoded.username);
   }
 
   private getVisitsUser(username: string) {
-    console.info('username');
-    console.info(username);
     this.profilService.getVisitsUser(username)
       .then(res => {
-        console.info(res);
+        const visitsUsers : VisitUser[] = res['hydra:member'];
+        for( let i = 0; i < visitsUsers.length; i++) {
+          const visitUser =  visitsUsers[i];
+          let visitModel : VisitModel = visitUser.visit;
+          let user : UserModel = null;
+          let visitGuideModel : VisitGuideModel = visitUser.visitGuide;
+          let visitAdded = new VisitUser(visitUser.id, visitModel, user, visitGuideModel, visitUser.isValidated, null, visitUser.isConfirm );
+          this.visitsUserWaiting.push( visitAdded );
+        }
       })
   }
 
@@ -167,5 +173,23 @@ export class ProfilComponent implements OnInit {
           localStorage.setItem('idUser', user['@id']);
         });
     }
+  }
+
+  declineVisitUser(event: any, visitUser: VisitUser, i : number) {
+    event.stopPropagation();
+    this.profilService.putUserVisit(false, visitUser.id, this.appService.getLocalVar('token'))
+      .then( data => {
+        alert('Demande de visite refusée');
+        this.visitsUserWaiting.splice(i,1);
+      });
+  }
+
+  validateVisitUser(event: any, visitUser: VisitUser, i : number) {
+    event.stopPropagation();
+    this.profilService.putUserVisit(true, visitUser.id, this.appService.getLocalVar('token'))
+      .then( data => {
+        alert('Demande de visite validée');
+        this.visitsUserWaiting.splice(i,1);
+      });
   }
 }

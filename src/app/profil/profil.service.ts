@@ -93,6 +93,28 @@ export class ProfilService {
       .catch(error => Promise.reject(error.message || error));
   }
 
+  putUserVisit(isConfirm: boolean, id: number, token: string) {
+    const url = this.endpointUrlVisiteursUsers + '/' + id;
+
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    const options = new RequestOptions({headers: headers});
+
+    const bodyJSON = JSON.stringify({
+      'isConfirm': isConfirm,
+      'isValidated': true
+    });
+
+    return this.http
+      .put(url, bodyJSON, options)
+      .toPromise()
+      .then()
+      .catch(error => Promise.reject(error.message || error));
+  }
+
   postUserVisit(itemVisit: ItemVisitModel, token: string) {
     const url = this.endpointUrlVisiteursUsers;
 

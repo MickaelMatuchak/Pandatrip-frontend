@@ -55,11 +55,11 @@ export class VisitUser {
   user: UserModel;
   visitGuide: VisitGuideModel;
 
-  // si false : visite guidée pas validé par guide
-  // si true : visite guidée validé par guide
+  // si false : visite guidée pas encore répondu par guide
+  // si true : visite guidée répondu par guide
   isValidated: boolean;
-  // si false : En attente de validation
-  // si true : Visite répondu
+  // si false : visite guidée refusé par guide
+  // si true : visite guidée accepté par guide
   isConfirm: boolean;
   parcours: ParcoursModel;
 }
