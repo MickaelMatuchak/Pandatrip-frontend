@@ -16,7 +16,9 @@ export class VisitComponent implements OnInit {
   lineVisits = [];
   selectedVisitModel: VisitModel;
   location = {};
-  ville : string;
+  ville = 'Lille';
+  codePostal = 59;
+
   /*  setPosition(position){
    this.location = position.coords;
    console.log(position.coords);
@@ -46,7 +48,7 @@ export class VisitComponent implements OnInit {
   };
 
   readVisitsPromise() {
-    this.visitService.getNumbersVisits(8, 59)
+    this.visitService.getNumbersVisits(8, this.codePostal)
       .then((data: Object[]) => {
           this.separateLine(4, data['hydra:member']);
         }
@@ -69,25 +71,36 @@ export class VisitComponent implements OnInit {
     this.getLieu();
   }
 
-  getLieu(){
-    if(navigator.geolocation){
+  getLieu() {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
-        //console.log(position.coords.latitude);
-        //console.log(position.coords.longitude);
 
         let lieu;
 
         this.positionService.getPosition(position.coords.latitude, position.coords.longitude).then(
           data => {
-            if(data['results'][0] != undefined){
+            if (data['results'][0] !== undefined) {
               lieu = data['results'][0];
-              //console.log(lieu['address_components'][6]['short_name']);
-              //console.log(lieu['address_components'][2]['short_name']);
-              this.ville = lieu['address_components'][2]['short_name'];
+              lieu = lieu['address_components'];
+
+              lieu.forEach(function(element) {
+                if (element['types'][0].match('postal_code')) {
+                  this.codePostal = element['short_name'];
+                  this.codePostal = parseInt(this.codePostal / 1000 + '', 10);
+                } else if (element['types'][0].match('city')) {
+                  this.ville = element['short_name'];
+                }
+              }, this);
+
+              this.visitService.getNumbersVisits(8, this.codePostal)
+                .then((data: Object[]) => {
+                    this.lineVisits = [];
+                    this.separateLine(4, data['hydra:member']);
+                  }
+                );
             }
-          }
-        )
+          });
       });
     }
   }
