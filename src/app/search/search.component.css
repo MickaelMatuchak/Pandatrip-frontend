@@ -5,6 +5,7 @@ article.bandeau-vert {
 
 .search_image {
   height: 100%;
+  max-height: 12rem;
 }
 
 .notification[_ngcontent-c2] a[_ngcontent-c2]:not(.button) {
