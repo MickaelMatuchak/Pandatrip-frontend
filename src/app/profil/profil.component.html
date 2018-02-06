@@ -5,25 +5,30 @@
         <article class="tile is-child notification">
           <p class="title">Vos demandes de visites guidées</p>
           <div class="content">
-            <table>
+            <p *ngIf="visitsUserAsked.length == 0">
+              Vous n'avez effectué aucune demande de visites guidées
+            </p>
+            <table *ngIf="visitsUserAsked.length > 0">
               <thead>
-              <tr>
-                <th>Visit</th>
-                <th>Nom du guide</th>
-                <th>Statut (validée ou pas)</th>
-              </tr>
+                <tr>
+                  <th>Visit</th>
+                  <th>Nom du guide</th>
+                  <th>Statut</th>
+                  <th>Accepté?</th>
+                </tr>
               </thead>
-              <tbody>
-              <tr>
-                <td>Tour Eiffel</td>
-                <td>22/01/2018</td>
-                <td>Jean</td>
-              </tr>
-              <tr>
-                <td>Champs Elysées</td>
-                <td>22/01/2018</td>
-                <td>Visite libre</td>
-              </tr>
+              <tbody *ngFor="let visitUser of visitsUserAsked">
+                <tr>
+                  <td>{{ visitUser.visit.name }}</td>
+                  <td *ngIf='!!visitUser.visitGuide'>{{ visitUser.visitGuide.guide.user.lastname }} {{ visitUser.visitGuide.guide.user.firstname }}</td>
+                  <td *ngIf='!visitUser.visitGuide'>Pas de guide</td>
+                  <td><p *ngIf='visitUser.isValidated'>Décidé</p><p *ngIf='!visitUser.isValidated'>En attente...</p></td>
+                  <td>
+                    <p *ngIf='!visitUser.isValidated'>???</p>
+                    <p *ngIf='visitUser.isValidated && visitUser.isConfirm'>Accepté</p>
+                    <p *ngIf='visitUser.isValidated && !visitUser.isConfirm'>Refusé</p>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

@@ -94,6 +94,32 @@ export class ProfilComponent implements OnInit {
 
     this.visitsUserValidated = [];
     this.getVisitsUserValidated(tokenDecoded.username);
+
+    this.visitsUserAsked = [];
+    this.getVisitsUserAsked(tokenDecoded.username);
+  }
+
+  private getVisitsUserAsked(username: string) {
+    this.profilService.getVisitsUserAsked(username)
+      .then(res => {
+        const visitsUsers : VisitUser[] = res['hydra:member'];
+        for( let i = 0; i < visitsUsers.length; i++) {
+          const visitUser =  visitsUsers[i];
+          let visitModel : VisitModel = visitUser.visit;
+          let user : UserModel = new UserModel(visitUser.user.id, visitUser.user.username, visitUser.user.gender, visitUser.user.firstname, visitUser.user.lastname, visitUser.user.mail, visitUser.user.image)
+          let visitGuide : VisitGuideModel ;
+          if(visitUser.visitGuide) {
+            visitGuide = new VisitGuideModel(visitUser.visitGuide.id, visitUser.visitGuide.visit, visitUser.visitGuide.guide, visitUser.visitGuide.date, visitUser.visitGuide.duration, visitUser.visitGuide.price, visitUser.visitGuide.isAvailable);
+          } else {
+            visitGuide = null;
+          }
+          let visitGuideModel : VisitGuideModel = visitGuide;
+          let visitAdded = new VisitUser(visitUser.id, visitModel, user, visitGuideModel, visitUser.isValidated, null, visitUser.isConfirm );
+          if(visitUser.visitGuide) {
+            this.visitsUserAsked.push( visitAdded );
+          }
+        }
+      })
   }
 
   private getVisitsUserWaiting(username: string) {
