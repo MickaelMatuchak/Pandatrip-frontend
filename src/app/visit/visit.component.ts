@@ -39,7 +39,7 @@ export class VisitComponent implements OnInit {
   };
 
   readVisitsPromise() {
-    this.visitService.getNumbersVisits(8)
+    this.visitService.getNumbersVisits(8, 59)
       .then((data: Object[]) => {
           this.separateLine(4, data['hydra:member']);
         }
@@ -77,7 +77,7 @@ export class VisitSuggestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.visitService.getNumbersVisits(4)
+    this.visitService.getNumbersVisits(4, parseInt(this.visitSelected.postalCode / 1000 + '', 10))
       .then((data: Object[]) => {
           const visits = data['hydra:member'];
 
@@ -87,6 +87,14 @@ export class VisitSuggestionComponent implements OnInit {
                 visits[i].address, visits[i].country, visits[i].region, visits[i].city, visits[i].postalCode,
                 visits[i].description, visits[i].note, null, null));
             }
+          }
+
+          if (this.visits.length === 4) {
+            this.visits.pop();
+          }
+
+          if (this.visits.length < 3) {
+            console.log("need autre visite");
           }
         }
       );

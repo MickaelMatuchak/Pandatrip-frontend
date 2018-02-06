@@ -36,8 +36,8 @@ export class VisitService {
       });
   }
 
-  getNumbersVisits(nbVisits: number): Promise<VisitModel[]> {
-    let url = `${this.endpointUrl}?postalCode[between]=59000..59999&itemsPerPage=` + nbVisits;
+  getNumbersVisits(nbVisits: number, postalCode: number): Promise<VisitModel[]> {
+    const url = `${this.endpointUrl}?postalCode[between]=` + postalCode + `000..` + postalCode + `999&itemsPerPage=` + nbVisits;
 
     return this.http.get(url)
       .toPromise()
