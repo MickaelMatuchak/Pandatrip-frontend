@@ -7,10 +7,11 @@ import {Http} from '@angular/http';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {ImageModel} from './image/image.model';
 import {UserModel} from './profil/profil.model';
+import {AppSharedService} from './app-shared-service';
 
 @Injectable()
 export class AppService {
-  constructor(private http: Http) {
+  constructor(private http: Http, private appSharedService: AppSharedService) {
   }
 
   public static entryPointUrl: string = 'https://pandatrip.herokuapp.com/api';
@@ -19,6 +20,7 @@ export class AppService {
 
   logOut() {
     localStorage.removeItem('token');
+    this.appSharedService.emitChange(false);
   }
 
   loggedIn() {
@@ -27,6 +29,7 @@ export class AppService {
 
   saveTokenInLocal(token: string) {
     localStorage.setItem('token', token);
+    this.appSharedService.emitChange(true);
   }
 
   getLocalVar(key: string) {

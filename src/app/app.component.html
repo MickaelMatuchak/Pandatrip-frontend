@@ -12,8 +12,11 @@
       <li *ngIf="!isConnected"><a (click)="logIn($event)">Se connecter</a></li>
       <li *ngIf="!isConnected"><a routerLink="/register">S'inscrire</a></li>
       <li *ngIf="isConnected"><a routerLink="/profil">Profil</a></li>
-      <li *ngIf="isConnected" class="deconnexion"><a (click)="logOut($event)"><i
-        class="fa fa-power-off fa-lg input_icone"></i></a></li>
+      <li *ngIf="isConnected" class="deconnexion">
+        <a (click)="logOut($event)">
+          <i class="fa fa-power-off fa-lg input_icone"></i>
+        </a>
+      </li>
     </ul>
   </nav>
 
