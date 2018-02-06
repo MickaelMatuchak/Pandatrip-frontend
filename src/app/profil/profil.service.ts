@@ -10,7 +10,7 @@ export class ProfilService {
   private endpointUrlUsers = AppService.entryPointUrl + '/users';
   private endpointUrlUserParcours = AppService.entryPointUrl + '/parcours';
   private endpointUrlUserGuides = AppService.entryPointUrl + '/guides';
-  private endpointUrlVisiteursUsers = AppService.entryPointUrl + 'visit_users';
+  private endpointUrlVisiteursUsers = AppService.entryPointUrl + '/visit_users';
 
   constructor(private http: Http) {
   }
@@ -42,7 +42,7 @@ export class ProfilService {
   }
 
   getVisitsUser(username: string) {
-    let url = `${this.endpointUrlVisiteursUsers}?user.username=${username}`;
+    let url = `${this.endpointUrlVisiteursUsers}?visitGuide.guide.user.username=${username}&isValidated=false`;
 
     return this.http.get(url)
       .toPromise()

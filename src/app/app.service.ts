@@ -19,7 +19,11 @@ export class AppService {
   jwtHelper: JwtHelper = new JwtHelper();
 
   logOut() {
-    localStorage.removeItem('token');
+    const storeLog = localStorage;
+    const nbLocal = localStorage.length;
+    for(let i = 0; i < nbLocal; i++) {
+      localStorage.removeItem(localStorage.key(0));
+    }
     this.appSharedService.emitChange(false);
   }
 

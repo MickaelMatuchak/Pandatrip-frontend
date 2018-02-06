@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfilService} from './profil.service';
-import {UserModel, ParcoursModel, VisitGuideModel} from './profil.model';
+import {UserModel, ParcoursModel, VisitGuideModel, VisitUser} from './profil.model';
 import {ImageModel} from '../image/image.model';
 import {GuideModel} from '../guide/guide.model';
 import {AppService} from '../app.service';
 import {Router} from '@angular/router';
+import { forEach } from '@angular/router/src/utils/collection';
 
 declare var $: any;
 declare var jquery: any;
@@ -20,6 +21,7 @@ export class ProfilComponent implements OnInit {
   userLog: UserModel;
   userGuide: GuideModel;
   userParcours: ParcoursModel[];
+  visitsUser: VisitUser[];
   parcoursSelected: ParcoursModel;
   isGuide: boolean;
   public show: boolean = false;
@@ -84,6 +86,18 @@ export class ProfilComponent implements OnInit {
 
     this.userParcours = [];
     this.getUserParcours(tokenDecoded.username);
+
+    this.visitsUser = [];
+    this.getVisitsUser(tokenDecoded.username);
+  }
+
+  private getVisitsUser(username: string) {
+    console.info('username');
+    console.info(username);
+    this.profilService.getVisitsUser(username)
+      .then(res => {
+        console.info(res);
+      })
   }
 
   private getUserParcours(username: string) {
