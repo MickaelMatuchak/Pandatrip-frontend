@@ -63,3 +63,9 @@
 .table_recap, .table_contenu{
   width: 100%;
 }
+
+
+.table_recap td {
+  vertical-align: middle;
+  text-align: center;
+}

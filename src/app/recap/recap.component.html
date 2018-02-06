@@ -16,12 +16,13 @@
           </p>
 
           <div class="content">
-            <table>
+            <table id="recap-table">
               <thead>
               <tr>
                 <th>Lieu</th>
                 <th>Nom du lieu</th>
                 <th>Adresse</th>
+                <th>Prix du guide</th>
                 <th>Guide</th>
               </tr>
               </thead>
@@ -29,10 +30,12 @@
               <tr>
                 <td>
                   <figure class="image is-128x128">
-                    <a href="visit/{{ itemVisit.visit.name }}">
-                      <img src="../assets/img/{{ itemVisit.visit.images[0].url }}"
-                           alt="{{ itemVisit.visit.images[0].description }}" class="image_visite_recap">
-                    </a>
+                    <p>
+                      <a href="visit/{{ itemVisit.visit.name }}">
+                        <img src="../assets/img/{{ itemVisit.visit.images[0].url }}"
+                             alt="{{ itemVisit.visit.images[0].description }}" class="image_visite_recap">
+                      </a>
+                    </p>
                   </figure>
                 </td>
                 <td>{{ itemVisit.visit.name }}</td>
@@ -40,6 +43,9 @@
                   {{ itemVisit.visit.address }} {{ itemVisit.visit.city }} ({{ itemVisit.visit.postalCode }})<br>
                   {{ itemVisit.visit.country }} {{ itemVisit.visit.region }}
                 </td>
+
+                <td *ngIf="itemVisit.guideVisit == null">/</td>
+                <td *ngIf="itemVisit.guideVisit != null">{{ itemVisit.guideVisit.price }} €</td>
 
                 <td *ngIf="itemVisit.guideVisit == null">Visite libre</td>
                 <td *ngIf="itemVisit.guideVisit != null">
