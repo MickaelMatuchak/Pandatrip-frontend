@@ -30,7 +30,7 @@
           <p class="title">{{ visitSelected.name }}</p>
           <p class="content">
             <img src="../assets/img/marker.png" alt="position" class="marker"/>
-            {{ visitSelected.address }}<span *ngIf="visitSelected.address.length != 0">,</span>
+            <a href="https://www.google.com/maps/search/?api=1&query={{visitSelected.latitude}},{{visitSelected.longitude}}" target="_blank">{{ visitSelected.address }}</a><span *ngIf="visitSelected.address.length != 0">,</span>
             {{ visitSelected.city }} ({{ visitSelected.postalCode }})
             {{ visitSelected.country }},
             {{ visitSelected.region }}
