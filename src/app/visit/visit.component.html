@@ -1,5 +1,5 @@
 <div class="content title_visit">
-  <h1>Les utilisateurs près de Lille ont aussi aimé...</h1>
+  <h1>Les utilisateurs près de <span *ngIf="ville">{{ ville}}</span><span *ngIf="!ville">Lille</span> ont aussi aimé...</h1>
 </div>
 
 <div class="tile" *ngFor="let line of lineVisits;">

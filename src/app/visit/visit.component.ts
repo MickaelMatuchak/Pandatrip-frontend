@@ -1,23 +1,30 @@
-///<reference path="../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {VisitModel} from './visit.model';
 import {VisitService} from './visit.service';
+import {PositionService} from './position.service';
 
 @Component({
   selector: 'visits',
   templateUrl: 'visit.component.html',
   styleUrls: ['visit.component.css', '../../../node_modules/bulma/css/bulma.css'],
-  providers: [VisitService]
+  providers: [VisitService, PositionService]
 })
 
 export class VisitComponent implements OnInit {
   lineVisits = [];
   selectedVisitModel: VisitModel;
+  location = {};
+  ville : string;
+  /*  setPosition(position){
+   this.location = position.coords;
+   console.log(position.coords);
+   }*/
 
   constructor(private router: Router,
-              private visitService: VisitService) {
+              private visitService: VisitService,
+              private positionService: PositionService) {
   }
 
   separateLine = function (nbElementPerLine, visits) {
@@ -58,6 +65,31 @@ export class VisitComponent implements OnInit {
 
   ngOnInit() {
     this.readVisitsPromise();
+
+    this.getLieu();
+  }
+
+  getLieu(){
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = position.coords;
+        //console.log(position.coords.latitude);
+        //console.log(position.coords.longitude);
+
+        let lieu;
+
+        this.positionService.getPosition(position.coords.latitude, position.coords.longitude).then(
+          data => {
+            if(data['results'][0] != undefined){
+              lieu = data['results'][0];
+              //console.log(lieu['address_components'][6]['short_name']);
+              //console.log(lieu['address_components'][2]['short_name']);
+              this.ville = lieu['address_components'][2]['short_name'];
+            }
+          }
+        )
+      });
+    }
   }
 }
 
