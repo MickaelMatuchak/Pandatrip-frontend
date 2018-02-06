@@ -22,6 +22,7 @@ export class ProfilComponent implements OnInit {
   userGuide: GuideModel;
   userParcours: ParcoursModel[];
   visitsUserWaiting: VisitUser[];
+  visitsUserValidated: VisitUser[];
   parcoursSelected: ParcoursModel;
   isGuide: boolean;
   public show: boolean = false;
@@ -88,20 +89,38 @@ export class ProfilComponent implements OnInit {
     this.getUserParcours(tokenDecoded.username);
 
     this.visitsUserWaiting = [];
-    this.getVisitsUser(tokenDecoded.username);
+    this.getVisitsUserWaiting(tokenDecoded.username);
+
+    this.visitsUserValidated = [];
+    this.getVisitsUserValidated(tokenDecoded.username);
   }
 
-  private getVisitsUser(username: string) {
-    this.profilService.getVisitsUser(username)
+  private getVisitsUserWaiting(username: string) {
+    this.profilService.getVisitsUserWaiting(username)
       .then(res => {
         const visitsUsers : VisitUser[] = res['hydra:member'];
         for( let i = 0; i < visitsUsers.length; i++) {
           const visitUser =  visitsUsers[i];
           let visitModel : VisitModel = visitUser.visit;
-          let user : UserModel = null;
+          let user : UserModel = new UserModel(visitUser.user.id, visitUser.user.username, visitUser.user.gender, visitUser.user.firstname, visitUser.user.lastname, visitUser.user.mail, visitUser.user.image)
           let visitGuideModel : VisitGuideModel = visitUser.visitGuide;
           let visitAdded = new VisitUser(visitUser.id, visitModel, user, visitGuideModel, visitUser.isValidated, null, visitUser.isConfirm );
           this.visitsUserWaiting.push( visitAdded );
+        }
+      })
+  }
+
+  private getVisitsUserValidated(username: string) {
+    this.profilService.getVisitsUserValidated(username)
+      .then(res => {
+        const visitsUsers : VisitUser[] = res['hydra:member'];
+        for( let i = 0; i < visitsUsers.length; i++) {
+          const visitUser =  visitsUsers[i];
+          let visitModel : VisitModel = visitUser.visit;
+          let user : UserModel = visitUser.user;
+          let visitGuideModel : VisitGuideModel = visitUser.visitGuide;
+          let visitAdded = new VisitUser(visitUser.id, visitModel, user, visitGuideModel, visitUser.isValidated, null, visitUser.isConfirm );
+          this.visitsUserValidated.push( visitAdded );
         }
       })
   }
@@ -188,7 +207,13 @@ export class ProfilComponent implements OnInit {
     event.stopPropagation();
     this.profilService.putUserVisit(true, visitUser.id, this.appService.getLocalVar('token'))
       .then( data => {
+        const visitValidated = data.json();
+        let visitModel : VisitModel = visitValidated.visit;
+        let user : UserModel = visitValidated.user;
+        let visitGuideModel : VisitGuideModel = visitValidated.visitGuide;
+        let visitAdded = new VisitUser(visitValidated.id, visitModel, user, visitGuideModel, visitValidated.isValidated, null, visitValidated.isConfirm );
         alert('Demande de visite validée');
+        this.visitsUserValidated.push( visitAdded );
         this.visitsUserWaiting.splice(i,1);
       });
   }

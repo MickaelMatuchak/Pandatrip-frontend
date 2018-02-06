@@ -2,7 +2,7 @@
   <div class="tile is-vertical is-12">
     <div class="tile">
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification">
+        <article class="tile is-child notification"  *ngIf="!isGuide">
           <p class="title">Historique de vos visites</p>
           <div class="content">
             <table>
@@ -27,6 +27,32 @@
               </tbody>
             </table>
           </div>
+        </article>
+
+        <article class="tile is-child notification" *ngIf="isGuide">
+          <p class="title">Les demandes acceptées</p>
+          <p *ngIf="visitsUserValidated.length == 0">
+            Vous n'avez accepté aucune demande
+          </p>
+    
+          <table *ngIf="visitsUserValidated.length > 0">
+            <thead>
+              <tr>
+                <th>Nom du lieu</th>
+                <th>Visiteur</th>
+                <th>Durée</th>
+                <th>Prix</th>
+              </tr>
+            </thead>
+            <tbody id="ligne_visite" *ngFor="let visitUser of visitsUserValidated; let i = index">
+              <tr>
+                <td>{{ visitUser.visit.name }}</td>
+                <td>{{ visitUser.user.lastname }} {{ visitUser.user.firstname }}  {{ visitUser.user.mail }}</td>
+                <td>{{ visitUser.visitGuide.duration }} min</td>
+                <td>{{ visitUser.visitGuide.price }} €</td>
+              </tr>
+            </tbody>
+          </table>
         </article>
       </div>
       <div class="tile is-parent">
@@ -145,7 +171,7 @@
                   </figure>
                 </td>
                 <td>{{ visitUser.visit.name }}</td>
-                <td>{{ visitUser.user }}</td>
+                <td>{{ visitUser.user.lastname }} {{ visitUser.user.lastname }}</td>
                 <td>{{ visitUser.visitGuide.duration }} min</td>
                 <td>{{ visitUser.visitGuide.price }} €</td>
                 <td (click)='declineVisitUser($event, visitUser, i)'><span class="supprimer_demande"><i class="fa fa-window-close"></i></span></td>

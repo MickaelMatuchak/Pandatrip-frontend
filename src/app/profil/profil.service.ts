@@ -41,7 +41,15 @@ export class ProfilService {
       .then(response => response.json());
   }
 
-  getVisitsUser(username: string) {
+  getVisitsUserValidated(username: string) {
+    let url = `${this.endpointUrlVisiteursUsers}?visitGuide.guide.user.username=${username}&isValidated=true&isConfirm=true`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json());
+  }
+
+  getVisitsUserWaiting(username: string) {
     let url = `${this.endpointUrlVisiteursUsers}?visitGuide.guide.user.username=${username}&isValidated=false`;
 
     return this.http.get(url)
