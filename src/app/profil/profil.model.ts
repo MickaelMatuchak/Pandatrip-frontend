@@ -40,24 +40,27 @@ export class ParcoursModel {
 
 export class VisitUser {
   constructor(id: number, visit: VisitModel, user: UserModel,
-              visitGuide: VisitGuideModel, isValidated: boolean, parcours: ParcoursModel) {
+              visitGuide: VisitGuideModel, isValidated: boolean, parcours: ParcoursModel, isConfirm: boolean) {
     this.id = id;
     this.visit = visit;
     this.user = user;
     this.visitGuide = visitGuide;
     this.isValidated = isValidated;
     this.parcours = parcours;
+    this.isConfirm = isConfirm;
   }
 
   id: number;
   visit: VisitModel;
   user: UserModel;
   visitGuide: VisitGuideModel;
-  
+
   // si false : visite guidée pas validé par guide
   // si true : visite guidée validé par guide
-  // sinon null : visite guidée en attente du guide
-  isValidated: boolean; 
+  isValidated: boolean;
+  // si false : En attente de validation
+  // si true : Visite répondu
+  isConfirm: boolean;
   parcours: ParcoursModel;
 }
 

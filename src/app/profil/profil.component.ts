@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfilService} from './profil.service';
-import {UserModel, ParcoursModel, VisitGuideModel, VisitUser} from './profil.model';
+import {UserModel, ParcoursModel, VisitGuideModel} from './profil.model';
 import {ImageModel} from '../image/image.model';
-import {JwtHelper} from 'angular2-jwt';
 import {GuideModel} from '../guide/guide.model';
 import {AppService} from '../app.service';
 import {Router} from '@angular/router';
@@ -23,14 +22,13 @@ export class ProfilComponent implements OnInit {
   userParcours: ParcoursModel[];
   parcoursSelected: ParcoursModel;
   isGuide: boolean;
-  jwtHelper: JwtHelper = new JwtHelper();
   public show: boolean = false;
   public buttonName: any = 'Show';
 
   constructor(private profilService: ProfilService,
               private appService: AppService,
               private router: Router) {
-      if(! this.appService.loggedIn()) {
+      if (!this.appService.loggedIn()) {
         this.appService.logOut();
         this.router.navigate(['home']);
         alert('Vous n\'avez pas accés à cette page en étant déconnecté');
@@ -40,10 +38,12 @@ export class ProfilComponent implements OnInit {
   toggle() {
     this.show = !this.show;
 
-    if (this.show)
+    if (this.show) {
       this.buttonName = "Hide";
-    else
+    }
+    else {
       this.buttonName = "Show";
+    }
   }
 
   /* fermer pop-up récapitulatif d'un parcours enregistré */
@@ -52,7 +52,6 @@ export class ProfilComponent implements OnInit {
     const modal = $(modalId);
     modal.toggleClass('is-active');
     $('html').toggleClass('is-clipped');
-    console.info('closeModal');
     this.parcoursSelected = new ParcoursModel(null, [], '', '');
   }
 
@@ -69,7 +68,7 @@ export class ProfilComponent implements OnInit {
     $('.open-modal').click(this.openModalRecap);
     $('.close-modal').click(this.closeModalRecap);
 
-    let tokenDecoded = this.appService.decodeToken();
+    const tokenDecoded = this.appService.decodeToken();
 
     this.parcoursSelected = new ParcoursModel(null, [], '', '');
 
@@ -94,13 +93,13 @@ export class ProfilComponent implements OnInit {
 
         for (let i = 0; i < parcours.length; i++) {
           const parcoursI = parcours[i];
-          console.info('parcoursI ' + i);
-          console.info(parcoursI);
+
           const visitUser = [];
 
-          for(let j=0; j < parcoursI.visitUser.length; j++) {
-            if(parcoursI.visitUser[j].visitGuide) {
-              parcoursI.visitUser[j].visitGuide.guide.user.image = this.appService.initialiseUserImage(parcoursI.visitUser[j].visitGuide.guide.user);
+          for (let j = 0; j < parcoursI.visitUser.length; j++) {
+            if (parcoursI.visitUser[j].visitGuide) {
+              parcoursI.visitUser[j].visitGuide.guide.user.image =
+                this.appService.initialiseUserImage(parcoursI.visitUser[j].visitGuide.guide.user);
             }
             visitUser.push( parcoursI.visitUser[j] );
           }
