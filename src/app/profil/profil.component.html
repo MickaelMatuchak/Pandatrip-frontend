@@ -74,6 +74,7 @@
             <th>Lieu</th>
             <th>Nom du lieu</th>
             <th>Adresse</th>
+            <th>Prix du guide</th>
             <th>Guide</th>
           </tr>
         </thead>
@@ -93,10 +94,13 @@
               {{ itemVisit.visit.country }} {{ itemVisit.visit.region }}
             </td>
 
+            <td *ngIf="itemVisit.visitGuide == null">/</td>
+            <td *ngIf="itemVisit.visitGuide != null">{{ itemVisit.visitGuide.price }} €</td>
+
             <td *ngIf="itemVisit.visitGuide == null">Visite libre</td>
             <td *ngIf="itemVisit.visitGuide != null">
               <figure class="image is-96x96">
-                <img src="../assets/img/{{ itemVisit.visitGuide.guide.user.image.url  }}"
+                <img src="../assets/img/{{ itemVisit.visitGuide.guide.user.image.url }}"
                     alt="{{ itemVisit.visitGuide.guide.user.firstname  }}" class="image_visite_recap">
                 {{ itemVisit.visitGuide.guide.user.firstname }} {{ itemVisit.visitGuide.guide.user.lastname}}
               </figure>
@@ -107,7 +111,6 @@
     </section>
 
     <footer class="modal-card-foot">
-      <button class="close-modal button" data-modal-id="#UserParcours-modal">Annuler</button>
       <button class="close-modal button bouton_vert" data-modal-id="#UserParcours-modal">Revenir à la page Profil</button>
     </footer>
   </div>

@@ -29,3 +29,8 @@ article.bandeau-vert {
 .fa-pencil-square {
   cursor: pointer;
 }
+
+#recap-table td {
+  vertical-align: middle;
+  text-align: center;
+}
