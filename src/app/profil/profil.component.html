@@ -34,8 +34,8 @@
           <p *ngIf="visitsUserValidated.length == 0">
             Vous n'avez accepté aucune demande
           </p>
-    
-          <table *ngIf="visitsUserValidated.length > 0">
+
+          <table *ngIf="visitsUserValidated.length > 0" class="table_contenu">
             <thead>
               <tr>
                 <th>Nom du lieu</th>
@@ -44,10 +44,10 @@
                 <th>Prix</th>
               </tr>
             </thead>
-            <tbody id="ligne_visite" *ngFor="let visitUser of visitsUserValidated; let i = index">
+            <tbody *ngFor="let visitUser of visitsUserValidated; let i = index">
               <tr>
                 <td>{{ visitUser.visit.name }}</td>
-                <td>{{ visitUser.user.lastname }} {{ visitUser.user.firstname }}  {{ visitUser.user.mail }}</td>
+                <td>{{ visitUser.user.lastname }} <span title="{{visitUser.user.mail}}">{{ visitUser.user.firstname }}</span></td>
                 <td>{{ visitUser.visitGuide.duration }} min</td>
                 <td>{{ visitUser.visitGuide.price }} €</td>
               </tr>
@@ -102,7 +102,7 @@
             <th>Guide</th>
           </tr>
         </thead>
-        <tbody id="ligne_visite" *ngFor="let itemVisit of parcoursSelected.visitUser">
+        <tbody *ngFor="let itemVisit of parcoursSelected.visitUser">
           <tr>
             <td>
               <figure class="image is-128x128">
@@ -139,7 +139,7 @@
 </div>
 
 <div class="tile is-ancestor" *ngIf="isGuide">
-  <div class="tile is-vertical is-8">
+  <div class="tile is-vertical is-12">
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
@@ -147,7 +147,7 @@
           <p *ngIf="visitsUserWaiting.length == 0">
             Vous n'avez aucune demande en attente
           </p>
-    
+
           <table *ngIf="visitsUserWaiting.length > 0">
             <thead>
               <tr>
@@ -186,19 +186,7 @@
       </div>
     </div>
   </div>
-  <div class="tile is-parent">
-    <article class="tile is-child notification">
-      <div class="content">
-        <p class="title">Mon porte-monnaie</p>
-        <p class="subtitle has-text-centered">Solde : {{ userGuide.billfold }} €</p>
-        <p class="content">
-          <button class="login_valider">
-            Retirer mon argent
-          </button>
-        </p>
-      </div>
-    </article>
-  </div>
+
 </div>
 
 <div class="tile is-ancestor">
@@ -226,7 +214,8 @@
 <div class="tile is-ancestor">
   <div class="tile is-vertical is-12">
     <div class="tile">
-      <div class="tile is-parent is-vertical is-4">
+
+      <div class="tile is-parent is-vertical is-3">
         <article class="tile is-child notification">
           <p class="title">Mes informations</p>
           <figure class="image">
@@ -234,7 +223,8 @@
           </figure>
         </article>
       </div>
-      <div class="tile is-parent">
+
+      <div class="tile is-parent is-5">
         <article class="tile is-child notification">
           <p class="title">
             <span *ngIf="!show">{{ userLog.username }}</span>
@@ -297,6 +287,21 @@
           </p>
         </article>
       </div>
+
+      <div class="tile is-parent is-3.5" *ngIf="isGuide">
+        <article class="tile is-child notification">
+          <div class="content">
+            <p class="title">Mon porte-monnaie</p>
+            <p class="subtitle has-text-centered">Solde : {{ userGuide.billfold }} €</p>
+            <p class="content">
+              <button class="login_valider">
+                Retirer mon argent
+              </button>
+            </p>
+          </div>
+        </article>
+      </div>
+
     </div>
   </div>
 </div>
