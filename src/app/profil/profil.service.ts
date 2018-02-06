@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {AppService} from '../app.service';
-import {JwtHelper} from 'angular2-jwt';
 import {UserModel, VisitGuideModel, VisitUser} from "./profil.model";
 import {ItemVisitModel} from "../visit-details/item-visit.model";
 
@@ -11,8 +10,7 @@ export class ProfilService {
   private endpointUrlUsers = AppService.entryPointUrl + '/users';
   private endpointUrlUserParcours = AppService.entryPointUrl + '/parcours';
   private endpointUrlUserGuides = AppService.entryPointUrl + '/guides';
-
-  jwtHelper: JwtHelper = new JwtHelper();
+  private endpointUrlVisiteursUsers = AppService.entryPointUrl + 'visit_users';
 
   constructor(private http: Http) {
   }
@@ -43,8 +41,38 @@ export class ProfilService {
       .then(response => response.json());
   }
 
+  getVisitsUser(username: string) {
+    let url = `${this.endpointUrlVisiteursUsers}?user.username=${username}`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json());
+  }
+
+  postVisitsUser(name: string, idUser: string, token: string) {
+    const url = this.endpointUrlVisiteursUsers;
+
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    const options = new RequestOptions({headers: headers});
+
+    const bodyJSON = JSON.stringify({
+      'name': name,
+      'user': '/api/users/' + idUser
+    });
+
+    return this.http
+      .post(url, bodyJSON, options)
+      .toPromise()
+      .then()
+      .catch(error => Promise.reject(error.message || error));
+  }
+
   postUserParcours(name: string, idUser: string, token: string) {
-    const url = AppService.entryPointUrl + '/parcours';
+    const url = this.endpointUrlUserParcours;
 
     const headers = new Headers({
       'Content-Type': 'application/json',
@@ -66,7 +94,7 @@ export class ProfilService {
   }
 
   postUserVisit(itemVisit: ItemVisitModel, token: string) {
-    const url = AppService.entryPointUrl + '/visit_users';
+    const url = this.endpointUrlVisiteursUsers;
 
     const headers = new Headers({
       'Content-Type': 'application/json',

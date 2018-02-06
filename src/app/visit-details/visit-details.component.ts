@@ -47,6 +47,7 @@ export class VisitDetailsComponent implements OnInit {
 
   private getVisitDetails(nameVisit: string) {
     this.imageSources = [];
+    this.itemsVisitGuide = [];
     this.visitService.getVisit(nameVisit)
       .then(visit => {
         const visitTmp = visit['hydra:member'][0];

@@ -12,14 +12,19 @@ import {AppSharedService} from "./app-shared-service";
 
 export class AppComponent {
 
-  isConnected: boolean = false;
-  isGuide: boolean = false;
+  isConnected: boolean;
+  isGuide: boolean;
   search: string = '';
 
   constructor(
     private router: Router,
     private appService: AppService,
     private appSharedService: AppSharedService) {
+      this.isConnected = this.appService.loggedIn();
+      if (this.isConnected) {
+        const tokenDecoded = this.appService.decodeToken();
+        this.isGuide = this.appService.initialiseIsGuide(tokenDecoded.roles);
+      }
       this.appSharedService.changeEmitted$.subscribe(
         value => {
           this.isConnected = value;
