@@ -23,6 +23,7 @@ export class ProfilComponent implements OnInit {
   userParcours: ParcoursModel[];
   visitsUserWaiting: VisitUser[];
   visitsUserValidated: VisitUser[];
+  visitsUserAsked: VisitUser[];
   parcoursSelected: ParcoursModel;
   isGuide: boolean;
   public show: boolean = false;

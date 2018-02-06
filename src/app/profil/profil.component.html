@@ -2,15 +2,15 @@
   <div class="tile is-vertical is-12">
     <div class="tile">
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification"  *ngIf="!isGuide">
-          <p class="title">Historique de vos visites</p>
+        <article class="tile is-child notification">
+          <p class="title">Vos demandes de visites guidées</p>
           <div class="content">
             <table>
               <thead>
               <tr>
-                <th>Lieu</th>
-                <th>Date</th>
-                <th>Guide</th>
+                <th>Visit</th>
+                <th>Nom du guide</th>
+                <th>Statut (validée ou pas)</th>
               </tr>
               </thead>
               <tbody>
@@ -29,31 +29,6 @@
           </div>
         </article>
 
-        <article class="tile is-child notification" *ngIf="isGuide">
-          <p class="title">Les demandes acceptées</p>
-          <p *ngIf="visitsUserValidated.length == 0">
-            Vous n'avez accepté aucune demande
-          </p>
-
-          <table *ngIf="visitsUserValidated.length > 0" class="table_contenu">
-            <thead>
-              <tr>
-                <th>Nom du lieu</th>
-                <th>Visiteur</th>
-                <th>Durée</th>
-                <th>Prix</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let visitUser of visitsUserValidated; let i = index">
-              <tr>
-                <td>{{ visitUser.visit.name }}</td>
-                <td>{{ visitUser.user.lastname }} <span title="{{visitUser.user.mail}}">{{ visitUser.user.firstname }}</span></td>
-                <td>{{ visitUser.visitGuide.duration }} min</td>
-                <td>{{ visitUser.visitGuide.price }} €</td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child notification">
@@ -143,11 +118,11 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification">
-          <p class="title">Demandes en attente</p>
+          <p class="title">Demandes en attente de votre validation</p>
           <p *ngIf="visitsUserWaiting.length == 0">
             Vous n'avez aucune demande en attente
           </p>
-
+    
           <table *ngIf="visitsUserWaiting.length > 0">
             <thead>
               <tr>
@@ -171,16 +146,40 @@
                   </figure>
                 </td>
                 <td>{{ visitUser.visit.name }}</td>
-                <td>{{ visitUser.user.lastname }} {{ visitUser.user.lastname }}</td>
+                <td>{{ visitUser.user.lastname }} {{ visitUser.user.firstname }}</td>
                 <td>{{ visitUser.visitGuide.duration }} min</td>
                 <td>{{ visitUser.visitGuide.price }} €</td>
                 <td (click)='declineVisitUser($event, visitUser, i)'><span class="supprimer_demande"><i class="fa fa-window-close"></i></span></td>
                 <td (click)='validateVisitUser($event, visitUser, i)'><span class="valider_demande"><i class="fa fa-check-square"></i></span></td>
               </tr>
             </tbody>
-            <tfoot>
-              <tr><p class="content">(*Expire après 48h en absence de réponse)</p></tr>
-            </tfoot>
+          </table>
+        </article>
+      </div>
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification">
+          <p class="title">Les demandes acceptées</p>
+          <p *ngIf="visitsUserValidated.length == 0">
+            Vous n'avez accepté aucune demande
+          </p>
+    
+          <table *ngIf="visitsUserValidated.length > 0" class="table_contenu">
+            <thead>
+              <tr>
+                <th>Nom du lieu</th>
+                <th>Visiteur</th>
+                <th>Durée</th>
+                <th>Prix</th>
+              </tr>
+            </thead>
+            <tbody id="ligne_visite" *ngFor="let visitUser of visitsUserValidated; let i = index">
+              <tr>
+                <td>{{ visitUser.visit.name }}</td>
+                <td>{{ visitUser.user.lastname }} <span title="{{visitUser.user.mail}}">{{ visitUser.user.firstname }}</span></td>
+                <td>{{ visitUser.visitGuide.duration }} min</td>
+                <td>{{ visitUser.visitGuide.price }} €</td>
+              </tr>
+            </tbody>
           </table>
         </article>
       </div>
@@ -301,7 +300,7 @@
           </div>
         </article>
       </div>
-
+      
     </div>
   </div>
 </div>

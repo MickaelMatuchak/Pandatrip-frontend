@@ -41,6 +41,14 @@ export class ProfilService {
       .then(response => response.json());
   }
 
+  getVisitsUserAsked(username: string) {
+    let url = `${this.endpointUrlVisiteursUsers}?user.username=${username}`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json());
+  }
+
   getVisitsUserValidated(username: string) {
     let url = `${this.endpointUrlVisiteursUsers}?visitGuide.guide.user.username=${username}&isValidated=true&isConfirm=true`;
 
@@ -49,7 +57,7 @@ export class ProfilService {
       .then(response => response.json());
   }
 
-  getVisitsUserWaiting(username: string) {
+  getVisitsUserWaiting(username: string) { 
     let url = `${this.endpointUrlVisiteursUsers}?visitGuide.guide.user.username=${username}&isValidated=false`;
 
     return this.http.get(url)
