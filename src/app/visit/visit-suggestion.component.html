@@ -1,4 +1,4 @@
-<div class="tile is-ancestor">
+<div class="tile is-ancestor" *ngIf="visits.length > 0">
   <div class="tile is-vertical is-8">
 
     <div class="tile is-parent">
@@ -23,6 +23,16 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
 
+<div class="tile is-ancestor" *ngIf="visits.length === 0">
+  <div class="tile is-vertical is-8">
+
+    <div class="tile is-parent">
+      <article class="tile is-child notification bandeau-vert">
+        <p class="title">Il n'y a pas de suggestion pour ce lieu</p>
+      </article>
+    </div>
   </div>
 </div>

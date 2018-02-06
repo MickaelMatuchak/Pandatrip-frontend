@@ -122,7 +122,9 @@ export class VisitSuggestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.visitService.getNumbersVisits(4, parseInt(this.visitSelected.postalCode / 1000 + '', 10))
+    const codePostal = parseInt(this.visitSelected.postalCode / 1000 + '', 10);
+
+    this.visitService.getNumbersVisits(4, codePostal)
       .then((data: Object[]) => {
           const visits = data['hydra:member'];
 
@@ -134,15 +136,11 @@ export class VisitSuggestionComponent implements OnInit {
             }
           }
 
+          /* TODO A AMELIORER */
           if (this.visits.length === 4) {
             this.visits.pop();
           }
-
-          if (this.visits.length < 3) {
-            console.log("need autre visite");
-          }
-        }
-      );
+      });
   }
 
   onSelect(visit, event) {
