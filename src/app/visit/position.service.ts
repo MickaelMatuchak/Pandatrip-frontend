@@ -9,7 +9,7 @@ export class PositionService {
   }
 
   getPosition(latitude, longitude) {
-    const url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+latitude+'%2C'+longitude+'&sensor=true';
+    const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latitude+'%2C'+longitude+'&sensor=true';
     return this.http.get(url)
       .toPromise()
       .then(response => response.json());

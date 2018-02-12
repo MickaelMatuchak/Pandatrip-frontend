@@ -88,7 +88,7 @@ export class VisitComponent implements OnInit {
                 if (element['types'][0].match('postal_code')) {
                   this.codePostal = element['short_name'];
                   this.codePostal = parseInt(this.codePostal / 1000 + '', 10);
-                } else if (element['types'][0].match('city')) {
+                } else if (element['types'][0].match('locality')) {
                   this.ville = element['short_name'];
                 }
               }, this);

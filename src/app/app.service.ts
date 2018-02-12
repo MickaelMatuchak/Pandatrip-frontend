@@ -14,6 +14,7 @@ export class AppService {
   constructor(private http: Http, private appSharedService: AppSharedService) {
   }
 
+  // public static entryPointUrl: string = 'http://127.0.0.1:8080/api';
   public static entryPointUrl: string = 'https://pandatrip.herokuapp.com/api';
 
   jwtHelper: JwtHelper = new JwtHelper();
@@ -43,9 +44,6 @@ export class AppService {
 
         const tokenDecoded = this.decodeToken();
         const timeNow = parseInt(Date.now() / 1000 + '', 10);
-
-        console.log('now : ' + timeNow);
-        console.log('token : ' + tokenDecoded['exp']);
 
         if (tokenDecoded['exp'] < timeNow) {
           this.logOut();
