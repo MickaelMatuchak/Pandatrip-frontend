@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'
+import { HttpModule } from '@angular/http'
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -61,7 +62,7 @@ const routes: Routes = [
     VisitFilterPipe
   ],
   imports: [
-    BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes), StarRatingModule.forRoot(), CarouselModule
+    BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(routes), StarRatingModule.forRoot(), CarouselModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
