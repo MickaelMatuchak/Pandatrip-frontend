@@ -14,11 +14,11 @@ describe('AppService', () => {
     .compileComponents();
   });
 
-  it('should be created', inject([AppService], service => {
+  it('should be created', inject([AppService], (service: AppService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('test AppService loggedIn', inject([AppService], service => {
+  it('testLoggedIn', inject([AppService], (service: AppService) => {
     expect(service.loggedIn()).toBe(false);
   }));
 

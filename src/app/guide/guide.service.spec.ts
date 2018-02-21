@@ -12,7 +12,7 @@ describe('GuideService', () => {
     .compileComponents();
   });
 
-  it('should be created', inject([GuideService], service => {
+  it('should be created', inject([GuideService], (service: GuideService) => {
     expect(service).toBeTruthy();
   }));
 });

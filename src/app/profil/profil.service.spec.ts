@@ -12,7 +12,7 @@ describe('ProfilService', () => {
     .compileComponents();
   });
 
-  it('should be created', inject([ProfilService], service => {
+  it('should be created', inject([ProfilService], (service: ProfilService) => {
     expect(service).toBeTruthy();
   }));
 }); 

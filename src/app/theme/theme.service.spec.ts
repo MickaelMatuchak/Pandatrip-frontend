@@ -11,7 +11,9 @@ describe('ThemeService', () => {
     })
     .compileComponents();
   });
-  it('should be created', inject([ThemeService], service => {
+
+  it('should be created', inject([ThemeService], (service : ThemeService) => {
     expect(service).toBeTruthy();
   }));
+
 });
