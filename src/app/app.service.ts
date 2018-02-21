@@ -15,7 +15,8 @@ export class AppService {
   }
 
   // public static entryPointUrl: string = 'http://127.0.0.1:8080/api';
-  public static entryPointUrl: string = 'https://pandatrip.herokuapp.com/api';
+  // public static entryPointUrl: string = 'https://pandatrip.herokuapp.com/api';
+  public static entryPointUrl: string = 'http://api.pandatrip.fr/api';
 
   jwtHelper: JwtHelper = new JwtHelper();
 

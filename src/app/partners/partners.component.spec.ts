@@ -2,16 +2,24 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
 import { PartnersService } from './partners.service';
+import { HttpModule } from '@angular/http';
 
 describe('PartnersService', () => {
-  beforeEach(() => {
+  let service;
+
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpModule],
       providers: [PartnersService]
-    });
+    })
+    .compileComponents();
   });
 
-  it('should be created', inject([PartnersService], (service: PartnersService) => {
+  beforeEach(inject([PartnersService], s => {
+    service = s;
+  })); 
+
+  it('should be created', inject([PartnersService], service => {
     expect(service).toBeTruthy();
   }));
 });
