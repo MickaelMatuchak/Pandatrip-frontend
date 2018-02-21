@@ -38,4 +38,8 @@ describe('GuideComponent', () => {
   });
 */
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
 });
