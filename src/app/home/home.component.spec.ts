@@ -4,6 +4,11 @@ import { VisitComponent } from '../visit/visit.component';
 import { GuideComponent } from '../guide/guide.component';
 
 import { HomeComponent } from './home.component';
+import {StarRatingComponent} from "angular-star-rating";
+import {HttpModule} from "@angular/http";
+import {RouterTestingModule} from "@angular/router/testing";
+import {AppService} from "../app.service";
+import {AppSharedService} from "../app-shared-service";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,7 +16,9 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThemeComponent, VisitComponent, GuideComponent, HomeComponent ]
+      imports: [ HttpModule, RouterTestingModule ],
+      declarations: [ ThemeComponent, VisitComponent, GuideComponent, HomeComponent, StarRatingComponent ],
+      providers: [AppService, AppSharedService]
     })
     .compileComponents();
   }));
