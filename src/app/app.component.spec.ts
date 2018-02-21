@@ -18,7 +18,6 @@ import { ResearchComponent } from './research/research.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { ThemeDetailComponent } from './theme-detail/theme-detail.component';
 import { VisitDetailsComponent } from './visit-details/visit-details.component';
 import { ReviewsComponent } from './reviews/reviews.component';
@@ -41,7 +40,6 @@ describe('AppComponent', () => {
         LoginComponent,
         RegisterComponent,
         HomeComponent,
-        AuthenticationComponent,
         ThemeDetailComponent,
         VisitDetailsComponent,
         ReviewsComponent,
@@ -58,7 +56,6 @@ describe('AppComponent', () => {
           {path: 'home', component: HomeComponent},
           {path: 'login', component: LoginComponent},
           {path: 'register', component: RegisterComponent},
-          {path: 'auth', component: AuthenticationComponent},
           {path: 'theme/:name', component: ThemeDetailComponent},
           {path: 'visit/:name', component: VisitDetailsComponent},
           {path: 'profil', component: ProfilComponent},
