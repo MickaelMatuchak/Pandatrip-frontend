@@ -1,18 +1,19 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ProfilService } from './profil.service';
+import { VisitService } from './visit.service';
 import { HttpModule } from '@angular/http';
 
-describe('ProfilService', () => {
+describe('VisitService', () => {
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      providers: [ProfilService]
+      providers: [VisitService]
     })
     .compileComponents();
   });
 
-  it('should be created', inject([ProfilService], (service: ProfilService) => {
+  it('should be created', inject([VisitService], (service : VisitService) => {
     expect(service).toBeTruthy();
   }));
-}); 
+
+});

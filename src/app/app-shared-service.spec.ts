@@ -1,18 +1,19 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ProfilService } from './profil.service';
+import { AppSharedService } from './app-shared-service';
 import { HttpModule } from '@angular/http';
 
-describe('ProfilService', () => {
+describe('AppSharedService', () => {
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      providers: [ProfilService]
+      providers: [AppSharedService]
     })
     .compileComponents();
   });
 
-  it('should be created', inject([ProfilService], (service: ProfilService) => {
+  it('should be created', inject([AppSharedService], (service : AppSharedService) => {
     expect(service).toBeTruthy();
   }));
-}); 
+
+});

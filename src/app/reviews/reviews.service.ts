@@ -4,7 +4,7 @@ import {AppService} from '../app.service';
 import {ReviewsModel} from './reviews.model';
 
 @Injectable()
-export class ReviewService {
+export class ReviewsService {
 
   private endpointUrlReviews = AppService.entryPointUrl + '/reviews';
 

@@ -12,7 +12,7 @@ describe('LoginService', () => {
     .compileComponents();
   });
 
-  it('should be created', inject([LoginService], service => {
+  it('should be created', inject([LoginService], (service: LoginService) => {
     expect(service).toBeTruthy();
   }));
 });
