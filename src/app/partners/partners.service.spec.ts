@@ -4,8 +4,6 @@ import { PartnersService } from './partners.service';
 import { HttpModule } from '@angular/http';
 
 describe('PartnersService', () => {
-  let service;
-
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
@@ -13,10 +11,6 @@ describe('PartnersService', () => {
     })
     .compileComponents();
   });
-
-  beforeEach(inject([PartnersService], s => {
-    service = s;
-  })); 
 
   it('should be created', inject([PartnersService], service => {
     expect(service).toBeTruthy();

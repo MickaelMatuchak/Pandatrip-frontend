@@ -6,8 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppSharedService } from './app-shared-service';
 
 describe('AppService', () => {
-  let service;
-
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
@@ -15,11 +13,6 @@ describe('AppService', () => {
     })
     .compileComponents();
   });
-
-  beforeEach(inject([AppService], s => {
-    service = s;
-  })); 
-
 
   it('should be created', inject([AppService], service => {
     expect(service).toBeTruthy();
