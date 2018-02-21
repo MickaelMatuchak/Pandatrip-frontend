@@ -9,7 +9,7 @@ import {
 } from './../../../node_modules/angular-star-rating/star-rating-struct';
 import {AppService} from '../app.service';
 import {UserModel} from '../profil/profil.model';
-import {ReviewService} from "./review.service";
+import {ReviewsService} from "./reviews.service";
 import {DatePipe} from "@angular/common";
 import {ProfilService} from "../profil/profil.service";
 import {VisitModel} from "../visit/visit.model";
@@ -20,7 +20,7 @@ import {VisitService} from "../visit/visit.service";
   selector: 'reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.css', '../../../node_modules/bulma/css/bulma.css', './star-rating.scss'],
-  providers: [DatePipe, ReviewService, ProfilService, AppService, VisitService]
+  providers: [DatePipe, ReviewsService, ProfilService, AppService, VisitService]
 })
 
 export class ReviewsComponent implements OnInit {
@@ -34,7 +34,7 @@ export class ReviewsComponent implements OnInit {
   reviewMessage: string = null;
 
   constructor(private appService: AppService,
-              private reviewService: ReviewService,
+              private ReviewsService: ReviewsService,
               private profilService: ProfilService,
               private visitService: VisitService,
               private datePipe: DatePipe) {
@@ -88,7 +88,7 @@ export class ReviewsComponent implements OnInit {
           const review = new ReviewsModel(null, this.reviewNote, this.reviewTitle, this.reviewMessage, date, user);
 
           // Ajoute l'avis
-          this.reviewService.postReview(review, token)
+          this.ReviewsService.postReview(review, token)
             .then(postReview => {
               let review = JSON.parse(postReview['_body']);
               let createdReview = new ReviewsModel(review.id, review.note, review.title, review.text, review.date, user);
